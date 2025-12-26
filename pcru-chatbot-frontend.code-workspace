@@ -1,0 +1,12 @@
+{
+	"folders": [
+		{
+			"name": "pcru-chatbot-frontend",
+			"path": "../pcru-chatbot-frontend"
+		},
+		{
+			"name": "pcru-chatbot-backend",
+			"path": "."
+		}
+	]
+}

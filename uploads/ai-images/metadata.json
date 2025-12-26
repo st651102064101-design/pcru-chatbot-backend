@@ -1,0 +1,25 @@
+{
+  "active": "1765817621207",
+  "images": [
+    {
+      "id": "1765817621207",
+      "filename": "ai-1765817621202-292127745.jpg",
+      "originalName": "cropped-image.jpg",
+      "name": "cropped-image.jpg",
+      "size": 142239,
+      "mimetype": "image/png",
+      "uploadedAt": "2025-12-15T16:53:41.207Z"
+    },
+    {
+      "id": "1765820502992",
+      "filename": "ai-1765820502979-288928408.jpg",
+      "originalName": "cropped-image.jpg",
+      "name": "cropped-image.jpg",
+      "size": 218954,
+      "mimetype": "image/png",
+      "uploadedAt": "2025-12-15T17:41:42.992Z"
+    }
+  ],
+  "botName": "ปลายฟ้า",
+  "botPronoun": "หนู"
+}

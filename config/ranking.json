@@ -1,0 +1,6 @@
+{
+  "core": 1,
+  "synonym_support": 0.95,
+  "domain_support": 0.9,
+  "application_support": 0.2
+}

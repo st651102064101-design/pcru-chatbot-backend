@@ -1,0 +1,1008 @@
+[dotenv@17.2.3] injecting env (25) from .env -- tip: ⚙️  suppress all logs with { quiet: true }
+[dotenv@17.2.3] injecting env (0) from .env -- tip: 🔐 prevent building .env in docker: https://dotenvx.com/prebuild
+[dotenv@17.2.3] injecting env (0) from .env -- tip: ⚙️  specify custom .env file path with { path: '/custom/path/.env' }
+🚀 Auto-starting PyThaiNLP tokenizer at http://localhost:8001
+✅ Nodemailer Transporter Initialized.
+Server running at http://localhost:3000
+WebSocket server running at ws://localhost:3000
+🔄 Starting stopwords auto-sync...
+🔄 Starting stopwords sync from standard list...
+✅ Connected to database
+✅ MySQL Database Connected Successfully!
+📊 Found 1011 existing stopwords in database
+➕ Adding 3 new standard stopwords...
+/Library/Developer/CommandLineTools/usr/bin/python3: No module named uvicorn
+✅ Successfully added new stopwords
+⚠️  Warning: Found 895 non-standard stopwords in database:
+    ก็คือ, ก็จะ, ก็ดี, ก็ต่อเมื่อ, ก็ตาม, ก็ตามที, ก็ตามแต่, กระทั่ง, กระทำ, กระนั้น ...
+   You may want to review and remove these manually if needed.
+ℹ️ Tokenizer service exited (code=1, signal=null)
+
+📊 Final count: 1011 stopwords in database
+✅ Sync completed successfully!
+✅ New WebSocket client connected on /ws/categories
+✅ New WebSocket client connected on /ws/questions-answers
+✅ New WebSocket client connected on /ws/questions-answers
+✅ New WebSocket client connected on /ws/keywords
+✅ New WebSocket client connected on /ws/chat-logs
+✅ New WebSocket client connected on /ws/feedbacks
+✅ New WebSocket client connected on /ws/chat-logs
+✅ New WebSocket client connected on /ws/feedbacks
+✅ New WebSocket client connected on /ws/categories
+✅ New WebSocket client connected on /ws/keywords
+✅ New WebSocket client connected on /ws/questions-answers
+❌ WebSocket client disconnected
+❌ WebSocket client disconnected
+❌ WebSocket client disconnected
+❌ WebSocket client disconnected
+❌ WebSocket client disconnected
+❌ WebSocket client disconnected
+❌ WebSocket client disconnected
+❌ WebSocket client disconnected
+❌ WebSocket client disconnected
+❌ WebSocket client disconnected
+❌ WebSocket client disconnected
+🔄 Loading stopwords from database...
+  🛡️ Excluded keyword: "การ"
+  🛡️ Excluded keyword: "ขอ"
+  🛡️ Excluded keyword: "ทั้งหมด"
+  🛡️ Excluded keyword: "ทำให้"
+  🛡️ Excluded keyword: "ทำไม"
+  🛡️ Excluded keyword: "ที่"
+  🛡️ Excluded keyword: "ปัจจุบัน"
+  🛡️ Excluded keyword: "ผม"
+  🛡️ Excluded keyword: "ผู้"
+  🛡️ Excluded keyword: "รับ"
+  🛡️ Excluded keyword: "ล่าสุด"
+  🛡️ Excluded keyword: "อย่าง"
+  🛡️ Excluded keyword: "อย่างไร"
+  🛡️ Excluded keyword: "อะไร"
+  🛡️ Excluded keyword: "เท่าไหร่"
+  🛡️ Excluded keyword: "ใหม่"
+  🛡️ Excluded keyword: "ไร"
+  🛡️ Excluded keyword: "ไว้"
+🛡️ Auto-whitelist: excluded 18 keyword(s) from stopwords (based on Keywords table)
+📝 Loaded 993 stopwords from database
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+🔍 Query tokens (after stopword removal): [หอหญิง]
+📊 Total QA items in database: 18
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+✅ Semantic keyword match: Found 0 items
+📢 Broadcasting chat logs update to 0 clients: {
+  action: 'created',
+  type: 'no-answer',
+  chatLogId: 204,
+  userQuery: 'หาหอหญิง',
+  status: 0,
+  timestamp: '2025-12-16T17:04:37.547Z'
+}
+✅ Sent WebSocket message to 0 active clients (chat-logs)
+[uploadQuestionsAnswers] headers: {
+  authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjMwMDEsInVzZXJ0eXBlIjoiT2ZmaWNlciIsImlhdCI6MTc2NTkwMjI2NSwiZXhwIjoxNzY1OTA1ODY1fQ.64utB9eb8OC2AMPiCEK75G3bukAGKyNcNnv3tLemTlE',
+  'content-type': 'multipart/form-data; boundary=----WebKitFormBoundaryVtTJg016tBDQxFgR'
+}
+[uploadQuestionsAnswers] req.file: undefined req.files: [
+  {
+    fieldname: 'file',
+    originalname: 'last_uploaded_questionsanswers (1).csv',
+    encoding: '7bit',
+    mimetype: 'text/csv',
+    destination: 'uploads/',
+    filename: 'da717be4562ca4c22ce50d84e1f60329',
+    path: 'uploads/da717be4562ca4c22ce50d84e1f60329',
+    size: 10990
+  }
+]
+[uploadQuestionsAnswers] selected req.file from req.files: file last_uploaded_questionsanswers (1).csv
+[uploadQuestionsAnswers] CSV keyword column detected: "Keywords" — non-empty rows: 17, sample="กี่อย่าง, ต่างชาติ, ทุน, ทุนเรียนดี, นักศึกษา, เรียน"
+[uploadQuestionsAnswers] Reordered rows: with-ID first (count: 0 ), without-ID: 18 )
+[uploadQuestionsAnswers] row 2: Cleaned CategoriesID from Excel formula format: "="1-1"" → "1-1"
+[uploadQuestionsAnswers] row 3: Cleaned CategoriesID from Excel formula format: "="1-1"" → "1-1"
+[uploadQuestionsAnswers] row 4: Cleaned CategoriesID from Excel formula format: "="1-1"" → "1-1"
+[uploadQuestionsAnswers] row 5: Cleaned CategoriesID from Excel formula format: "="1-1"" → "1-1"
+[uploadQuestionsAnswers] row 6: Cleaned CategoriesID from Excel formula format: "="1-1"" → "1-1"
+[uploadQuestionsAnswers] row 7: Cleaned CategoriesID from Excel formula format: "="1-2"" → "1-2"
+[uploadQuestionsAnswers] row 8: Cleaned CategoriesID from Excel formula format: "="1-2"" → "1-2"
+[uploadQuestionsAnswers] row 9: Cleaned CategoriesID from Excel formula format: "="1-2"" → "1-2"
+[uploadQuestionsAnswers] row 10: Cleaned CategoriesID from Excel formula format: "="1-3"" → "1-3"
+[uploadQuestionsAnswers] row 11: Cleaned CategoriesID from Excel formula format: "="1-3"" → "1-3"
+[uploadQuestionsAnswers] row 12: Cleaned CategoriesID from Excel formula format: "="1-4"" → "1-4"
+[uploadQuestionsAnswers] row 13: Cleaned CategoriesID from Excel formula format: "="1-4"" → "1-4"
+[uploadQuestionsAnswers] Checking for QAs to delete...
+[uploadQuestionsAnswers] uploaderId: 3001
+[uploadQuestionsAnswers] processedQaIds: [
+  '1',  '2',  '3',  '4',
+  '5',  '6',  '7',  '8',
+  '9',  '10', '11', '12',
+  '13', '14', '15', '25',
+  '27', '32'
+]
+[uploadQuestionsAnswers] existingIds for this officer: [
+  '1',  '2',  '3',  '4',
+  '5',  '6',  '7',  '8',
+  '9',  '10', '11', '12',
+  '13', '14', '15', '25',
+  '27', '32'
+]
+[uploadQuestionsAnswers] toRemove: []
+✅ Auto-exported 18 Q&As to: /Users/kriangkrai/pcru-chatbot-backend/files/managequestionsanswers/3001/questionsanswers_2025-12-16T17-10-10.csv
+📄 Latest CSV available at: /Users/kriangkrai/pcru-chatbot-backend/files/managequestionsanswers/3001/latest.csv
+✅ Auto-exported CSV after upload
+📢 Broadcasting questions-answers update to 0 clients: {
+  action: 'uploaded',
+  summary: {
+    totalRows: 18,
+    inserted: 0,
+    updated: 18,
+    failed: 0,
+    deleted: 0,
+    unassigned: 0
+  }
+}
+✅ Sent WebSocket message to 0 active clients (questions-answers)
+🔄 Stopwords cache cleared
+[uploadQuestionsAnswers] headers: {
+  authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjMwMDEsInVzZXJ0eXBlIjoiT2ZmaWNlciIsImlhdCI6MTc2NTkwMjI2NSwiZXhwIjoxNzY1OTA1ODY1fQ.64utB9eb8OC2AMPiCEK75G3bukAGKyNcNnv3tLemTlE',
+  'content-type': 'multipart/form-data; boundary=----WebKitFormBoundary0SqVSMAgUE3Qcrsz'
+}
+[uploadQuestionsAnswers] req.file: undefined req.files: [
+  {
+    fieldname: 'file',
+    originalname: 'last_uploaded_questionsanswers (1).csv',
+    encoding: '7bit',
+    mimetype: 'text/csv',
+    destination: 'uploads/',
+    filename: '96b6d90e0ff04395c7127d485dd4f692',
+    path: 'uploads/96b6d90e0ff04395c7127d485dd4f692',
+    size: 10990
+  }
+]
+[uploadQuestionsAnswers] selected req.file from req.files: file last_uploaded_questionsanswers (1).csv
+[uploadQuestionsAnswers] CSV keyword column detected: "Keywords" — non-empty rows: 17, sample="กี่อย่าง, ต่างชาติ, ทุน, ทุนเรียนดี, นักศึกษา, เรียน"
+[uploadQuestionsAnswers] Reordered rows: with-ID first (count: 0 ), without-ID: 18 )
+[uploadQuestionsAnswers] row 2: Cleaned CategoriesID from Excel formula format: "="1-1"" → "1-1"
+[uploadQuestionsAnswers] row 3: Cleaned CategoriesID from Excel formula format: "="1-1"" → "1-1"
+[uploadQuestionsAnswers] row 4: Cleaned CategoriesID from Excel formula format: "="1-1"" → "1-1"
+[uploadQuestionsAnswers] row 5: Cleaned CategoriesID from Excel formula format: "="1-1"" → "1-1"
+[uploadQuestionsAnswers] row 6: Cleaned CategoriesID from Excel formula format: "="1-1"" → "1-1"
+[uploadQuestionsAnswers] row 7: Cleaned CategoriesID from Excel formula format: "="1-2"" → "1-2"
+[uploadQuestionsAnswers] row 8: Cleaned CategoriesID from Excel formula format: "="1-2"" → "1-2"
+[uploadQuestionsAnswers] row 9: Cleaned CategoriesID from Excel formula format: "="1-2"" → "1-2"
+[uploadQuestionsAnswers] row 10: Cleaned CategoriesID from Excel formula format: "="1-3"" → "1-3"
+[uploadQuestionsAnswers] row 11: Cleaned CategoriesID from Excel formula format: "="1-3"" → "1-3"
+[uploadQuestionsAnswers] row 12: Cleaned CategoriesID from Excel formula format: "="1-4"" → "1-4"
+[uploadQuestionsAnswers] row 13: Cleaned CategoriesID from Excel formula format: "="1-4"" → "1-4"
+[uploadQuestionsAnswers] Checking for QAs to delete...
+[uploadQuestionsAnswers] uploaderId: 3001
+[uploadQuestionsAnswers] processedQaIds: [
+  '1',  '2',  '3',  '4',
+  '5',  '6',  '7',  '8',
+  '9',  '10', '11', '12',
+  '13', '14', '15', '25',
+  '27', '32'
+]
+[uploadQuestionsAnswers] existingIds for this officer: [
+  '1',  '2',  '3',  '4',
+  '5',  '6',  '7',  '8',
+  '9',  '10', '11', '12',
+  '13', '14', '15', '25',
+  '27', '32'
+]
+[uploadQuestionsAnswers] toRemove: []
+✅ Auto-exported 18 Q&As to: /Users/kriangkrai/pcru-chatbot-backend/files/managequestionsanswers/3001/questionsanswers_2025-12-16T17-10-59.csv
+📄 Latest CSV available at: /Users/kriangkrai/pcru-chatbot-backend/files/managequestionsanswers/3001/latest.csv
+✅ Auto-exported CSV after upload
+📢 Broadcasting questions-answers update to 0 clients: {
+  action: 'uploaded',
+  summary: {
+    totalRows: 18,
+    inserted: 0,
+    updated: 18,
+    failed: 0,
+    deleted: 0,
+    unassigned: 0
+  }
+}
+✅ Sent WebSocket message to 0 active clients (questions-answers)
+🔄 Stopwords cache cleared
+🔄 Loading stopwords from database...
+  🛡️ Excluded keyword: "ทำให้"
+  🛡️ Excluded keyword: "รับ"
+  🛡️ Excluded keyword: "อย่าง"
+  🛡️ Excluded keyword: "อะไร"
+🛡️ Auto-whitelist: excluded 4 keyword(s) from stopwords (based on Keywords table)
+📝 Loaded 1007 stopwords from database
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+🔍 Query tokens (after stopword removal): [สมัครเรียน]
+📊 Total QA items in database: 18
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+✅ Semantic keyword match: Found 0 items
+📢 Broadcasting chat logs update to 0 clients: {
+  action: 'created',
+  type: 'no-answer',
+  chatLogId: 205,
+  userQuery: 'สมัครเรียน',
+  status: 0,
+  timestamp: '2025-12-16T17:13:36.705Z'
+}
+✅ Sent WebSocket message to 0 active clients (chat-logs)
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+🔍 Query tokens (after stopword removal): [สมัคร]
+📊 Total QA items in database: 18
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+✅ Semantic keyword match: Found 5 items
+[Domain Terms Loaded]: { dormTerms: 0, scholarshipTerms: 0, admissionsTerms: 0 }
+Domain detection (DB-only): {
+  query: 'การสมัคร',
+  dormTermsLoaded: 0,
+  scholarshipTermsLoaded: 0,
+  admissionsTermsLoaded: 0,
+  queryHasDorm: false,
+  queryHasScholarship: false,
+  queryHasAdmissions: false
+}
+🏅 Returning 5/5 relevant matches (generic search)
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+🔍 Query tokens (after stopword removal): [สมัครเรียน]
+📊 Total QA items in database: 18
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+✅ Semantic keyword match: Found 0 items
+📢 Broadcasting chat logs update to 0 clients: {
+  action: 'created',
+  type: 'no-answer',
+  chatLogId: 206,
+  userQuery: 'สมัครเรียน',
+  status: 0,
+  timestamp: '2025-12-16T17:14:06.758Z'
+}
+✅ Sent WebSocket message to 0 active clients (chat-logs)
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+🔍 Query tokens (after stopword removal): [สมัครเรียน]
+📊 Total QA items in database: 18
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+✅ Semantic keyword match: Found 0 items
+📢 Broadcasting chat logs update to 0 clients: {
+  action: 'created',
+  type: 'no-answer',
+  chatLogId: 207,
+  userQuery: 'สมัครเรียน',
+  status: 0,
+  timestamp: '2025-12-16T17:16:15.035Z'
+}
+✅ Sent WebSocket message to 0 active clients (chat-logs)
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+🔍 Query tokens (after stopword removal): [สมัครเรียน]
+📊 Total QA items in database: 18
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+✅ Semantic keyword match: Found 0 items
+📢 Broadcasting chat logs update to 0 clients: {
+  action: 'created',
+  type: 'no-answer',
+  chatLogId: 208,
+  userQuery: 'สมัครเรียน',
+  status: 0,
+  timestamp: '2025-12-16T17:18:23.148Z'
+}
+✅ Sent WebSocket message to 0 active clients (chat-logs)
+Update request: {
+  qaId: 1,
+  questionTitle: 'ทุนเรียนดีมีกี่อย่าง?',
+  questionText: 'ทุนเรียนดีมี 3 อย่าง คือ ทุนเรียนดีสำหรับนักศึกษาทั่วไป ทุนเรียนดีสำหรับนักศึกษาต่างชาติ และทุนเรียนดีสำหรับนักศึกษาพิการ',
+  reviewDate: '2025-12-30',
+  categoriesId: '1-1'
+}
+Adding ReviewDate to update: 2025-12-30
+SQL Query: UPDATE QuestionsAnswers SET QuestionTitle = ?, QuestionText = ?, ReviewDate = ?, CategoriesID = ? WHERE QuestionsAnswersID = ?
+Update values: [
+  'ทุนเรียนดีมีกี่อย่าง?',
+  'ทุนเรียนดีมี 3 อย่าง คือ ทุนเรียนดีสำหรับนักศึกษาทั่วไป ทุนเรียนดีสำหรับนักศึกษาต่างชาติ และทุนเรียนดีสำหรับนักศึกษาพิการ',
+  '2025-12-30',
+  '1-1',
+  1
+]
+Update result - affected rows: 1
+⚠️  Skipping keyword (failed length/charset check): "2"
+🔄 Stopwords cache cleared
+📢 Broadcasting questions-answers update to 0 clients: { action: 'update', id: 1 }
+✅ Sent WebSocket message to 0 active clients (questions-answers)
+✅ Auto-exported 18 Q&As to: /Users/kriangkrai/pcru-chatbot-backend/files/managequestionsanswers/3001/questionsanswers_2025-12-16T17-20-22.csv
+📄 Latest CSV available at: /Users/kriangkrai/pcru-chatbot-backend/files/managequestionsanswers/3001/latest.csv
+✅ Auto-exported CSV after QA change
+Update request: {
+  qaId: 1,
+  questionTitle: 'ทุนเรียนดีมีกี่อย่าง?',
+  questionText: 'ทุนเรียนดีมี 3 อย่าง คือ ทุนเรียนดีสำหรับนักศึกษาทั่วไป ทุนเรียนดีสำหรับนักศึกษาต่างชาติ และทุนเรียนดีสำหรับนักศึกษาพิการ',
+  reviewDate: '2025-12-29',
+  categoriesId: '1-1'
+}
+Adding ReviewDate to update: 2025-12-29
+SQL Query: UPDATE QuestionsAnswers SET QuestionTitle = ?, QuestionText = ?, ReviewDate = ?, CategoriesID = ? WHERE QuestionsAnswersID = ?
+Update values: [
+  'ทุนเรียนดีมีกี่อย่าง?',
+  'ทุนเรียนดีมี 3 อย่าง คือ ทุนเรียนดีสำหรับนักศึกษาทั่วไป ทุนเรียนดีสำหรับนักศึกษาต่างชาติ และทุนเรียนดีสำหรับนักศึกษาพิการ',
+  '2025-12-29',
+  '1-1',
+  1
+]
+Update result - affected rows: 1
+⚠️  Skipping keyword (failed length/charset check): "2"
+🔄 Stopwords cache cleared
+📢 Broadcasting questions-answers update to 0 clients: { action: 'update', id: 1 }
+✅ Sent WebSocket message to 0 active clients (questions-answers)
+✅ Auto-exported 18 Q&As to: /Users/kriangkrai/pcru-chatbot-backend/files/managequestionsanswers/3001/questionsanswers_2025-12-16T17-20-47.csv
+📄 Latest CSV available at: /Users/kriangkrai/pcru-chatbot-backend/files/managequestionsanswers/3001/latest.csv
+✅ Auto-exported CSV after QA change
+Update request: {
+  qaId: 1,
+  questionTitle: 'ทุนเรียนดีมีกี่อย่าง?',
+  questionText: 'ทุนเรียนดีมี 3 อย่าง คือ ทุนเรียนดีสำหรับนักศึกษาทั่วไป ทุนเรียนดีสำหรับนักศึกษาต่างชาติ และทุนเรียนดีสำหรับนักศึกษาพิการ',
+  reviewDate: '2025-12-28',
+  categoriesId: '1-1'
+}
+Adding ReviewDate to update: 2025-12-28
+SQL Query: UPDATE QuestionsAnswers SET QuestionTitle = ?, QuestionText = ?, ReviewDate = ?, CategoriesID = ? WHERE QuestionsAnswersID = ?
+Update values: [
+  'ทุนเรียนดีมีกี่อย่าง?',
+  'ทุนเรียนดีมี 3 อย่าง คือ ทุนเรียนดีสำหรับนักศึกษาทั่วไป ทุนเรียนดีสำหรับนักศึกษาต่างชาติ และทุนเรียนดีสำหรับนักศึกษาพิการ',
+  '2025-12-28',
+  '1-1',
+  1
+]
+Update result - affected rows: 1
+🔄 Stopwords cache cleared
+📢 Broadcasting questions-answers update to 0 clients: { action: 'update', id: 1 }
+✅ Sent WebSocket message to 0 active clients (questions-answers)
+✅ Auto-exported 18 Q&As to: /Users/kriangkrai/pcru-chatbot-backend/files/managequestionsanswers/3001/questionsanswers_2025-12-16T17-20-54.csv
+📄 Latest CSV available at: /Users/kriangkrai/pcru-chatbot-backend/files/managequestionsanswers/3001/latest.csv
+✅ Auto-exported CSV after QA change
+Update request: {
+  qaId: 1,
+  questionTitle: 'ทุนเรียนดีมีกี่อย่าง?',
+  questionText: 'ทุนเรียนดีมี 3 อย่าง คือ ทุนเรียนดีสำหรับนักศึกษาทั่วไป ทุนเรียนดีสำหรับนักศึกษาต่างชาติ และทุนเรียนดีสำหรับนักศึกษาพิการ',
+  reviewDate: '2025-12-27',
+  categoriesId: '1-1'
+}
+Adding ReviewDate to update: 2025-12-27
+SQL Query: UPDATE QuestionsAnswers SET QuestionTitle = ?, QuestionText = ?, ReviewDate = ?, CategoriesID = ? WHERE QuestionsAnswersID = ?
+Update values: [
+  'ทุนเรียนดีมีกี่อย่าง?',
+  'ทุนเรียนดีมี 3 อย่าง คือ ทุนเรียนดีสำหรับนักศึกษาทั่วไป ทุนเรียนดีสำหรับนักศึกษาต่างชาติ และทุนเรียนดีสำหรับนักศึกษาพิการ',
+  '2025-12-27',
+  '1-1',
+  1
+]
+Update result - affected rows: 1
+⚠️  Skipping keyword (failed length/charset check): "3"
+🔄 Stopwords cache cleared
+📢 Broadcasting questions-answers update to 0 clients: { action: 'update', id: 1 }
+✅ Sent WebSocket message to 0 active clients (questions-answers)
+✅ Auto-exported 18 Q&As to: /Users/kriangkrai/pcru-chatbot-backend/files/managequestionsanswers/3001/questionsanswers_2025-12-16T17-20-59.csv
+📄 Latest CSV available at: /Users/kriangkrai/pcru-chatbot-backend/files/managequestionsanswers/3001/latest.csv
+✅ Auto-exported CSV after QA change
+Update request: {
+  qaId: 1,
+  questionTitle: 'ทุนเรียนดีมีกี่อย่าง?',
+  questionText: 'ทุนเรียนดีมี 3 อย่าง คือ ทุนเรียนดีสำหรับนักศึกษาทั่วไป ทุนเรียนดีสำหรับนักศึกษาต่างชาติ และทุนเรียนดีสำหรับนักศึกษาพิการ',
+  reviewDate: '2025-12-26',
+  categoriesId: '1-1'
+}
+Adding ReviewDate to update: 2025-12-26
+SQL Query: UPDATE QuestionsAnswers SET QuestionTitle = ?, QuestionText = ?, ReviewDate = ?, CategoriesID = ? WHERE QuestionsAnswersID = ?
+Update values: [
+  'ทุนเรียนดีมีกี่อย่าง?',
+  'ทุนเรียนดีมี 3 อย่าง คือ ทุนเรียนดีสำหรับนักศึกษาทั่วไป ทุนเรียนดีสำหรับนักศึกษาต่างชาติ และทุนเรียนดีสำหรับนักศึกษาพิการ',
+  '2025-12-26',
+  '1-1',
+  1
+]
+Update result - affected rows: 1
+🔄 Stopwords cache cleared
+📢 Broadcasting questions-answers update to 0 clients: { action: 'update', id: 1 }
+✅ Sent WebSocket message to 0 active clients (questions-answers)
+✅ Auto-exported 18 Q&As to: /Users/kriangkrai/pcru-chatbot-backend/files/managequestionsanswers/3001/questionsanswers_2025-12-16T17-21-06.csv
+📄 Latest CSV available at: /Users/kriangkrai/pcru-chatbot-backend/files/managequestionsanswers/3001/latest.csv
+✅ Auto-exported CSV after QA change
+Update request: {
+  qaId: 1,
+  questionTitle: 'ทุนเรียนดีมีกี่อย่าง?',
+  questionText: 'ทุนเรียนดีมี 3 อย่าง คือ ทุนเรียนดีสำหรับนักศึกษาทั่วไป ทุนเรียนดีสำหรับนักศึกษาต่างชาติ และทุนเรียนดีสำหรับนักศึกษาพิการ',
+  reviewDate: '2025-12-25',
+  categoriesId: '1-1'
+}
+Adding ReviewDate to update: 2025-12-25
+SQL Query: UPDATE QuestionsAnswers SET QuestionTitle = ?, QuestionText = ?, ReviewDate = ?, CategoriesID = ? WHERE QuestionsAnswersID = ?
+Update values: [
+  'ทุนเรียนดีมีกี่อย่าง?',
+  'ทุนเรียนดีมี 3 อย่าง คือ ทุนเรียนดีสำหรับนักศึกษาทั่วไป ทุนเรียนดีสำหรับนักศึกษาต่างชาติ และทุนเรียนดีสำหรับนักศึกษาพิการ',
+  '2025-12-25',
+  '1-1',
+  1
+]
+Update result - affected rows: 1
+🔄 Stopwords cache cleared
+📢 Broadcasting questions-answers update to 0 clients: { action: 'update', id: 1 }
+✅ Sent WebSocket message to 0 active clients (questions-answers)
+✅ Auto-exported 18 Q&As to: /Users/kriangkrai/pcru-chatbot-backend/files/managequestionsanswers/3001/questionsanswers_2025-12-16T17-21-16.csv
+📄 Latest CSV available at: /Users/kriangkrai/pcru-chatbot-backend/files/managequestionsanswers/3001/latest.csv
+✅ Auto-exported CSV after QA change
+Update request: {
+  qaId: 1,
+  questionTitle: 'ทุนเรียนดีมีกี่อย่าง?',
+  questionText: 'ทุนเรียนดีมี 3 อย่าง คือ ทุนเรียนดีสำหรับนักศึกษาทั่วไป ทุนเรียนดีสำหรับนักศึกษาต่างชาติ และทุนเรียนดีสำหรับนักศึกษาพิการ',
+  reviewDate: '2025-12-24',
+  categoriesId: '1-1'
+}
+Adding ReviewDate to update: 2025-12-24
+SQL Query: UPDATE QuestionsAnswers SET QuestionTitle = ?, QuestionText = ?, ReviewDate = ?, CategoriesID = ? WHERE QuestionsAnswersID = ?
+Update values: [
+  'ทุนเรียนดีมีกี่อย่าง?',
+  'ทุนเรียนดีมี 3 อย่าง คือ ทุนเรียนดีสำหรับนักศึกษาทั่วไป ทุนเรียนดีสำหรับนักศึกษาต่างชาติ และทุนเรียนดีสำหรับนักศึกษาพิการ',
+  '2025-12-24',
+  '1-1',
+  1
+]
+Update result - affected rows: 1
+🔄 Stopwords cache cleared
+📢 Broadcasting questions-answers update to 0 clients: { action: 'update', id: 1 }
+✅ Sent WebSocket message to 0 active clients (questions-answers)
+✅ Auto-exported 18 Q&As to: /Users/kriangkrai/pcru-chatbot-backend/files/managequestionsanswers/3001/questionsanswers_2025-12-16T17-21-23.csv
+📄 Latest CSV available at: /Users/kriangkrai/pcru-chatbot-backend/files/managequestionsanswers/3001/latest.csv
+✅ Auto-exported CSV after QA change
+🔄 Loading stopwords from database...
+  🛡️ Excluded keyword: "ทำให้"
+  🛡️ Excluded keyword: "รับ"
+  🛡️ Excluded keyword: "อย่าง"
+  🛡️ Excluded keyword: "อะไร"
+🛡️ Auto-whitelist: excluded 4 keyword(s) from stopwords (based on Keywords table)
+📝 Loaded 1007 stopwords from database
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+🔍 Query tokens (after stopword removal): [test]
+📊 Total QA items in database: 18
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+✅ Semantic keyword match: Found 1 items
+🎯 Exact match found: QA#1
+chat/logs/has-answer error: Cannot add or update a child row: a foreign key constraint fails (`pcru_auto_response`.`chatloghasanswers`, CONSTRAINT `fk_cha_qa` FOREIGN KEY (`QuestionsAnswersID`) REFERENCES `questionsanswers` (`QuestionsAnswersID`))
+Update request: {
+  qaId: 1,
+  questionTitle: 'ทุนเรียนดีมีกี่อย่าง?',
+  questionText: 'ทุนเรียนดีมี 3 อย่าง คือ ทุนเรียนดีสำหรับนักศึกษาทั่วไป ทุนเรียนดีสำหรับนักศึกษาต่างชาติ และทุนเรียนดีสำหรับนักศึกษาพิการ',
+  reviewDate: '2025-12-23',
+  categoriesId: '1-1'
+}
+Adding ReviewDate to update: 2025-12-23
+SQL Query: UPDATE QuestionsAnswers SET QuestionTitle = ?, QuestionText = ?, ReviewDate = ?, CategoriesID = ? WHERE QuestionsAnswersID = ?
+Update values: [
+  'ทุนเรียนดีมีกี่อย่าง?',
+  'ทุนเรียนดีมี 3 อย่าง คือ ทุนเรียนดีสำหรับนักศึกษาทั่วไป ทุนเรียนดีสำหรับนักศึกษาต่างชาติ และทุนเรียนดีสำหรับนักศึกษาพิการ',
+  '2025-12-23',
+  '1-1',
+  1
+]
+Update result - affected rows: 1
+🔄 Stopwords cache cleared
+📢 Broadcasting questions-answers update to 0 clients: { action: 'update', id: 1 }
+✅ Sent WebSocket message to 0 active clients (questions-answers)
+✅ Auto-exported 18 Q&As to: /Users/kriangkrai/pcru-chatbot-backend/files/managequestionsanswers/3001/questionsanswers_2025-12-16T17-21-34.csv
+📄 Latest CSV available at: /Users/kriangkrai/pcru-chatbot-backend/files/managequestionsanswers/3001/latest.csv
+✅ Auto-exported CSV after QA change
+Login attempt: ID=3001
+Login Successful for user: นางสาววิพาดา… (ID: 3001), Role: Officer
+✅ New WebSocket client connected on /ws/categories
+✅ New WebSocket client connected on /ws/questions-answers
+✅ New WebSocket client connected on /ws/questions-answers
+✅ New WebSocket client connected on /ws/keywords
+✅ New WebSocket client connected on /ws/chat-logs
+✅ New WebSocket client connected on /ws/chat-logs
+✅ New WebSocket client connected on /ws/feedbacks
+✅ New WebSocket client connected on /ws/feedbacks
+✅ New WebSocket client connected on /ws/categories
+✅ New WebSocket client connected on /ws/keywords
+✅ New WebSocket client connected on /ws/questions-answers
+❌ WebSocket client disconnected
+❌ WebSocket client disconnected
+❌ WebSocket client disconnected
+❌ WebSocket client disconnected
+❌ WebSocket client disconnected
+❌ WebSocket client disconnected
+❌ WebSocket client disconnected
+❌ WebSocket client disconnected
+❌ WebSocket client disconnected
+❌ WebSocket client disconnected
+❌ WebSocket client disconnected

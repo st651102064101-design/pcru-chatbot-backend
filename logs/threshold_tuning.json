@@ -1,0 +1,2202 @@
+[
+  {
+    "timestamp": "2025-12-16T09:41:00.095Z",
+    "reason": "High no-answer rate (>30%) - lowering thresholds to improve coverage",
+    "oldValues": {
+      "domainThreshold": 0.25,
+      "fallbackThreshold": 0.15
+    },
+    "newValues": {
+      "domainThreshold": 0.25,
+      "fallbackThreshold": 0.15
+    },
+    "metrics": {
+      "repeatedQueryRate": 0.7755102040816326,
+      "uniqueQueries": 14,
+      "totalQueriesWithAnswers": 49,
+      "negativeRate": 0.08571428571428572,
+      "positiveRate": 0.9142857142857143,
+      "totalFeedback": 35,
+      "noAnswerRate": 0.6343283582089553,
+      "totalQueries": 134
+    }
+  },
+  {
+    "timestamp": "2025-12-16T09:42:00.056Z",
+    "reason": "High no-answer rate (>30%) - lowering thresholds to improve coverage",
+    "oldValues": {
+      "domainThreshold": 0.25,
+      "fallbackThreshold": 0.15
+    },
+    "newValues": {
+      "domainThreshold": 0.25,
+      "fallbackThreshold": 0.15
+    },
+    "metrics": {
+      "repeatedQueryRate": 0.7755102040816326,
+      "uniqueQueries": 14,
+      "totalQueriesWithAnswers": 49,
+      "negativeRate": 0.08571428571428572,
+      "positiveRate": 0.9142857142857143,
+      "totalFeedback": 35,
+      "noAnswerRate": 0.6343283582089553,
+      "totalQueries": 134
+    }
+  },
+  {
+    "timestamp": "2025-12-16T09:43:00.039Z",
+    "reason": "High no-answer rate (>30%) - lowering thresholds to improve coverage",
+    "oldValues": {
+      "domainThreshold": 0.25,
+      "fallbackThreshold": 0.15
+    },
+    "newValues": {
+      "domainThreshold": 0.25,
+      "fallbackThreshold": 0.15
+    },
+    "metrics": {
+      "repeatedQueryRate": 0.7755102040816326,
+      "uniqueQueries": 14,
+      "totalQueriesWithAnswers": 49,
+      "negativeRate": 0.08571428571428572,
+      "positiveRate": 0.9142857142857143,
+      "totalFeedback": 35,
+      "noAnswerRate": 0.6343283582089553,
+      "totalQueries": 134
+    }
+  },
+  {
+    "timestamp": "2025-12-16T09:44:00.098Z",
+    "reason": "High no-answer rate (>30%) - lowering thresholds to improve coverage",
+    "oldValues": {
+      "domainThreshold": 0.25,
+      "fallbackThreshold": 0.15
+    },
+    "newValues": {
+      "domainThreshold": 0.25,
+      "fallbackThreshold": 0.15
+    },
+    "metrics": {
+      "repeatedQueryRate": 0.7755102040816326,
+      "uniqueQueries": 14,
+      "totalQueriesWithAnswers": 49,
+      "negativeRate": 0.08571428571428572,
+      "positiveRate": 0.9142857142857143,
+      "totalFeedback": 35,
+      "noAnswerRate": 0.6343283582089553,
+      "totalQueries": 134
+    }
+  },
+  {
+    "timestamp": "2025-12-16T09:45:00.119Z",
+    "reason": "High no-answer rate (>30%) - lowering thresholds to improve coverage",
+    "oldValues": {
+      "domainThreshold": 0.25,
+      "fallbackThreshold": 0.15
+    },
+    "newValues": {
+      "domainThreshold": 0.25,
+      "fallbackThreshold": 0.15
+    },
+    "metrics": {
+      "repeatedQueryRate": 0.7755102040816326,
+      "uniqueQueries": 14,
+      "totalQueriesWithAnswers": 49,
+      "negativeRate": 0.08571428571428572,
+      "positiveRate": 0.9142857142857143,
+      "totalFeedback": 35,
+      "noAnswerRate": 0.6343283582089553,
+      "totalQueries": 134
+    }
+  },
+  {
+    "timestamp": "2025-12-16T09:46:00.049Z",
+    "reason": "High no-answer rate (>30%) - lowering thresholds to improve coverage",
+    "oldValues": {
+      "domainThreshold": 0.25,
+      "fallbackThreshold": 0.15
+    },
+    "newValues": {
+      "domainThreshold": 0.25,
+      "fallbackThreshold": 0.15
+    },
+    "metrics": {
+      "repeatedQueryRate": 0.7755102040816326,
+      "uniqueQueries": 14,
+      "totalQueriesWithAnswers": 49,
+      "negativeRate": 0.08571428571428572,
+      "positiveRate": 0.9142857142857143,
+      "totalFeedback": 35,
+      "noAnswerRate": 0.6343283582089553,
+      "totalQueries": 134
+    }
+  },
+  {
+    "timestamp": "2025-12-16T09:47:00.108Z",
+    "reason": "High no-answer rate (>30%) - lowering thresholds to improve coverage",
+    "oldValues": {
+      "domainThreshold": 0.25,
+      "fallbackThreshold": 0.15
+    },
+    "newValues": {
+      "domainThreshold": 0.25,
+      "fallbackThreshold": 0.15
+    },
+    "metrics": {
+      "repeatedQueryRate": 0.7755102040816326,
+      "uniqueQueries": 14,
+      "totalQueriesWithAnswers": 49,
+      "negativeRate": 0.08571428571428572,
+      "positiveRate": 0.9142857142857143,
+      "totalFeedback": 35,
+      "noAnswerRate": 0.6343283582089553,
+      "totalQueries": 134
+    }
+  },
+  {
+    "timestamp": "2025-12-16T09:48:00.045Z",
+    "reason": "High no-answer rate (>30%) - lowering thresholds to improve coverage",
+    "oldValues": {
+      "domainThreshold": 0.25,
+      "fallbackThreshold": 0.15
+    },
+    "newValues": {
+      "domainThreshold": 0.25,
+      "fallbackThreshold": 0.15
+    },
+    "metrics": {
+      "repeatedQueryRate": 0.7755102040816326,
+      "uniqueQueries": 14,
+      "totalQueriesWithAnswers": 49,
+      "negativeRate": 0.08571428571428572,
+      "positiveRate": 0.9142857142857143,
+      "totalFeedback": 35,
+      "noAnswerRate": 0.6343283582089553,
+      "totalQueries": 134
+    }
+  },
+  {
+    "timestamp": "2025-12-16T09:49:00.113Z",
+    "reason": "High no-answer rate (>30%) - lowering thresholds to improve coverage",
+    "oldValues": {
+      "domainThreshold": 0.25,
+      "fallbackThreshold": 0.15
+    },
+    "newValues": {
+      "domainThreshold": 0.25,
+      "fallbackThreshold": 0.15
+    },
+    "metrics": {
+      "repeatedQueryRate": 0.7755102040816326,
+      "uniqueQueries": 14,
+      "totalQueriesWithAnswers": 49,
+      "negativeRate": 0.08571428571428572,
+      "positiveRate": 0.9142857142857143,
+      "totalFeedback": 35,
+      "noAnswerRate": 0.6343283582089553,
+      "totalQueries": 134
+    }
+  },
+  {
+    "timestamp": "2025-12-16T09:50:00.039Z",
+    "reason": "High no-answer rate (>30%) - lowering thresholds to improve coverage",
+    "oldValues": {
+      "domainThreshold": 0.25,
+      "fallbackThreshold": 0.15
+    },
+    "newValues": {
+      "domainThreshold": 0.25,
+      "fallbackThreshold": 0.15
+    },
+    "metrics": {
+      "repeatedQueryRate": 0.7755102040816326,
+      "uniqueQueries": 14,
+      "totalQueriesWithAnswers": 49,
+      "negativeRate": 0.08571428571428572,
+      "positiveRate": 0.9142857142857143,
+      "totalFeedback": 35,
+      "noAnswerRate": 0.6343283582089553,
+      "totalQueries": 134
+    }
+  },
+  {
+    "timestamp": "2025-12-16T09:51:00.101Z",
+    "reason": "High no-answer rate (>30%) - lowering thresholds to improve coverage",
+    "oldValues": {
+      "domainThreshold": 0.25,
+      "fallbackThreshold": 0.15
+    },
+    "newValues": {
+      "domainThreshold": 0.25,
+      "fallbackThreshold": 0.15
+    },
+    "metrics": {
+      "repeatedQueryRate": 0.7755102040816326,
+      "uniqueQueries": 14,
+      "totalQueriesWithAnswers": 49,
+      "negativeRate": 0.08571428571428572,
+      "positiveRate": 0.9142857142857143,
+      "totalFeedback": 35,
+      "noAnswerRate": 0.6343283582089553,
+      "totalQueries": 134
+    }
+  },
+  {
+    "timestamp": "2025-12-16T09:52:00.095Z",
+    "reason": "High no-answer rate (>30%) - lowering thresholds to improve coverage",
+    "oldValues": {
+      "domainThreshold": 0.25,
+      "fallbackThreshold": 0.15
+    },
+    "newValues": {
+      "domainThreshold": 0.25,
+      "fallbackThreshold": 0.15
+    },
+    "metrics": {
+      "repeatedQueryRate": 0.7755102040816326,
+      "uniqueQueries": 14,
+      "totalQueriesWithAnswers": 49,
+      "negativeRate": 0.08571428571428572,
+      "positiveRate": 0.9142857142857143,
+      "totalFeedback": 35,
+      "noAnswerRate": 0.6343283582089553,
+      "totalQueries": 134
+    }
+  },
+  {
+    "timestamp": "2025-12-16T09:53:00.115Z",
+    "reason": "High no-answer rate (>30%) - lowering thresholds to improve coverage",
+    "oldValues": {
+      "domainThreshold": 0.25,
+      "fallbackThreshold": 0.15
+    },
+    "newValues": {
+      "domainThreshold": 0.25,
+      "fallbackThreshold": 0.15
+    },
+    "metrics": {
+      "repeatedQueryRate": 0.7755102040816326,
+      "uniqueQueries": 14,
+      "totalQueriesWithAnswers": 49,
+      "negativeRate": 0.08571428571428572,
+      "positiveRate": 0.9142857142857143,
+      "totalFeedback": 35,
+      "noAnswerRate": 0.6343283582089553,
+      "totalQueries": 134
+    }
+  },
+  {
+    "timestamp": "2025-12-16T09:54:00.038Z",
+    "reason": "High no-answer rate (>30%) - lowering thresholds to improve coverage",
+    "oldValues": {
+      "domainThreshold": 0.25,
+      "fallbackThreshold": 0.15
+    },
+    "newValues": {
+      "domainThreshold": 0.25,
+      "fallbackThreshold": 0.15
+    },
+    "metrics": {
+      "repeatedQueryRate": 0.7755102040816326,
+      "uniqueQueries": 14,
+      "totalQueriesWithAnswers": 49,
+      "negativeRate": 0.08571428571428572,
+      "positiveRate": 0.9142857142857143,
+      "totalFeedback": 35,
+      "noAnswerRate": 0.6343283582089553,
+      "totalQueries": 134
+    }
+  },
+  {
+    "timestamp": "2025-12-16T09:55:00.036Z",
+    "reason": "High no-answer rate (>30%) - lowering thresholds to improve coverage",
+    "oldValues": {
+      "domainThreshold": 0.25,
+      "fallbackThreshold": 0.15
+    },
+    "newValues": {
+      "domainThreshold": 0.25,
+      "fallbackThreshold": 0.15
+    },
+    "metrics": {
+      "repeatedQueryRate": 0.7755102040816326,
+      "uniqueQueries": 14,
+      "totalQueriesWithAnswers": 49,
+      "negativeRate": 0.08571428571428572,
+      "positiveRate": 0.9142857142857143,
+      "totalFeedback": 35,
+      "noAnswerRate": 0.6343283582089553,
+      "totalQueries": 134
+    }
+  },
+  {
+    "timestamp": "2025-12-16T09:56:00.018Z",
+    "reason": "High no-answer rate (>30%) - lowering thresholds to improve coverage",
+    "oldValues": {
+      "domainThreshold": 0.25,
+      "fallbackThreshold": 0.15
+    },
+    "newValues": {
+      "domainThreshold": 0.25,
+      "fallbackThreshold": 0.15
+    },
+    "metrics": {
+      "repeatedQueryRate": 0.7755102040816326,
+      "uniqueQueries": 14,
+      "totalQueriesWithAnswers": 49,
+      "negativeRate": 0.08571428571428572,
+      "positiveRate": 0.9142857142857143,
+      "totalFeedback": 35,
+      "noAnswerRate": 0.6343283582089553,
+      "totalQueries": 134
+    }
+  },
+  {
+    "timestamp": "2025-12-16T09:57:00.128Z",
+    "reason": "High no-answer rate (>30%) - lowering thresholds to improve coverage",
+    "oldValues": {
+      "domainThreshold": 0.25,
+      "fallbackThreshold": 0.15
+    },
+    "newValues": {
+      "domainThreshold": 0.25,
+      "fallbackThreshold": 0.15
+    },
+    "metrics": {
+      "repeatedQueryRate": 0.7755102040816326,
+      "uniqueQueries": 14,
+      "totalQueriesWithAnswers": 49,
+      "negativeRate": 0.08571428571428572,
+      "positiveRate": 0.9142857142857143,
+      "totalFeedback": 35,
+      "noAnswerRate": 0.6343283582089553,
+      "totalQueries": 134
+    }
+  },
+  {
+    "timestamp": "2025-12-16T09:58:00.095Z",
+    "reason": "High no-answer rate (>30%) - lowering thresholds to improve coverage",
+    "oldValues": {
+      "domainThreshold": 0.25,
+      "fallbackThreshold": 0.15
+    },
+    "newValues": {
+      "domainThreshold": 0.25,
+      "fallbackThreshold": 0.15
+    },
+    "metrics": {
+      "repeatedQueryRate": 0.7755102040816326,
+      "uniqueQueries": 14,
+      "totalQueriesWithAnswers": 49,
+      "negativeRate": 0.08571428571428572,
+      "positiveRate": 0.9142857142857143,
+      "totalFeedback": 35,
+      "noAnswerRate": 0.6343283582089553,
+      "totalQueries": 134
+    }
+  },
+  {
+    "timestamp": "2025-12-16T09:59:00.034Z",
+    "reason": "High no-answer rate (>30%) - lowering thresholds to improve coverage",
+    "oldValues": {
+      "domainThreshold": 0.25,
+      "fallbackThreshold": 0.15
+    },
+    "newValues": {
+      "domainThreshold": 0.25,
+      "fallbackThreshold": 0.15
+    },
+    "metrics": {
+      "repeatedQueryRate": 0.7755102040816326,
+      "uniqueQueries": 14,
+      "totalQueriesWithAnswers": 49,
+      "negativeRate": 0.08571428571428572,
+      "positiveRate": 0.9142857142857143,
+      "totalFeedback": 35,
+      "noAnswerRate": 0.6343283582089553,
+      "totalQueries": 134
+    }
+  },
+  {
+    "timestamp": "2025-12-16T10:00:00.027Z",
+    "reason": "High no-answer rate (>30%) - lowering thresholds to improve coverage",
+    "oldValues": {
+      "domainThreshold": 0.25,
+      "fallbackThreshold": 0.15
+    },
+    "newValues": {
+      "domainThreshold": 0.25,
+      "fallbackThreshold": 0.15
+    },
+    "metrics": {
+      "repeatedQueryRate": 0.7755102040816326,
+      "uniqueQueries": 14,
+      "totalQueriesWithAnswers": 49,
+      "negativeRate": 0.08571428571428572,
+      "positiveRate": 0.9142857142857143,
+      "totalFeedback": 35,
+      "noAnswerRate": 0.6343283582089553,
+      "totalQueries": 134
+    }
+  },
+  {
+    "timestamp": "2025-12-16T10:01:00.135Z",
+    "reason": "High no-answer rate (>30%) - lowering thresholds to improve coverage",
+    "oldValues": {
+      "domainThreshold": 0.25,
+      "fallbackThreshold": 0.15
+    },
+    "newValues": {
+      "domainThreshold": 0.25,
+      "fallbackThreshold": 0.15
+    },
+    "metrics": {
+      "repeatedQueryRate": 0.7755102040816326,
+      "uniqueQueries": 14,
+      "totalQueriesWithAnswers": 49,
+      "negativeRate": 0.08571428571428572,
+      "positiveRate": 0.9142857142857143,
+      "totalFeedback": 35,
+      "noAnswerRate": 0.6343283582089553,
+      "totalQueries": 134
+    }
+  },
+  {
+    "timestamp": "2025-12-16T10:02:00.032Z",
+    "reason": "High no-answer rate (>30%) - lowering thresholds to improve coverage",
+    "oldValues": {
+      "domainThreshold": 0.25,
+      "fallbackThreshold": 0.15
+    },
+    "newValues": {
+      "domainThreshold": 0.25,
+      "fallbackThreshold": 0.15
+    },
+    "metrics": {
+      "repeatedQueryRate": 0.7755102040816326,
+      "uniqueQueries": 14,
+      "totalQueriesWithAnswers": 49,
+      "negativeRate": 0.08571428571428572,
+      "positiveRate": 0.9142857142857143,
+      "totalFeedback": 35,
+      "noAnswerRate": 0.6343283582089553,
+      "totalQueries": 134
+    }
+  },
+  {
+    "timestamp": "2025-12-16T10:03:00.019Z",
+    "reason": "High no-answer rate (>30%) - lowering thresholds to improve coverage",
+    "oldValues": {
+      "domainThreshold": 0.25,
+      "fallbackThreshold": 0.15
+    },
+    "newValues": {
+      "domainThreshold": 0.25,
+      "fallbackThreshold": 0.15
+    },
+    "metrics": {
+      "repeatedQueryRate": 0.7755102040816326,
+      "uniqueQueries": 14,
+      "totalQueriesWithAnswers": 49,
+      "negativeRate": 0.08571428571428572,
+      "positiveRate": 0.9142857142857143,
+      "totalFeedback": 35,
+      "noAnswerRate": 0.6343283582089553,
+      "totalQueries": 134
+    }
+  },
+  {
+    "timestamp": "2025-12-16T10:04:00.015Z",
+    "reason": "High no-answer rate (>30%) - lowering thresholds to improve coverage",
+    "oldValues": {
+      "domainThreshold": 0.25,
+      "fallbackThreshold": 0.15
+    },
+    "newValues": {
+      "domainThreshold": 0.25,
+      "fallbackThreshold": 0.15
+    },
+    "metrics": {
+      "repeatedQueryRate": 0.7755102040816326,
+      "uniqueQueries": 14,
+      "totalQueriesWithAnswers": 49,
+      "negativeRate": 0.08571428571428572,
+      "positiveRate": 0.9142857142857143,
+      "totalFeedback": 35,
+      "noAnswerRate": 0.6343283582089553,
+      "totalQueries": 134
+    }
+  },
+  {
+    "timestamp": "2025-12-16T10:05:00.029Z",
+    "reason": "High no-answer rate (>30%) - lowering thresholds to improve coverage",
+    "oldValues": {
+      "domainThreshold": 0.25,
+      "fallbackThreshold": 0.15
+    },
+    "newValues": {
+      "domainThreshold": 0.25,
+      "fallbackThreshold": 0.15
+    },
+    "metrics": {
+      "repeatedQueryRate": 0.7755102040816326,
+      "uniqueQueries": 14,
+      "totalQueriesWithAnswers": 49,
+      "negativeRate": 0.08571428571428572,
+      "positiveRate": 0.9142857142857143,
+      "totalFeedback": 35,
+      "noAnswerRate": 0.6343283582089553,
+      "totalQueries": 134
+    }
+  },
+  {
+    "timestamp": "2025-12-16T10:06:00.083Z",
+    "reason": "High no-answer rate (>30%) - lowering thresholds to improve coverage",
+    "oldValues": {
+      "domainThreshold": 0.25,
+      "fallbackThreshold": 0.15
+    },
+    "newValues": {
+      "domainThreshold": 0.25,
+      "fallbackThreshold": 0.15
+    },
+    "metrics": {
+      "repeatedQueryRate": 0.7755102040816326,
+      "uniqueQueries": 14,
+      "totalQueriesWithAnswers": 49,
+      "negativeRate": 0.08571428571428572,
+      "positiveRate": 0.9142857142857143,
+      "totalFeedback": 35,
+      "noAnswerRate": 0.6343283582089553,
+      "totalQueries": 134
+    }
+  },
+  {
+    "timestamp": "2025-12-16T10:07:00.119Z",
+    "reason": "High no-answer rate (>30%) - lowering thresholds to improve coverage",
+    "oldValues": {
+      "domainThreshold": 0.25,
+      "fallbackThreshold": 0.15
+    },
+    "newValues": {
+      "domainThreshold": 0.25,
+      "fallbackThreshold": 0.15
+    },
+    "metrics": {
+      "repeatedQueryRate": 0.7755102040816326,
+      "uniqueQueries": 14,
+      "totalQueriesWithAnswers": 49,
+      "negativeRate": 0.08571428571428572,
+      "positiveRate": 0.9142857142857143,
+      "totalFeedback": 35,
+      "noAnswerRate": 0.6343283582089553,
+      "totalQueries": 134
+    }
+  },
+  {
+    "timestamp": "2025-12-16T10:08:00.091Z",
+    "reason": "High no-answer rate (>30%) - lowering thresholds to improve coverage",
+    "oldValues": {
+      "domainThreshold": 0.25,
+      "fallbackThreshold": 0.15
+    },
+    "newValues": {
+      "domainThreshold": 0.25,
+      "fallbackThreshold": 0.15
+    },
+    "metrics": {
+      "repeatedQueryRate": 0.7755102040816326,
+      "uniqueQueries": 14,
+      "totalQueriesWithAnswers": 49,
+      "negativeRate": 0.08571428571428572,
+      "positiveRate": 0.9142857142857143,
+      "totalFeedback": 35,
+      "noAnswerRate": 0.6343283582089553,
+      "totalQueries": 134
+    }
+  },
+  {
+    "timestamp": "2025-12-16T10:09:00.030Z",
+    "reason": "High no-answer rate (>30%) - lowering thresholds to improve coverage",
+    "oldValues": {
+      "domainThreshold": 0.25,
+      "fallbackThreshold": 0.15
+    },
+    "newValues": {
+      "domainThreshold": 0.25,
+      "fallbackThreshold": 0.15
+    },
+    "metrics": {
+      "repeatedQueryRate": 0.7755102040816326,
+      "uniqueQueries": 14,
+      "totalQueriesWithAnswers": 49,
+      "negativeRate": 0.08571428571428572,
+      "positiveRate": 0.9142857142857143,
+      "totalFeedback": 35,
+      "noAnswerRate": 0.6343283582089553,
+      "totalQueries": 134
+    }
+  },
+  {
+    "timestamp": "2025-12-16T10:10:00.027Z",
+    "reason": "High no-answer rate (>30%) - lowering thresholds to improve coverage",
+    "oldValues": {
+      "domainThreshold": 0.25,
+      "fallbackThreshold": 0.15
+    },
+    "newValues": {
+      "domainThreshold": 0.25,
+      "fallbackThreshold": 0.15
+    },
+    "metrics": {
+      "repeatedQueryRate": 0.7755102040816326,
+      "uniqueQueries": 14,
+      "totalQueriesWithAnswers": 49,
+      "negativeRate": 0.08571428571428572,
+      "positiveRate": 0.9142857142857143,
+      "totalFeedback": 35,
+      "noAnswerRate": 0.6343283582089553,
+      "totalQueries": 134
+    }
+  },
+  {
+    "timestamp": "2025-12-16T10:11:00.026Z",
+    "reason": "High no-answer rate (>30%) - lowering thresholds to improve coverage",
+    "oldValues": {
+      "domainThreshold": 0.25,
+      "fallbackThreshold": 0.15
+    },
+    "newValues": {
+      "domainThreshold": 0.25,
+      "fallbackThreshold": 0.15
+    },
+    "metrics": {
+      "repeatedQueryRate": 0.7755102040816326,
+      "uniqueQueries": 14,
+      "totalQueriesWithAnswers": 49,
+      "negativeRate": 0.08571428571428572,
+      "positiveRate": 0.9142857142857143,
+      "totalFeedback": 35,
+      "noAnswerRate": 0.6343283582089553,
+      "totalQueries": 134
+    }
+  },
+  {
+    "timestamp": "2025-12-16T10:12:00.031Z",
+    "reason": "High no-answer rate (>30%) - lowering thresholds to improve coverage",
+    "oldValues": {
+      "domainThreshold": 0.25,
+      "fallbackThreshold": 0.15
+    },
+    "newValues": {
+      "domainThreshold": 0.25,
+      "fallbackThreshold": 0.15
+    },
+    "metrics": {
+      "repeatedQueryRate": 0.7755102040816326,
+      "uniqueQueries": 14,
+      "totalQueriesWithAnswers": 49,
+      "negativeRate": 0.08571428571428572,
+      "positiveRate": 0.9142857142857143,
+      "totalFeedback": 35,
+      "noAnswerRate": 0.6343283582089553,
+      "totalQueries": 134
+    }
+  },
+  {
+    "timestamp": "2025-12-16T10:13:00.083Z",
+    "reason": "High no-answer rate (>30%) - lowering thresholds to improve coverage",
+    "oldValues": {
+      "domainThreshold": 0.25,
+      "fallbackThreshold": 0.15
+    },
+    "newValues": {
+      "domainThreshold": 0.25,
+      "fallbackThreshold": 0.15
+    },
+    "metrics": {
+      "repeatedQueryRate": 0.7755102040816326,
+      "uniqueQueries": 14,
+      "totalQueriesWithAnswers": 49,
+      "negativeRate": 0.08571428571428572,
+      "positiveRate": 0.9142857142857143,
+      "totalFeedback": 35,
+      "noAnswerRate": 0.6343283582089553,
+      "totalQueries": 134
+    }
+  },
+  {
+    "timestamp": "2025-12-16T10:14:00.052Z",
+    "reason": "High no-answer rate (>30%) - lowering thresholds to improve coverage",
+    "oldValues": {
+      "domainThreshold": 0.25,
+      "fallbackThreshold": 0.15
+    },
+    "newValues": {
+      "domainThreshold": 0.25,
+      "fallbackThreshold": 0.15
+    },
+    "metrics": {
+      "repeatedQueryRate": 0.7755102040816326,
+      "uniqueQueries": 14,
+      "totalQueriesWithAnswers": 49,
+      "negativeRate": 0.08571428571428572,
+      "positiveRate": 0.9142857142857143,
+      "totalFeedback": 35,
+      "noAnswerRate": 0.6343283582089553,
+      "totalQueries": 134
+    }
+  },
+  {
+    "timestamp": "2025-12-16T10:15:00.020Z",
+    "reason": "High no-answer rate (>30%) - lowering thresholds to improve coverage",
+    "oldValues": {
+      "domainThreshold": 0.25,
+      "fallbackThreshold": 0.15
+    },
+    "newValues": {
+      "domainThreshold": 0.25,
+      "fallbackThreshold": 0.15
+    },
+    "metrics": {
+      "repeatedQueryRate": 0.7755102040816326,
+      "uniqueQueries": 14,
+      "totalQueriesWithAnswers": 49,
+      "negativeRate": 0.08571428571428572,
+      "positiveRate": 0.9142857142857143,
+      "totalFeedback": 35,
+      "noAnswerRate": 0.6343283582089553,
+      "totalQueries": 134
+    }
+  },
+  {
+    "timestamp": "2025-12-16T10:16:00.037Z",
+    "reason": "High no-answer rate (>30%) - lowering thresholds to improve coverage",
+    "oldValues": {
+      "domainThreshold": 0.25,
+      "fallbackThreshold": 0.15
+    },
+    "newValues": {
+      "domainThreshold": 0.25,
+      "fallbackThreshold": 0.15
+    },
+    "metrics": {
+      "repeatedQueryRate": 0.7755102040816326,
+      "uniqueQueries": 14,
+      "totalQueriesWithAnswers": 49,
+      "negativeRate": 0.08571428571428572,
+      "positiveRate": 0.9142857142857143,
+      "totalFeedback": 35,
+      "noAnswerRate": 0.6343283582089553,
+      "totalQueries": 134
+    }
+  },
+  {
+    "timestamp": "2025-12-16T10:17:00.038Z",
+    "reason": "High no-answer rate (>30%) - lowering thresholds to improve coverage",
+    "oldValues": {
+      "domainThreshold": 0.25,
+      "fallbackThreshold": 0.15
+    },
+    "newValues": {
+      "domainThreshold": 0.25,
+      "fallbackThreshold": 0.15
+    },
+    "metrics": {
+      "repeatedQueryRate": 0.7755102040816326,
+      "uniqueQueries": 14,
+      "totalQueriesWithAnswers": 49,
+      "negativeRate": 0.08571428571428572,
+      "positiveRate": 0.9142857142857143,
+      "totalFeedback": 35,
+      "noAnswerRate": 0.6343283582089553,
+      "totalQueries": 134
+    }
+  },
+  {
+    "timestamp": "2025-12-16T10:18:00.035Z",
+    "reason": "High no-answer rate (>30%) - lowering thresholds to improve coverage",
+    "oldValues": {
+      "domainThreshold": 0.25,
+      "fallbackThreshold": 0.15
+    },
+    "newValues": {
+      "domainThreshold": 0.25,
+      "fallbackThreshold": 0.15
+    },
+    "metrics": {
+      "repeatedQueryRate": 0.7755102040816326,
+      "uniqueQueries": 14,
+      "totalQueriesWithAnswers": 49,
+      "negativeRate": 0.08571428571428572,
+      "positiveRate": 0.9142857142857143,
+      "totalFeedback": 35,
+      "noAnswerRate": 0.6343283582089553,
+      "totalQueries": 134
+    }
+  },
+  {
+    "timestamp": "2025-12-16T10:19:00.016Z",
+    "reason": "High no-answer rate (>30%) - lowering thresholds to improve coverage",
+    "oldValues": {
+      "domainThreshold": 0.25,
+      "fallbackThreshold": 0.15
+    },
+    "newValues": {
+      "domainThreshold": 0.25,
+      "fallbackThreshold": 0.15
+    },
+    "metrics": {
+      "repeatedQueryRate": 0.7755102040816326,
+      "uniqueQueries": 14,
+      "totalQueriesWithAnswers": 49,
+      "negativeRate": 0.08571428571428572,
+      "positiveRate": 0.9142857142857143,
+      "totalFeedback": 35,
+      "noAnswerRate": 0.6343283582089553,
+      "totalQueries": 134
+    }
+  },
+  {
+    "timestamp": "2025-12-16T10:20:00.031Z",
+    "reason": "High no-answer rate (>30%) - lowering thresholds to improve coverage",
+    "oldValues": {
+      "domainThreshold": 0.25,
+      "fallbackThreshold": 0.15
+    },
+    "newValues": {
+      "domainThreshold": 0.25,
+      "fallbackThreshold": 0.15
+    },
+    "metrics": {
+      "repeatedQueryRate": 0.7755102040816326,
+      "uniqueQueries": 14,
+      "totalQueriesWithAnswers": 49,
+      "negativeRate": 0.08571428571428572,
+      "positiveRate": 0.9142857142857143,
+      "totalFeedback": 35,
+      "noAnswerRate": 0.6343283582089553,
+      "totalQueries": 134
+    }
+  },
+  {
+    "timestamp": "2025-12-16T10:21:00.047Z",
+    "reason": "High no-answer rate (>30%) - lowering thresholds to improve coverage",
+    "oldValues": {
+      "domainThreshold": 0.25,
+      "fallbackThreshold": 0.15
+    },
+    "newValues": {
+      "domainThreshold": 0.25,
+      "fallbackThreshold": 0.15
+    },
+    "metrics": {
+      "repeatedQueryRate": 0.7755102040816326,
+      "uniqueQueries": 14,
+      "totalQueriesWithAnswers": 49,
+      "negativeRate": 0.08571428571428572,
+      "positiveRate": 0.9142857142857143,
+      "totalFeedback": 35,
+      "noAnswerRate": 0.6343283582089553,
+      "totalQueries": 134
+    }
+  },
+  {
+    "timestamp": "2025-12-16T10:22:00.015Z",
+    "reason": "High no-answer rate (>30%) - lowering thresholds to improve coverage",
+    "oldValues": {
+      "domainThreshold": 0.25,
+      "fallbackThreshold": 0.15
+    },
+    "newValues": {
+      "domainThreshold": 0.25,
+      "fallbackThreshold": 0.15
+    },
+    "metrics": {
+      "repeatedQueryRate": 0.7755102040816326,
+      "uniqueQueries": 14,
+      "totalQueriesWithAnswers": 49,
+      "negativeRate": 0.08571428571428572,
+      "positiveRate": 0.9142857142857143,
+      "totalFeedback": 35,
+      "noAnswerRate": 0.6343283582089553,
+      "totalQueries": 134
+    }
+  },
+  {
+    "timestamp": "2025-12-16T10:23:00.049Z",
+    "reason": "High no-answer rate (>30%) - lowering thresholds to improve coverage",
+    "oldValues": {
+      "domainThreshold": 0.25,
+      "fallbackThreshold": 0.15
+    },
+    "newValues": {
+      "domainThreshold": 0.25,
+      "fallbackThreshold": 0.15
+    },
+    "metrics": {
+      "repeatedQueryRate": 0.7755102040816326,
+      "uniqueQueries": 14,
+      "totalQueriesWithAnswers": 49,
+      "negativeRate": 0.08571428571428572,
+      "positiveRate": 0.9142857142857143,
+      "totalFeedback": 35,
+      "noAnswerRate": 0.6343283582089553,
+      "totalQueries": 134
+    }
+  },
+  {
+    "timestamp": "2025-12-16T10:24:00.058Z",
+    "reason": "High no-answer rate (>30%) - lowering thresholds to improve coverage",
+    "oldValues": {
+      "domainThreshold": 0.25,
+      "fallbackThreshold": 0.15
+    },
+    "newValues": {
+      "domainThreshold": 0.25,
+      "fallbackThreshold": 0.15
+    },
+    "metrics": {
+      "repeatedQueryRate": 0.7755102040816326,
+      "uniqueQueries": 14,
+      "totalQueriesWithAnswers": 49,
+      "negativeRate": 0.08571428571428572,
+      "positiveRate": 0.9142857142857143,
+      "totalFeedback": 35,
+      "noAnswerRate": 0.6343283582089553,
+      "totalQueries": 134
+    }
+  },
+  {
+    "timestamp": "2025-12-16T10:25:00.090Z",
+    "reason": "High no-answer rate (>30%) - lowering thresholds to improve coverage",
+    "oldValues": {
+      "domainThreshold": 0.25,
+      "fallbackThreshold": 0.15
+    },
+    "newValues": {
+      "domainThreshold": 0.25,
+      "fallbackThreshold": 0.15
+    },
+    "metrics": {
+      "repeatedQueryRate": 0.7755102040816326,
+      "uniqueQueries": 14,
+      "totalQueriesWithAnswers": 49,
+      "negativeRate": 0.08571428571428572,
+      "positiveRate": 0.9142857142857143,
+      "totalFeedback": 35,
+      "noAnswerRate": 0.6343283582089553,
+      "totalQueries": 134
+    }
+  },
+  {
+    "timestamp": "2025-12-16T10:26:00.019Z",
+    "reason": "High no-answer rate (>30%) - lowering thresholds to improve coverage",
+    "oldValues": {
+      "domainThreshold": 0.25,
+      "fallbackThreshold": 0.15
+    },
+    "newValues": {
+      "domainThreshold": 0.25,
+      "fallbackThreshold": 0.15
+    },
+    "metrics": {
+      "repeatedQueryRate": 0.7755102040816326,
+      "uniqueQueries": 14,
+      "totalQueriesWithAnswers": 49,
+      "negativeRate": 0.08571428571428572,
+      "positiveRate": 0.9142857142857143,
+      "totalFeedback": 35,
+      "noAnswerRate": 0.6343283582089553,
+      "totalQueries": 134
+    }
+  },
+  {
+    "timestamp": "2025-12-16T10:27:00.018Z",
+    "reason": "High no-answer rate (>30%) - lowering thresholds to improve coverage",
+    "oldValues": {
+      "domainThreshold": 0.25,
+      "fallbackThreshold": 0.15
+    },
+    "newValues": {
+      "domainThreshold": 0.25,
+      "fallbackThreshold": 0.15
+    },
+    "metrics": {
+      "repeatedQueryRate": 0.7755102040816326,
+      "uniqueQueries": 14,
+      "totalQueriesWithAnswers": 49,
+      "negativeRate": 0.08571428571428572,
+      "positiveRate": 0.9142857142857143,
+      "totalFeedback": 35,
+      "noAnswerRate": 0.6343283582089553,
+      "totalQueries": 134
+    }
+  },
+  {
+    "timestamp": "2025-12-16T10:28:00.028Z",
+    "reason": "High no-answer rate (>30%) - lowering thresholds to improve coverage",
+    "oldValues": {
+      "domainThreshold": 0.25,
+      "fallbackThreshold": 0.15
+    },
+    "newValues": {
+      "domainThreshold": 0.25,
+      "fallbackThreshold": 0.15
+    },
+    "metrics": {
+      "repeatedQueryRate": 0.7755102040816326,
+      "uniqueQueries": 14,
+      "totalQueriesWithAnswers": 49,
+      "negativeRate": 0.08571428571428572,
+      "positiveRate": 0.9142857142857143,
+      "totalFeedback": 35,
+      "noAnswerRate": 0.6343283582089553,
+      "totalQueries": 134
+    }
+  },
+  {
+    "timestamp": "2025-12-16T10:29:00.034Z",
+    "reason": "High no-answer rate (>30%) - lowering thresholds to improve coverage",
+    "oldValues": {
+      "domainThreshold": 0.25,
+      "fallbackThreshold": 0.15
+    },
+    "newValues": {
+      "domainThreshold": 0.25,
+      "fallbackThreshold": 0.15
+    },
+    "metrics": {
+      "repeatedQueryRate": 0.7755102040816326,
+      "uniqueQueries": 14,
+      "totalQueriesWithAnswers": 49,
+      "negativeRate": 0.08571428571428572,
+      "positiveRate": 0.9142857142857143,
+      "totalFeedback": 35,
+      "noAnswerRate": 0.6343283582089553,
+      "totalQueries": 134
+    }
+  },
+  {
+    "timestamp": "2025-12-16T10:30:00.047Z",
+    "reason": "High no-answer rate (>30%) - lowering thresholds to improve coverage",
+    "oldValues": {
+      "domainThreshold": 0.25,
+      "fallbackThreshold": 0.15
+    },
+    "newValues": {
+      "domainThreshold": 0.25,
+      "fallbackThreshold": 0.15
+    },
+    "metrics": {
+      "repeatedQueryRate": 0.7755102040816326,
+      "uniqueQueries": 14,
+      "totalQueriesWithAnswers": 49,
+      "negativeRate": 0.08571428571428572,
+      "positiveRate": 0.9142857142857143,
+      "totalFeedback": 35,
+      "noAnswerRate": 0.6343283582089553,
+      "totalQueries": 134
+    }
+  },
+  {
+    "timestamp": "2025-12-16T10:31:00.061Z",
+    "reason": "High no-answer rate (>30%) - lowering thresholds to improve coverage",
+    "oldValues": {
+      "domainThreshold": 0.25,
+      "fallbackThreshold": 0.15
+    },
+    "newValues": {
+      "domainThreshold": 0.25,
+      "fallbackThreshold": 0.15
+    },
+    "metrics": {
+      "repeatedQueryRate": 0.7755102040816326,
+      "uniqueQueries": 14,
+      "totalQueriesWithAnswers": 49,
+      "negativeRate": 0.08571428571428572,
+      "positiveRate": 0.9142857142857143,
+      "totalFeedback": 35,
+      "noAnswerRate": 0.6343283582089553,
+      "totalQueries": 134
+    }
+  },
+  {
+    "timestamp": "2025-12-16T10:32:00.029Z",
+    "reason": "High no-answer rate (>30%) - lowering thresholds to improve coverage",
+    "oldValues": {
+      "domainThreshold": 0.25,
+      "fallbackThreshold": 0.15
+    },
+    "newValues": {
+      "domainThreshold": 0.25,
+      "fallbackThreshold": 0.15
+    },
+    "metrics": {
+      "repeatedQueryRate": 0.7755102040816326,
+      "uniqueQueries": 14,
+      "totalQueriesWithAnswers": 49,
+      "negativeRate": 0.08571428571428572,
+      "positiveRate": 0.9142857142857143,
+      "totalFeedback": 35,
+      "noAnswerRate": 0.6343283582089553,
+      "totalQueries": 134
+    }
+  },
+  {
+    "timestamp": "2025-12-16T10:33:00.048Z",
+    "reason": "High no-answer rate (>30%) - lowering thresholds to improve coverage",
+    "oldValues": {
+      "domainThreshold": 0.25,
+      "fallbackThreshold": 0.15
+    },
+    "newValues": {
+      "domainThreshold": 0.25,
+      "fallbackThreshold": 0.15
+    },
+    "metrics": {
+      "repeatedQueryRate": 0.7755102040816326,
+      "uniqueQueries": 14,
+      "totalQueriesWithAnswers": 49,
+      "negativeRate": 0.08571428571428572,
+      "positiveRate": 0.9142857142857143,
+      "totalFeedback": 35,
+      "noAnswerRate": 0.6343283582089553,
+      "totalQueries": 134
+    }
+  },
+  {
+    "timestamp": "2025-12-16T10:34:00.116Z",
+    "reason": "High no-answer rate (>30%) - lowering thresholds to improve coverage",
+    "oldValues": {
+      "domainThreshold": 0.25,
+      "fallbackThreshold": 0.15
+    },
+    "newValues": {
+      "domainThreshold": 0.25,
+      "fallbackThreshold": 0.15
+    },
+    "metrics": {
+      "repeatedQueryRate": 0.7755102040816326,
+      "uniqueQueries": 14,
+      "totalQueriesWithAnswers": 49,
+      "negativeRate": 0.08571428571428572,
+      "positiveRate": 0.9142857142857143,
+      "totalFeedback": 35,
+      "noAnswerRate": 0.6343283582089553,
+      "totalQueries": 134
+    }
+  },
+  {
+    "timestamp": "2025-12-16T10:35:00.032Z",
+    "reason": "High no-answer rate (>30%) - lowering thresholds to improve coverage",
+    "oldValues": {
+      "domainThreshold": 0.25,
+      "fallbackThreshold": 0.15
+    },
+    "newValues": {
+      "domainThreshold": 0.25,
+      "fallbackThreshold": 0.15
+    },
+    "metrics": {
+      "repeatedQueryRate": 0.7755102040816326,
+      "uniqueQueries": 14,
+      "totalQueriesWithAnswers": 49,
+      "negativeRate": 0.08571428571428572,
+      "positiveRate": 0.9142857142857143,
+      "totalFeedback": 35,
+      "noAnswerRate": 0.6343283582089553,
+      "totalQueries": 134
+    }
+  },
+  {
+    "timestamp": "2025-12-16T10:36:00.109Z",
+    "reason": "High no-answer rate (>30%) - lowering thresholds to improve coverage",
+    "oldValues": {
+      "domainThreshold": 0.25,
+      "fallbackThreshold": 0.15
+    },
+    "newValues": {
+      "domainThreshold": 0.25,
+      "fallbackThreshold": 0.15
+    },
+    "metrics": {
+      "repeatedQueryRate": 0.7755102040816326,
+      "uniqueQueries": 14,
+      "totalQueriesWithAnswers": 49,
+      "negativeRate": 0.08571428571428572,
+      "positiveRate": 0.9142857142857143,
+      "totalFeedback": 35,
+      "noAnswerRate": 0.6343283582089553,
+      "totalQueries": 134
+    }
+  },
+  {
+    "timestamp": "2025-12-16T10:37:00.021Z",
+    "reason": "High no-answer rate (>30%) - lowering thresholds to improve coverage",
+    "oldValues": {
+      "domainThreshold": 0.25,
+      "fallbackThreshold": 0.15
+    },
+    "newValues": {
+      "domainThreshold": 0.25,
+      "fallbackThreshold": 0.15
+    },
+    "metrics": {
+      "repeatedQueryRate": 0.7755102040816326,
+      "uniqueQueries": 14,
+      "totalQueriesWithAnswers": 49,
+      "negativeRate": 0.08571428571428572,
+      "positiveRate": 0.9142857142857143,
+      "totalFeedback": 35,
+      "noAnswerRate": 0.6343283582089553,
+      "totalQueries": 134
+    }
+  },
+  {
+    "timestamp": "2025-12-16T10:38:00.033Z",
+    "reason": "High no-answer rate (>30%) - lowering thresholds to improve coverage",
+    "oldValues": {
+      "domainThreshold": 0.25,
+      "fallbackThreshold": 0.15
+    },
+    "newValues": {
+      "domainThreshold": 0.25,
+      "fallbackThreshold": 0.15
+    },
+    "metrics": {
+      "repeatedQueryRate": 0.7755102040816326,
+      "uniqueQueries": 14,
+      "totalQueriesWithAnswers": 49,
+      "negativeRate": 0.08571428571428572,
+      "positiveRate": 0.9142857142857143,
+      "totalFeedback": 35,
+      "noAnswerRate": 0.6343283582089553,
+      "totalQueries": 134
+    }
+  },
+  {
+    "timestamp": "2025-12-16T10:39:00.072Z",
+    "reason": "High no-answer rate (>30%) - lowering thresholds to improve coverage",
+    "oldValues": {
+      "domainThreshold": 0.25,
+      "fallbackThreshold": 0.15
+    },
+    "newValues": {
+      "domainThreshold": 0.25,
+      "fallbackThreshold": 0.15
+    },
+    "metrics": {
+      "repeatedQueryRate": 0.7755102040816326,
+      "uniqueQueries": 14,
+      "totalQueriesWithAnswers": 49,
+      "negativeRate": 0.08571428571428572,
+      "positiveRate": 0.9142857142857143,
+      "totalFeedback": 35,
+      "noAnswerRate": 0.6343283582089553,
+      "totalQueries": 134
+    }
+  },
+  {
+    "timestamp": "2025-12-16T10:40:00.047Z",
+    "reason": "High no-answer rate (>30%) - lowering thresholds to improve coverage",
+    "oldValues": {
+      "domainThreshold": 0.25,
+      "fallbackThreshold": 0.15
+    },
+    "newValues": {
+      "domainThreshold": 0.25,
+      "fallbackThreshold": 0.15
+    },
+    "metrics": {
+      "repeatedQueryRate": 0.7755102040816326,
+      "uniqueQueries": 14,
+      "totalQueriesWithAnswers": 49,
+      "negativeRate": 0.08571428571428572,
+      "positiveRate": 0.9142857142857143,
+      "totalFeedback": 35,
+      "noAnswerRate": 0.6343283582089553,
+      "totalQueries": 134
+    }
+  },
+  {
+    "timestamp": "2025-12-16T10:41:00.142Z",
+    "reason": "High no-answer rate (>30%) - lowering thresholds to improve coverage",
+    "oldValues": {
+      "domainThreshold": 0.25,
+      "fallbackThreshold": 0.15
+    },
+    "newValues": {
+      "domainThreshold": 0.25,
+      "fallbackThreshold": 0.15
+    },
+    "metrics": {
+      "repeatedQueryRate": 0.7755102040816326,
+      "uniqueQueries": 14,
+      "totalQueriesWithAnswers": 49,
+      "negativeRate": 0.08571428571428572,
+      "positiveRate": 0.9142857142857143,
+      "totalFeedback": 35,
+      "noAnswerRate": 0.6343283582089553,
+      "totalQueries": 134
+    }
+  },
+  {
+    "timestamp": "2025-12-16T10:42:00.104Z",
+    "reason": "High no-answer rate (>30%) - lowering thresholds to improve coverage",
+    "oldValues": {
+      "domainThreshold": 0.25,
+      "fallbackThreshold": 0.15
+    },
+    "newValues": {
+      "domainThreshold": 0.25,
+      "fallbackThreshold": 0.15
+    },
+    "metrics": {
+      "repeatedQueryRate": 0.7755102040816326,
+      "uniqueQueries": 14,
+      "totalQueriesWithAnswers": 49,
+      "negativeRate": 0.08571428571428572,
+      "positiveRate": 0.9142857142857143,
+      "totalFeedback": 35,
+      "noAnswerRate": 0.6343283582089553,
+      "totalQueries": 134
+    }
+  },
+  {
+    "timestamp": "2025-12-16T10:43:00.123Z",
+    "reason": "High no-answer rate (>30%) - lowering thresholds to improve coverage",
+    "oldValues": {
+      "domainThreshold": 0.25,
+      "fallbackThreshold": 0.15
+    },
+    "newValues": {
+      "domainThreshold": 0.25,
+      "fallbackThreshold": 0.15
+    },
+    "metrics": {
+      "repeatedQueryRate": 0.7755102040816326,
+      "uniqueQueries": 14,
+      "totalQueriesWithAnswers": 49,
+      "negativeRate": 0.08571428571428572,
+      "positiveRate": 0.9142857142857143,
+      "totalFeedback": 35,
+      "noAnswerRate": 0.6343283582089553,
+      "totalQueries": 134
+    }
+  },
+  {
+    "timestamp": "2025-12-16T10:44:00.207Z",
+    "reason": "High no-answer rate (>30%) - lowering thresholds to improve coverage",
+    "oldValues": {
+      "domainThreshold": 0.25,
+      "fallbackThreshold": 0.15
+    },
+    "newValues": {
+      "domainThreshold": 0.25,
+      "fallbackThreshold": 0.15
+    },
+    "metrics": {
+      "repeatedQueryRate": 0.7755102040816326,
+      "uniqueQueries": 14,
+      "totalQueriesWithAnswers": 49,
+      "negativeRate": 0.08571428571428572,
+      "positiveRate": 0.9142857142857143,
+      "totalFeedback": 35,
+      "noAnswerRate": 0.6343283582089553,
+      "totalQueries": 134
+    }
+  },
+  {
+    "timestamp": "2025-12-16T10:45:00.040Z",
+    "reason": "High no-answer rate (>30%) - lowering thresholds to improve coverage",
+    "oldValues": {
+      "domainThreshold": 0.25,
+      "fallbackThreshold": 0.15
+    },
+    "newValues": {
+      "domainThreshold": 0.25,
+      "fallbackThreshold": 0.15
+    },
+    "metrics": {
+      "repeatedQueryRate": 0.7755102040816326,
+      "uniqueQueries": 14,
+      "totalQueriesWithAnswers": 49,
+      "negativeRate": 0.08571428571428572,
+      "positiveRate": 0.9142857142857143,
+      "totalFeedback": 35,
+      "noAnswerRate": 0.6343283582089553,
+      "totalQueries": 134
+    }
+  },
+  {
+    "timestamp": "2025-12-16T10:46:00.064Z",
+    "reason": "High no-answer rate (>30%) - lowering thresholds to improve coverage",
+    "oldValues": {
+      "domainThreshold": 0.25,
+      "fallbackThreshold": 0.15
+    },
+    "newValues": {
+      "domainThreshold": 0.25,
+      "fallbackThreshold": 0.15
+    },
+    "metrics": {
+      "repeatedQueryRate": 0.7755102040816326,
+      "uniqueQueries": 14,
+      "totalQueriesWithAnswers": 49,
+      "negativeRate": 0.08571428571428572,
+      "positiveRate": 0.9142857142857143,
+      "totalFeedback": 35,
+      "noAnswerRate": 0.6343283582089553,
+      "totalQueries": 134
+    }
+  },
+  {
+    "timestamp": "2025-12-16T10:47:00.127Z",
+    "reason": "High no-answer rate (>30%) - lowering thresholds to improve coverage",
+    "oldValues": {
+      "domainThreshold": 0.25,
+      "fallbackThreshold": 0.15
+    },
+    "newValues": {
+      "domainThreshold": 0.25,
+      "fallbackThreshold": 0.15
+    },
+    "metrics": {
+      "repeatedQueryRate": 0.7755102040816326,
+      "uniqueQueries": 14,
+      "totalQueriesWithAnswers": 49,
+      "negativeRate": 0.08571428571428572,
+      "positiveRate": 0.9142857142857143,
+      "totalFeedback": 35,
+      "noAnswerRate": 0.6343283582089553,
+      "totalQueries": 134
+    }
+  },
+  {
+    "timestamp": "2025-12-16T10:48:00.129Z",
+    "reason": "High no-answer rate (>30%) - lowering thresholds to improve coverage",
+    "oldValues": {
+      "domainThreshold": 0.25,
+      "fallbackThreshold": 0.15
+    },
+    "newValues": {
+      "domainThreshold": 0.25,
+      "fallbackThreshold": 0.15
+    },
+    "metrics": {
+      "repeatedQueryRate": 0.7755102040816326,
+      "uniqueQueries": 14,
+      "totalQueriesWithAnswers": 49,
+      "negativeRate": 0.08571428571428572,
+      "positiveRate": 0.9142857142857143,
+      "totalFeedback": 35,
+      "noAnswerRate": 0.6343283582089553,
+      "totalQueries": 134
+    }
+  },
+  {
+    "timestamp": "2025-12-16T10:49:00.117Z",
+    "reason": "High no-answer rate (>30%) - lowering thresholds to improve coverage",
+    "oldValues": {
+      "domainThreshold": 0.25,
+      "fallbackThreshold": 0.15
+    },
+    "newValues": {
+      "domainThreshold": 0.25,
+      "fallbackThreshold": 0.15
+    },
+    "metrics": {
+      "repeatedQueryRate": 0.7755102040816326,
+      "uniqueQueries": 14,
+      "totalQueriesWithAnswers": 49,
+      "negativeRate": 0.08571428571428572,
+      "positiveRate": 0.9142857142857143,
+      "totalFeedback": 35,
+      "noAnswerRate": 0.6343283582089553,
+      "totalQueries": 134
+    }
+  },
+  {
+    "timestamp": "2025-12-16T10:50:00.017Z",
+    "reason": "High no-answer rate (>30%) - lowering thresholds to improve coverage",
+    "oldValues": {
+      "domainThreshold": 0.25,
+      "fallbackThreshold": 0.15
+    },
+    "newValues": {
+      "domainThreshold": 0.25,
+      "fallbackThreshold": 0.15
+    },
+    "metrics": {
+      "repeatedQueryRate": 0.7755102040816326,
+      "uniqueQueries": 14,
+      "totalQueriesWithAnswers": 49,
+      "negativeRate": 0.08571428571428572,
+      "positiveRate": 0.9142857142857143,
+      "totalFeedback": 35,
+      "noAnswerRate": 0.6343283582089553,
+      "totalQueries": 134
+    }
+  },
+  {
+    "timestamp": "2025-12-16T10:51:00.027Z",
+    "reason": "High no-answer rate (>30%) - lowering thresholds to improve coverage",
+    "oldValues": {
+      "domainThreshold": 0.25,
+      "fallbackThreshold": 0.15
+    },
+    "newValues": {
+      "domainThreshold": 0.25,
+      "fallbackThreshold": 0.15
+    },
+    "metrics": {
+      "repeatedQueryRate": 0.7755102040816326,
+      "uniqueQueries": 14,
+      "totalQueriesWithAnswers": 49,
+      "negativeRate": 0.08571428571428572,
+      "positiveRate": 0.9142857142857143,
+      "totalFeedback": 35,
+      "noAnswerRate": 0.6343283582089553,
+      "totalQueries": 134
+    }
+  },
+  {
+    "timestamp": "2025-12-16T10:52:00.026Z",
+    "reason": "High no-answer rate (>30%) - lowering thresholds to improve coverage",
+    "oldValues": {
+      "domainThreshold": 0.25,
+      "fallbackThreshold": 0.15
+    },
+    "newValues": {
+      "domainThreshold": 0.25,
+      "fallbackThreshold": 0.15
+    },
+    "metrics": {
+      "repeatedQueryRate": 0.7755102040816326,
+      "uniqueQueries": 14,
+      "totalQueriesWithAnswers": 49,
+      "negativeRate": 0.08571428571428572,
+      "positiveRate": 0.9142857142857143,
+      "totalFeedback": 35,
+      "noAnswerRate": 0.6343283582089553,
+      "totalQueries": 134
+    }
+  },
+  {
+    "timestamp": "2025-12-16T10:53:00.041Z",
+    "reason": "High no-answer rate (>30%) - lowering thresholds to improve coverage",
+    "oldValues": {
+      "domainThreshold": 0.25,
+      "fallbackThreshold": 0.15
+    },
+    "newValues": {
+      "domainThreshold": 0.25,
+      "fallbackThreshold": 0.15
+    },
+    "metrics": {
+      "repeatedQueryRate": 0.7755102040816326,
+      "uniqueQueries": 14,
+      "totalQueriesWithAnswers": 49,
+      "negativeRate": 0.08571428571428572,
+      "positiveRate": 0.9142857142857143,
+      "totalFeedback": 35,
+      "noAnswerRate": 0.6343283582089553,
+      "totalQueries": 134
+    }
+  },
+  {
+    "timestamp": "2025-12-16T10:54:00.221Z",
+    "reason": "High no-answer rate (>30%) - lowering thresholds to improve coverage",
+    "oldValues": {
+      "domainThreshold": 0.25,
+      "fallbackThreshold": 0.15
+    },
+    "newValues": {
+      "domainThreshold": 0.25,
+      "fallbackThreshold": 0.15
+    },
+    "metrics": {
+      "repeatedQueryRate": 0.7755102040816326,
+      "uniqueQueries": 14,
+      "totalQueriesWithAnswers": 49,
+      "negativeRate": 0.08571428571428572,
+      "positiveRate": 0.9142857142857143,
+      "totalFeedback": 35,
+      "noAnswerRate": 0.6343283582089553,
+      "totalQueries": 134
+    }
+  },
+  {
+    "timestamp": "2025-12-16T10:56:00.040Z",
+    "reason": "High no-answer rate (>30%) - lowering thresholds to improve coverage",
+    "oldValues": {
+      "domainThreshold": 0.25,
+      "fallbackThreshold": 0.15
+    },
+    "newValues": {
+      "domainThreshold": 0.25,
+      "fallbackThreshold": 0.15
+    },
+    "metrics": {
+      "repeatedQueryRate": 0.7755102040816326,
+      "uniqueQueries": 14,
+      "totalQueriesWithAnswers": 49,
+      "negativeRate": 0.08571428571428572,
+      "positiveRate": 0.9142857142857143,
+      "totalFeedback": 35,
+      "noAnswerRate": 0.6343283582089553,
+      "totalQueries": 134
+    }
+  },
+  {
+    "timestamp": "2025-12-16T10:57:00.027Z",
+    "reason": "High no-answer rate (>30%) - lowering thresholds to improve coverage",
+    "oldValues": {
+      "domainThreshold": 0.25,
+      "fallbackThreshold": 0.15
+    },
+    "newValues": {
+      "domainThreshold": 0.25,
+      "fallbackThreshold": 0.15
+    },
+    "metrics": {
+      "repeatedQueryRate": 0.7755102040816326,
+      "uniqueQueries": 14,
+      "totalQueriesWithAnswers": 49,
+      "negativeRate": 0.08571428571428572,
+      "positiveRate": 0.9142857142857143,
+      "totalFeedback": 35,
+      "noAnswerRate": 0.6343283582089553,
+      "totalQueries": 134
+    }
+  },
+  {
+    "timestamp": "2025-12-16T10:58:00.023Z",
+    "reason": "High no-answer rate (>30%) - lowering thresholds to improve coverage",
+    "oldValues": {
+      "domainThreshold": 0.25,
+      "fallbackThreshold": 0.15
+    },
+    "newValues": {
+      "domainThreshold": 0.25,
+      "fallbackThreshold": 0.15
+    },
+    "metrics": {
+      "repeatedQueryRate": 0.7755102040816326,
+      "uniqueQueries": 14,
+      "totalQueriesWithAnswers": 49,
+      "negativeRate": 0.08571428571428572,
+      "positiveRate": 0.9142857142857143,
+      "totalFeedback": 35,
+      "noAnswerRate": 0.6343283582089553,
+      "totalQueries": 134
+    }
+  },
+  {
+    "timestamp": "2025-12-16T10:59:00.045Z",
+    "reason": "High no-answer rate (>30%) - lowering thresholds to improve coverage",
+    "oldValues": {
+      "domainThreshold": 0.25,
+      "fallbackThreshold": 0.15
+    },
+    "newValues": {
+      "domainThreshold": 0.25,
+      "fallbackThreshold": 0.15
+    },
+    "metrics": {
+      "repeatedQueryRate": 0.7755102040816326,
+      "uniqueQueries": 14,
+      "totalQueriesWithAnswers": 49,
+      "negativeRate": 0.08571428571428572,
+      "positiveRate": 0.9142857142857143,
+      "totalFeedback": 35,
+      "noAnswerRate": 0.6397058823529411,
+      "totalQueries": 136
+    }
+  },
+  {
+    "timestamp": "2025-12-16T11:00:00.097Z",
+    "reason": "High no-answer rate (>30%) - lowering thresholds to improve coverage",
+    "oldValues": {
+      "domainThreshold": 0.25,
+      "fallbackThreshold": 0.15
+    },
+    "newValues": {
+      "domainThreshold": 0.25,
+      "fallbackThreshold": 0.15
+    },
+    "metrics": {
+      "repeatedQueryRate": 0.7755102040816326,
+      "uniqueQueries": 14,
+      "totalQueriesWithAnswers": 49,
+      "negativeRate": 0.08571428571428572,
+      "positiveRate": 0.9142857142857143,
+      "totalFeedback": 35,
+      "noAnswerRate": 0.6423357664233577,
+      "totalQueries": 137
+    }
+  },
+  {
+    "timestamp": "2025-12-16T11:01:00.024Z",
+    "reason": "High no-answer rate (>30%) - lowering thresholds to improve coverage",
+    "oldValues": {
+      "domainThreshold": 0.25,
+      "fallbackThreshold": 0.15
+    },
+    "newValues": {
+      "domainThreshold": 0.25,
+      "fallbackThreshold": 0.15
+    },
+    "metrics": {
+      "repeatedQueryRate": 0.7755102040816326,
+      "uniqueQueries": 14,
+      "totalQueriesWithAnswers": 49,
+      "negativeRate": 0.08571428571428572,
+      "positiveRate": 0.9142857142857143,
+      "totalFeedback": 35,
+      "noAnswerRate": 0.6423357664233577,
+      "totalQueries": 137
+    }
+  },
+  {
+    "timestamp": "2025-12-16T11:04:00.051Z",
+    "reason": "High no-answer rate (>30%) - lowering thresholds to improve coverage",
+    "oldValues": {
+      "domainThreshold": 0.25,
+      "fallbackThreshold": 0.15
+    },
+    "newValues": {
+      "domainThreshold": 0.25,
+      "fallbackThreshold": 0.15
+    },
+    "metrics": {
+      "repeatedQueryRate": 0.7755102040816326,
+      "uniqueQueries": 14,
+      "totalQueriesWithAnswers": 49,
+      "negativeRate": 0.08571428571428572,
+      "positiveRate": 0.9142857142857143,
+      "totalFeedback": 35,
+      "noAnswerRate": 0.6423357664233577,
+      "totalQueries": 137
+    }
+  },
+  {
+    "timestamp": "2025-12-16T11:06:00.061Z",
+    "reason": "High no-answer rate (>30%) - lowering thresholds to improve coverage",
+    "oldValues": {
+      "domainThreshold": 0.25,
+      "fallbackThreshold": 0.15
+    },
+    "newValues": {
+      "domainThreshold": 0.25,
+      "fallbackThreshold": 0.15
+    },
+    "metrics": {
+      "repeatedQueryRate": 0.7755102040816326,
+      "uniqueQueries": 14,
+      "totalQueriesWithAnswers": 49,
+      "negativeRate": 0.08571428571428572,
+      "positiveRate": 0.9142857142857143,
+      "totalFeedback": 35,
+      "noAnswerRate": 0.6423357664233577,
+      "totalQueries": 137
+    }
+  },
+  {
+    "timestamp": "2025-12-16T11:07:00.060Z",
+    "reason": "High no-answer rate (>30%) - lowering thresholds to improve coverage",
+    "oldValues": {
+      "domainThreshold": 0.25,
+      "fallbackThreshold": 0.15
+    },
+    "newValues": {
+      "domainThreshold": 0.25,
+      "fallbackThreshold": 0.15
+    },
+    "metrics": {
+      "repeatedQueryRate": 0.7755102040816326,
+      "uniqueQueries": 14,
+      "totalQueriesWithAnswers": 49,
+      "negativeRate": 0.08571428571428572,
+      "positiveRate": 0.9142857142857143,
+      "totalFeedback": 35,
+      "noAnswerRate": 0.6423357664233577,
+      "totalQueries": 137
+    }
+  },
+  {
+    "timestamp": "2025-12-16T11:09:00.022Z",
+    "reason": "High no-answer rate (>30%) - lowering thresholds to improve coverage",
+    "oldValues": {
+      "domainThreshold": 0.25,
+      "fallbackThreshold": 0.15
+    },
+    "newValues": {
+      "domainThreshold": 0.25,
+      "fallbackThreshold": 0.15
+    },
+    "metrics": {
+      "repeatedQueryRate": 0.7755102040816326,
+      "uniqueQueries": 14,
+      "totalQueriesWithAnswers": 49,
+      "negativeRate": 0.08571428571428572,
+      "positiveRate": 0.9142857142857143,
+      "totalFeedback": 35,
+      "noAnswerRate": 0.6423357664233577,
+      "totalQueries": 137
+    }
+  },
+  {
+    "timestamp": "2025-12-16T11:10:00.214Z",
+    "reason": "High no-answer rate (>30%) - lowering thresholds to improve coverage",
+    "oldValues": {
+      "domainThreshold": 0.25,
+      "fallbackThreshold": 0.15
+    },
+    "newValues": {
+      "domainThreshold": 0.25,
+      "fallbackThreshold": 0.15
+    },
+    "metrics": {
+      "repeatedQueryRate": 0.7755102040816326,
+      "uniqueQueries": 14,
+      "totalQueriesWithAnswers": 49,
+      "negativeRate": 0.08571428571428572,
+      "positiveRate": 0.9142857142857143,
+      "totalFeedback": 35,
+      "noAnswerRate": 0.644927536231884,
+      "totalQueries": 138
+    }
+  },
+  {
+    "timestamp": "2025-12-16T11:11:00.077Z",
+    "reason": "High no-answer rate (>30%) - lowering thresholds to improve coverage",
+    "oldValues": {
+      "domainThreshold": 0.25,
+      "fallbackThreshold": 0.15
+    },
+    "newValues": {
+      "domainThreshold": 0.25,
+      "fallbackThreshold": 0.15
+    },
+    "metrics": {
+      "repeatedQueryRate": 0.7755102040816326,
+      "uniqueQueries": 14,
+      "totalQueriesWithAnswers": 49,
+      "negativeRate": 0.08571428571428572,
+      "positiveRate": 0.9142857142857143,
+      "totalFeedback": 35,
+      "noAnswerRate": 0.6474820143884892,
+      "totalQueries": 139
+    }
+  },
+  {
+    "timestamp": "2025-12-16T11:12:00.108Z",
+    "reason": "High no-answer rate (>30%) - lowering thresholds to improve coverage",
+    "oldValues": {
+      "domainThreshold": 0.25,
+      "fallbackThreshold": 0.15
+    },
+    "newValues": {
+      "domainThreshold": 0.25,
+      "fallbackThreshold": 0.15
+    },
+    "metrics": {
+      "repeatedQueryRate": 0.7755102040816326,
+      "uniqueQueries": 14,
+      "totalQueriesWithAnswers": 49,
+      "negativeRate": 0.08571428571428572,
+      "positiveRate": 0.9142857142857143,
+      "totalFeedback": 35,
+      "noAnswerRate": 0.6474820143884892,
+      "totalQueries": 139
+    }
+  },
+  {
+    "timestamp": "2025-12-16T11:13:00.018Z",
+    "reason": "High no-answer rate (>30%) - lowering thresholds to improve coverage",
+    "oldValues": {
+      "domainThreshold": 0.25,
+      "fallbackThreshold": 0.15
+    },
+    "newValues": {
+      "domainThreshold": 0.25,
+      "fallbackThreshold": 0.15
+    },
+    "metrics": {
+      "repeatedQueryRate": 0.76,
+      "uniqueQueries": 15,
+      "totalQueriesWithAnswers": 50,
+      "negativeRate": 0.08333333333333333,
+      "positiveRate": 0.9166666666666666,
+      "totalFeedback": 36,
+      "noAnswerRate": 0.6428571428571429,
+      "totalQueries": 140
+    }
+  },
+  {
+    "timestamp": "2025-12-16T11:14:00.031Z",
+    "reason": "High no-answer rate (>30%) - lowering thresholds to improve coverage",
+    "oldValues": {
+      "domainThreshold": 0.25,
+      "fallbackThreshold": 0.15
+    },
+    "newValues": {
+      "domainThreshold": 0.25,
+      "fallbackThreshold": 0.15
+    },
+    "metrics": {
+      "repeatedQueryRate": 0.76,
+      "uniqueQueries": 15,
+      "totalQueriesWithAnswers": 50,
+      "negativeRate": 0.08333333333333333,
+      "positiveRate": 0.9166666666666666,
+      "totalFeedback": 36,
+      "noAnswerRate": 0.6428571428571429,
+      "totalQueries": 140
+    }
+  },
+  {
+    "timestamp": "2025-12-16T11:15:00.041Z",
+    "reason": "High no-answer rate (>30%) - lowering thresholds to improve coverage",
+    "oldValues": {
+      "domainThreshold": 0.25,
+      "fallbackThreshold": 0.15
+    },
+    "newValues": {
+      "domainThreshold": 0.25,
+      "fallbackThreshold": 0.15
+    },
+    "metrics": {
+      "repeatedQueryRate": 0.76,
+      "uniqueQueries": 15,
+      "totalQueriesWithAnswers": 50,
+      "negativeRate": 0.08333333333333333,
+      "positiveRate": 0.9166666666666666,
+      "totalFeedback": 36,
+      "noAnswerRate": 0.6428571428571429,
+      "totalQueries": 140
+    }
+  },
+  {
+    "timestamp": "2025-12-16T11:16:00.033Z",
+    "reason": "High no-answer rate (>30%) - lowering thresholds to improve coverage",
+    "oldValues": {
+      "domainThreshold": 0.25,
+      "fallbackThreshold": 0.15
+    },
+    "newValues": {
+      "domainThreshold": 0.25,
+      "fallbackThreshold": 0.15
+    },
+    "metrics": {
+      "repeatedQueryRate": 0.76,
+      "uniqueQueries": 15,
+      "totalQueriesWithAnswers": 50,
+      "negativeRate": 0.08333333333333333,
+      "positiveRate": 0.9166666666666666,
+      "totalFeedback": 36,
+      "noAnswerRate": 0.6428571428571429,
+      "totalQueries": 140
+    }
+  },
+  {
+    "timestamp": "2025-12-16T11:17:00.109Z",
+    "reason": "High no-answer rate (>30%) - lowering thresholds to improve coverage",
+    "oldValues": {
+      "domainThreshold": 0.25,
+      "fallbackThreshold": 0.15
+    },
+    "newValues": {
+      "domainThreshold": 0.25,
+      "fallbackThreshold": 0.15
+    },
+    "metrics": {
+      "repeatedQueryRate": 0.76,
+      "uniqueQueries": 15,
+      "totalQueriesWithAnswers": 50,
+      "negativeRate": 0.08333333333333333,
+      "positiveRate": 0.9166666666666666,
+      "totalFeedback": 36,
+      "noAnswerRate": 0.6428571428571429,
+      "totalQueries": 140
+    }
+  },
+  {
+    "timestamp": "2025-12-16T11:18:00.108Z",
+    "reason": "High no-answer rate (>30%) - lowering thresholds to improve coverage",
+    "oldValues": {
+      "domainThreshold": 0.25,
+      "fallbackThreshold": 0.15
+    },
+    "newValues": {
+      "domainThreshold": 0.25,
+      "fallbackThreshold": 0.15
+    },
+    "metrics": {
+      "repeatedQueryRate": 0.76,
+      "uniqueQueries": 15,
+      "totalQueriesWithAnswers": 50,
+      "negativeRate": 0.08333333333333333,
+      "positiveRate": 0.9166666666666666,
+      "totalFeedback": 36,
+      "noAnswerRate": 0.6428571428571429,
+      "totalQueries": 140
+    }
+  },
+  {
+    "timestamp": "2025-12-16T11:19:00.062Z",
+    "reason": "High no-answer rate (>30%) - lowering thresholds to improve coverage",
+    "oldValues": {
+      "domainThreshold": 0.25,
+      "fallbackThreshold": 0.15
+    },
+    "newValues": {
+      "domainThreshold": 0.25,
+      "fallbackThreshold": 0.15
+    },
+    "metrics": {
+      "repeatedQueryRate": 0.76,
+      "uniqueQueries": 15,
+      "totalQueriesWithAnswers": 50,
+      "negativeRate": 0.08333333333333333,
+      "positiveRate": 0.9166666666666666,
+      "totalFeedback": 36,
+      "noAnswerRate": 0.6428571428571429,
+      "totalQueries": 140
+    }
+  },
+  {
+    "timestamp": "2025-12-16T11:20:00.125Z",
+    "reason": "High no-answer rate (>30%) - lowering thresholds to improve coverage",
+    "oldValues": {
+      "domainThreshold": 0.25,
+      "fallbackThreshold": 0.15
+    },
+    "newValues": {
+      "domainThreshold": 0.25,
+      "fallbackThreshold": 0.15
+    },
+    "metrics": {
+      "repeatedQueryRate": 0.76,
+      "uniqueQueries": 15,
+      "totalQueriesWithAnswers": 50,
+      "negativeRate": 0.08333333333333333,
+      "positiveRate": 0.9166666666666666,
+      "totalFeedback": 36,
+      "noAnswerRate": 0.6428571428571429,
+      "totalQueries": 140
+    }
+  },
+  {
+    "timestamp": "2025-12-16T11:21:00.098Z",
+    "reason": "High no-answer rate (>30%) - lowering thresholds to improve coverage",
+    "oldValues": {
+      "domainThreshold": 0.25,
+      "fallbackThreshold": 0.15
+    },
+    "newValues": {
+      "domainThreshold": 0.25,
+      "fallbackThreshold": 0.15
+    },
+    "metrics": {
+      "repeatedQueryRate": 0.76,
+      "uniqueQueries": 15,
+      "totalQueriesWithAnswers": 50,
+      "negativeRate": 0.08333333333333333,
+      "positiveRate": 0.9166666666666666,
+      "totalFeedback": 36,
+      "noAnswerRate": 0.6428571428571429,
+      "totalQueries": 140
+    }
+  },
+  {
+    "timestamp": "2025-12-16T11:22:00.100Z",
+    "reason": "High no-answer rate (>30%) - lowering thresholds to improve coverage",
+    "oldValues": {
+      "domainThreshold": 0.25,
+      "fallbackThreshold": 0.15
+    },
+    "newValues": {
+      "domainThreshold": 0.25,
+      "fallbackThreshold": 0.15
+    },
+    "metrics": {
+      "repeatedQueryRate": 0.76,
+      "uniqueQueries": 15,
+      "totalQueriesWithAnswers": 50,
+      "negativeRate": 0.08333333333333333,
+      "positiveRate": 0.9166666666666666,
+      "totalFeedback": 36,
+      "noAnswerRate": 0.6428571428571429,
+      "totalQueries": 140
+    }
+  },
+  {
+    "timestamp": "2025-12-16T11:23:00.045Z",
+    "reason": "High no-answer rate (>30%) - lowering thresholds to improve coverage",
+    "oldValues": {
+      "domainThreshold": 0.25,
+      "fallbackThreshold": 0.15
+    },
+    "newValues": {
+      "domainThreshold": 0.25,
+      "fallbackThreshold": 0.15
+    },
+    "metrics": {
+      "repeatedQueryRate": 0.76,
+      "uniqueQueries": 15,
+      "totalQueriesWithAnswers": 50,
+      "negativeRate": 0.08333333333333333,
+      "positiveRate": 0.9166666666666666,
+      "totalFeedback": 36,
+      "noAnswerRate": 0.6428571428571429,
+      "totalQueries": 140
+    }
+  },
+  {
+    "timestamp": "2025-12-16T11:24:00.022Z",
+    "reason": "High no-answer rate (>30%) - lowering thresholds to improve coverage",
+    "oldValues": {
+      "domainThreshold": 0.25,
+      "fallbackThreshold": 0.15
+    },
+    "newValues": {
+      "domainThreshold": 0.25,
+      "fallbackThreshold": 0.15
+    },
+    "metrics": {
+      "repeatedQueryRate": 0.76,
+      "uniqueQueries": 15,
+      "totalQueriesWithAnswers": 50,
+      "negativeRate": 0.08333333333333333,
+      "positiveRate": 0.9166666666666666,
+      "totalFeedback": 36,
+      "noAnswerRate": 0.6428571428571429,
+      "totalQueries": 140
+    }
+  },
+  {
+    "timestamp": "2025-12-16T11:25:00.114Z",
+    "reason": "High no-answer rate (>30%) - lowering thresholds to improve coverage",
+    "oldValues": {
+      "domainThreshold": 0.25,
+      "fallbackThreshold": 0.15
+    },
+    "newValues": {
+      "domainThreshold": 0.25,
+      "fallbackThreshold": 0.15
+    },
+    "metrics": {
+      "repeatedQueryRate": 0.76,
+      "uniqueQueries": 15,
+      "totalQueriesWithAnswers": 50,
+      "negativeRate": 0.08333333333333333,
+      "positiveRate": 0.9166666666666666,
+      "totalFeedback": 36,
+      "noAnswerRate": 0.6428571428571429,
+      "totalQueries": 140
+    }
+  }
+]

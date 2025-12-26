@@ -1,0 +1,10 @@
+-- Create table for intent hints (data-driven)
+CREATE TABLE IF NOT EXISTS IntentHints (
+  HintID INT AUTO_INCREMENT PRIMARY KEY,
+  HintText VARCHAR(255) NOT NULL,
+  IntentType ENUM('count','other') NOT NULL DEFAULT 'count',
+  IsActive TINYINT(1) NOT NULL DEFAULT 1,
+  CreatedAt TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  UpdatedAt TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  UNIQUE KEY uniq_hint_intent (HintText, IntentType)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;

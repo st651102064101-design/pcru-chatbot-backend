@@ -1,0 +1,102 @@
+/**
+ * Service to get all QuestionsAnswers for the logged-in officer.
+ * @param {object} pool - MySQL connection pool
+ * @returns {function} - Express middleware (req, res)
+ */
+const getQuestionsAnswersService = (pool) => async (req, res) => {
+    // debug toggle: set DEBUG_GETQA=true to enable internal debug logs
+    const debugGETQA = true; // Force enable for debugging
+    const dbg = (...args) => { if (debugGETQA) console.log(...args); };
+    let connection;
+    try {
+        const officerId = (req.user?.userId ?? req.user?.officerId);
+        console.log('🔍 getQuestionsAnswers called for officerId:', officerId, 'raw user:', req.user);
+        if (!officerId) {
+            return res.status(401).json({ success: false, message: 'Unauthorized: Could not identify the user from the token.' });
+        }
+
+        connection = await pool.getConnection();
+        dbg('✅ Got database connection');
+
+        // Get QuestionsAnswers
+        dbg('📝 Fetching questions for officer:', officerId);
+        const order = req.query && String(req.query.order || '').toLowerCase() === 'asc' ? 'ASC' : 'DESC';
+        const [rows] = await connection.query(
+            `SELECT qa.QuestionsAnswersID, qa.QuestionTitle, qa.ReviewDate, qa.QuestionText, qa.OfficerID,
+                    c.CategoriesName AS CategoriesID
+             FROM QuestionsAnswers qa
+             LEFT JOIN Categories c ON qa.CategoriesID = c.CategoriesID
+             WHERE qa.OfficerID = ?
+             ORDER BY COALESCE(qa.ReviewDate, qa.QuestionsAnswersID) ${order}`,
+            [officerId]
+        );
+        dbg('✅ Found', rows.length, 'questions');
+
+        // Get keywords and feedback counts for each question
+        const questionsWithKeywords = await Promise.all(
+            rows.map(async (question) => {
+                try {
+                    dbg('🔍 Fetching keywords for question:', question.QuestionsAnswersID);
+                    const [keywords] = await connection.query(
+                        `SELECT k.KeywordID, k.KeywordText 
+                         FROM Keywords k
+                         INNER JOIN AnswersKeywords ak ON k.KeywordID = ak.KeywordID
+                         WHERE ak.QuestionsAnswersID = ?`,
+                        [question.QuestionsAnswersID]
+                    );
+                    dbg('✅ Found', keywords.length, 'keywords for question', question.QuestionsAnswersID);
+                    
+                    // Get like/unlike counts for this question
+                    dbg('🔍 Fetching feedback counts for question:', question.QuestionsAnswersID);
+                    const [feedbackCounts] = await connection.query(
+                        `SELECT 
+                            SUM(CASE WHEN f.FeedbackValue = 1 THEN 1 ELSE 0 END) as likeCount,
+                            SUM(CASE WHEN f.FeedbackValue = 0 THEN 1 ELSE 0 END) as unlikeCount
+                         FROM Feedbacks f
+                         INNER JOIN ChatLogHasAnswers c ON f.ChatLogID = c.ChatLogID
+                         WHERE c.QuestionsAnswersID = ?`,
+                        [question.QuestionsAnswersID]
+                    );
+                    
+                    const likeCount = feedbackCounts[0]?.likeCount || 0;
+                    const unlikeCount = feedbackCounts[0]?.unlikeCount || 0;
+                    dbg('✅ Found', likeCount, 'likes and', unlikeCount, 'unlikes for question', question.QuestionsAnswersID);
+                    
+                    return {
+                        ...question,
+                        keywords: keywords || [],
+                        likeCount: likeCount,
+                        unlikeCount: unlikeCount
+                    };
+                } catch (keywordError) {
+                    console.error('⚠️ Error fetching keywords/feedback for question', question.QuestionsAnswersID, ':', keywordError && (keywordError.message || keywordError));
+                    // Return question without keywords if there's an error
+                    return {
+                        ...question,
+                        keywords: [],
+                        likeCount: 0,
+                        unlikeCount: 0
+                    };
+                }
+            })
+        );
+
+        dbg('✅ Sending response with', questionsWithKeywords.length, 'questions');
+        res.status(200).json(questionsWithKeywords);
+    } catch (error) {
+        console.error('❌ Error fetching QuestionsAnswers:', error && (error.message || error));
+        res.status(500).json({ 
+            success: false, 
+            message: 'Internal Server Error', 
+            error: error.message,
+            sqlMessage: error.sqlMessage 
+        });
+    } finally {
+        if (connection) {
+            dbg('🔄 Releasing connection');
+            connection.release();
+        }
+    }
+};
+
+module.exports = getQuestionsAnswersService;

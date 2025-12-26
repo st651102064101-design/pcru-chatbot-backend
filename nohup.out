@@ -1,0 +1,1362 @@
+[dotenv@17.2.3] injecting env (25) from .env -- tip: ⚙️  write to custom object with { processEnv: myObject }
+[dotenv@17.2.3] injecting env (0) from .env -- tip: ⚙️  specify custom .env file path with { path: '/custom/path/.env' }
+[dotenv@17.2.3] injecting env (0) from .env -- tip: 🗂️ backup and recover secrets: https://dotenvx.com/ops
+🚀 Auto-starting PyThaiNLP tokenizer at http://localhost:8001
+✅ Nodemailer Transporter Initialized.
+Server running at http://localhost:3000
+WebSocket server running at ws://localhost:3000
+🔄 Starting stopwords auto-sync...
+🔄 Starting stopwords sync from standard list...
+✅ Connected to database
+✅ MySQL Database Connected Successfully!
+📊 Found 1011 existing stopwords in database
+➕ Adding 3 new standard stopwords...
+✅ Successfully added new stopwords
+⚠️  Warning: Found 895 non-standard stopwords in database:
+    ก็คือ, ก็จะ, ก็ดี, ก็ต่อเมื่อ, ก็ตาม, ก็ตามที, ก็ตามแต่, กระทั่ง, กระทำ, กระนั้น ...
+   You may want to review and remove these manually if needed.
+
+📊 Final count: 1011 stopwords in database
+✅ Sync completed successfully!
+/Library/Developer/CommandLineTools/usr/bin/python3: No module named uvicorn
+ℹ️ Tokenizer service exited (code=1, signal=null)
+✅ Loaded 13 synonym mappings
+✅ Loaded 20 negative keywords
+🔄 Loading stopwords from database...
+  🛡️ Excluded keyword: "ทำให้"
+  🛡️ Excluded keyword: "รับ"
+  🛡️ Excluded keyword: "อย่าง"
+  🛡️ Excluded keyword: "อะไร"
+🛡️ Auto-whitelist: excluded 4 keyword(s) from stopwords (based on Keywords table)
+📝 Loaded 1007 stopwords from database
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+⛔ Negation detected in query "ไม่เอาทุน": ไม่ → ทุน
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+🔄 Synonym resolved: 'ยื่นสมัคร' -> 'การสมัคร'
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+🔍 Query tokens (after stopword removal): [ทุน]
+📊 Total QA items in database: 17
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+✅ Semantic keyword match: Found 12 items
+[Domain Terms Loaded]: { dormTerms: 0, scholarshipTerms: 0, admissionsTerms: 0 }
+Domain detection (DB-only): {
+  query: 'ไม่เอาทุน',
+  dormTermsLoaded: 0,
+  scholarshipTermsLoaded: 0,
+  admissionsTermsLoaded: 0,
+  queryHasDorm: false,
+  queryHasScholarship: false,
+  queryHasAdmissions: false
+}
+⛔ Negation penalty applied to "ทุนความสามารถพิเศษสำหรับใคร?": 0.782 -> -0.782 (x-1)
+⛔ Negation penalty applied to "ทุนความสามารถพิเศษให้เงินเท่าไหร่?": 0.782 -> -0.782 (x-1)
+⛔ Negation penalty applied to "ทุนช่วยเหลือนักศึกษาต่างชาติทำให้อะไร?": 0.785 -> -0.785 (x-1)
+⛔ Negation penalty applied to "ทุนเรียนดีมีกี่อย่าง?": 0.782 -> -0.782 (x-1)
+⛔ Negation penalty applied to "เงื่อนไขการสมัครทุนเรียนดีคืออะไร?": 0.775 -> -0.775 (x-1)
+⛔ Negation penalty applied to "ต้องใช้เอกสารอะไรบ้างในการยื่นสมัครทุนเรียนดี?": 0.774 -> -0.774 (x-1)
+⛔ Negation penalty applied to "ปีการศึกษาไหนเปิดรับสมัครทุนเรียนดี?": 0.782 -> -0.782 (x-1)
+⛔ Negation penalty applied to "ทุนเรียนดีให้เงินเท่าไหร่?": 0.783 -> -0.783 (x-1)
+⛔ Negation penalty applied to "เงื่อนไขการสมัครทุนความสามารถพิเศษ?": 0.776 -> -0.776 (x-1)
+⛔ Negation penalty applied to "ทุนสร้างชื่อเสียงของมหาวิทยาลัยใช้เพื่ออะไร?": 0.785 -> -0.785 (x-1)
+⛔ Negation penalty applied to "ทุนสร้างชื่อเสียงมีเงินเท่าไหร่?": 0.784 -> -0.784 (x-1)
+⛔ Negation penalty applied to "ขั้นตอนการสมัครทุนช่วยเหลือนักศึกษาต่างชาติเป็นไงบ้าง?": 0.778 -> -0.778 (x-1)
+⛔ Negation filter removed 12 items due to user negation.
+✅ Loaded 13 synonym mappings
+✅ Loaded 20 negative keywords
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+🔄 Synonym resolved: 'ยื่นสมัคร' -> 'การสมัคร'
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+🔍 Query tokens (after stopword removal): [ทุน]
+📊 Total QA items in database: 17
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+✅ Semantic keyword match: Found 12 items
+[Domain Terms Loaded]: { dormTerms: 0, scholarshipTerms: 0, admissionsTerms: 0 }
+Domain detection (DB-only): {
+  query: 'ทุน',
+  dormTermsLoaded: 0,
+  scholarshipTermsLoaded: 0,
+  admissionsTermsLoaded: 0,
+  queryHasDorm: false,
+  queryHasScholarship: false,
+  queryHasAdmissions: false
+}
+🏅 Returning 12/12 relevant matches (generic search)
+✅ Loaded 13 synonym mappings
+✅ Loaded 20 negative keywords
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+⛔ Negation detected in query "ไม่เอาทุน": ไม่ → ทุน
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+🔄 Synonym resolved: 'ยื่นสมัคร' -> 'การสมัคร'
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+🔍 Query tokens (after stopword removal): [ทุน]
+📊 Total QA items in database: 17
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+✅ Semantic keyword match: Found 12 items
+[Domain Terms Loaded]: { dormTerms: 0, scholarshipTerms: 0, admissionsTerms: 0 }
+Domain detection (DB-only): {
+  query: 'ไม่เอาทุน',
+  dormTermsLoaded: 0,
+  scholarshipTermsLoaded: 0,
+  admissionsTermsLoaded: 0,
+  queryHasDorm: false,
+  queryHasScholarship: false,
+  queryHasAdmissions: false
+}
+⛔ Negation penalty applied to "ทุนความสามารถพิเศษสำหรับใคร?": 0.782 -> -0.782 (x-1)
+⛔ Negation penalty applied to "ทุนความสามารถพิเศษให้เงินเท่าไหร่?": 0.782 -> -0.782 (x-1)
+⛔ Negation penalty applied to "ทุนช่วยเหลือนักศึกษาต่างชาติทำให้อะไร?": 0.785 -> -0.785 (x-1)
+⛔ Negation penalty applied to "ทุนเรียนดีมีกี่อย่าง?": 0.782 -> -0.782 (x-1)
+⛔ Negation penalty applied to "เงื่อนไขการสมัครทุนเรียนดีคืออะไร?": 0.775 -> -0.775 (x-1)
+⛔ Negation penalty applied to "ต้องใช้เอกสารอะไรบ้างในการยื่นสมัครทุนเรียนดี?": 0.774 -> -0.774 (x-1)
+⛔ Negation penalty applied to "ปีการศึกษาไหนเปิดรับสมัครทุนเรียนดี?": 0.782 -> -0.782 (x-1)
+⛔ Negation penalty applied to "ทุนเรียนดีให้เงินเท่าไหร่?": 0.783 -> -0.783 (x-1)
+⛔ Negation penalty applied to "เงื่อนไขการสมัครทุนความสามารถพิเศษ?": 0.776 -> -0.776 (x-1)
+⛔ Negation penalty applied to "ทุนสร้างชื่อเสียงของมหาวิทยาลัยใช้เพื่ออะไร?": 0.785 -> -0.785 (x-1)
+⛔ Negation penalty applied to "ทุนสร้างชื่อเสียงมีเงินเท่าไหร่?": 0.784 -> -0.784 (x-1)
+⛔ Negation penalty applied to "ขั้นตอนการสมัครทุนช่วยเหลือนักศึกษาต่างชาติเป็นไงบ้าง?": 0.778 -> -0.778 (x-1)
+⛔ Negation filter removed 12 items due to user negation.
+📢 Broadcasting chat logs update to 0 clients: {
+  action: 'created',
+  type: 'no-answer',
+  chatLogId: 210,
+  userQuery: 'ไม่เอาทุน',
+  status: 0,
+  timestamp: '2025-12-16T22:24:37.290Z'
+}
+✅ Sent WebSocket message to 0 active clients (chat-logs)
+✅ Loaded 13 synonym mappings
+✅ Loaded 20 negative keywords
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+⛔ Negation detected in query "ไม่เอาทุนนะครับ อยากจะดูหอพัก": ไม่ → ทุน, ไม่ → อ
+🔧 Smart tokenizer: [ทุน, อ, จะดูหอพัก] → [ทุน, จะดูหอพัก]
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+🔄 Synonym resolved: 'ยื่นสมัคร' -> 'การสมัคร'
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+🔍 Query tokens (after stopword removal): [ทุน, จะดูหอพัก]
+📊 Total QA items in database: 17
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+✅ Semantic keyword match: Found 12 items
+[Domain Terms Loaded]: { dormTerms: 0, scholarshipTerms: 0, admissionsTerms: 0 }
+Domain detection (DB-only): {
+  query: 'ไม่เอาทุนนะครับ อยากจะดูหอพัก',
+  dormTermsLoaded: 0,
+  scholarshipTermsLoaded: 0,
+  admissionsTermsLoaded: 0,
+  queryHasDorm: false,
+  queryHasScholarship: false,
+  queryHasAdmissions: false
+}
+⛔ Negation penalty applied to "ทุนความสามารถพิเศษสำหรับใคร?": 0.782 -> -0.782 (x-1)
+⛔ Negation penalty applied to "ทุนความสามารถพิเศษให้เงินเท่าไหร่?": 0.782 -> -0.782 (x-1)
+⛔ Negation penalty applied to "ทุนช่วยเหลือนักศึกษาต่างชาติทำให้อะไร?": 0.785 -> -0.785 (x-1)
+⛔ Negation penalty applied to "ทุนเรียนดีมีกี่อย่าง?": 0.782 -> -0.782 (x-1)
+⛔ Negation penalty applied to "เงื่อนไขการสมัครทุนเรียนดีคืออะไร?": 0.775 -> -0.775 (x-1)
+⛔ Negation penalty applied to "ต้องใช้เอกสารอะไรบ้างในการยื่นสมัครทุนเรียนดี?": 0.774 -> -0.774 (x-1)
+⛔ Negation penalty applied to "ปีการศึกษาไหนเปิดรับสมัครทุนเรียนดี?": 0.782 -> -0.782 (x-1)
+⛔ Negation penalty applied to "ทุนเรียนดีให้เงินเท่าไหร่?": 0.783 -> -0.783 (x-1)
+⛔ Negation penalty applied to "เงื่อนไขการสมัครทุนความสามารถพิเศษ?": 0.776 -> -0.776 (x-1)
+⛔ Negation penalty applied to "ทุนสร้างชื่อเสียงของมหาวิทยาลัยใช้เพื่ออะไร?": 0.785 -> -0.785 (x-1)
+⛔ Negation penalty applied to "ทุนสร้างชื่อเสียงมีเงินเท่าไหร่?": 0.784 -> -0.784 (x-1)
+⛔ Negation penalty applied to "ขั้นตอนการสมัครทุนช่วยเหลือนักศึกษาต่างชาติเป็นไงบ้าง?": 0.778 -> -0.778 (x-1)
+⛔ Negation filter removed 12 items due to user negation.
+📢 Broadcasting chat logs update to 0 clients: {
+  action: 'created',
+  type: 'no-answer',
+  chatLogId: 211,
+  userQuery: 'ไม่เอาทุนนะครับ อยากจะดูหอพัก',
+  status: 0,
+  timestamp: '2025-12-16T22:25:02.117Z'
+}
+✅ Sent WebSocket message to 0 active clients (chat-logs)
+✅ Loaded 13 synonym mappings
+✅ Loaded 20 negative keywords
+🔄 Loading stopwords from database...
+  🛡️ Excluded keyword: "ทำให้"
+  🛡️ Excluded keyword: "รับ"
+  🛡️ Excluded keyword: "อย่าง"
+  🛡️ Excluded keyword: "อะไร"
+🛡️ Auto-whitelist: excluded 4 keyword(s) from stopwords (based on Keywords table)
+📝 Loaded 1007 stopwords from database
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+🔄 Synonym resolved: 'ยื่นสมัคร' -> 'การสมัคร'
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+🔍 Query tokens (after stopword removal): [ทุน, สา, รถพิเศษ]
+📊 Total QA items in database: 17
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+✅ Semantic keyword match: Found 12 items
+[Domain Terms Loaded]: { dormTerms: 0, scholarshipTerms: 0, admissionsTerms: 0 }
+Domain detection (DB-only): {
+  query: 'ทุนความสามารถพิเศษ',
+  dormTermsLoaded: 0,
+  scholarshipTermsLoaded: 0,
+  admissionsTermsLoaded: 0,
+  queryHasDorm: false,
+  queryHasScholarship: false,
+  queryHasAdmissions: false
+}
+🏅 Returning 12/12 relevant matches (generic search)
+✅ Loaded 13 synonym mappings
+✅ Loaded 20 negative keywords
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+🔄 Synonym resolved: 'ยื่นสมัคร' -> 'การสมัคร'
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+🔍 Query tokens (after stopword removal): [ทุน, ศึกษา, ชาติ]
+📊 Total QA items in database: 17
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+✅ Semantic keyword match: Found 12 items
+[Domain Terms Loaded]: { dormTerms: 0, scholarshipTerms: 0, admissionsTerms: 0 }
+Domain detection (DB-only): {
+  query: 'ทุนช่วยเหลือนักศึกษาต่างชาติ',
+  dormTermsLoaded: 0,
+  scholarshipTermsLoaded: 0,
+  admissionsTermsLoaded: 0,
+  queryHasDorm: false,
+  queryHasScholarship: false,
+  queryHasAdmissions: false
+}
+🏅 Returning 12/12 relevant matches (generic search)
+✅ Loaded 13 synonym mappings
+✅ Loaded 20 negative keywords
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+🔧 Smart tokenizer: [ทุนสร้างชื่อ, ง] → [ทุนสร้างชื่อ]
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+🔄 Synonym resolved: 'ยื่นสมัคร' -> 'การสมัคร'
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+🔍 Query tokens (after stopword removal): [ทุนสร้างชื่อ]
+📊 Total QA items in database: 17
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+✅ Semantic keyword match: Found 2 items
+[Domain Terms Loaded]: { dormTerms: 0, scholarshipTerms: 0, admissionsTerms: 0 }
+Domain detection (DB-only): {
+  query: 'ทุนสร้างชื่อเสียง',
+  dormTermsLoaded: 0,
+  scholarshipTermsLoaded: 0,
+  admissionsTermsLoaded: 0,
+  queryHasDorm: false,
+  queryHasScholarship: false,
+  queryHasAdmissions: false
+}
+🏅 Returning 2/2 relevant matches (generic search)
+Login attempt: ID=3001
+Login Successful for user: นางสาววิพาดา… (ID: 3001), Role: Officer
+✅ New WebSocket client connected on /ws/categories
+✅ New WebSocket client connected on /ws/questions-answers
+✅ New WebSocket client connected on /ws/questions-answers
+✅ New WebSocket client connected on /ws/keywords
+✅ New WebSocket client connected on /ws/feedbacks
+✅ New WebSocket client connected on /ws/chat-logs
+✅ New WebSocket client connected on /ws/chat-logs
+✅ New WebSocket client connected on /ws/feedbacks
+✅ New WebSocket client connected on /ws/categories
+✅ New WebSocket client connected on /ws/keywords
+✅ New WebSocket client connected on /ws/questions-answers
+❌ WebSocket client disconnected
+❌ WebSocket client disconnected
+❌ WebSocket client disconnected
+❌ WebSocket client disconnected
+❌ WebSocket client disconnected
+❌ WebSocket client disconnected
+❌ WebSocket client disconnected
+❌ WebSocket client disconnected
+❌ WebSocket client disconnected
+❌ WebSocket client disconnected
+❌ WebSocket client disconnected
+Update request: {
+  qaId: 11,
+  questionTitle: 'ทุนช่วยเหลือนักศึกษาต่างชาติทำให้อะไร?',
+  questionText: 'ทุนนี้เพื่อช่วยเหลือนักศึกษาต่างชาติให้สามารถศึกษาต่อในประเทศไทยได้อย่างราบรื่น',
+  reviewDate: '2026-12-10',
+  categoriesId: '1-4'
+}
+Adding ReviewDate to update: 2026-12-10
+SQL Query: UPDATE QuestionsAnswers SET QuestionTitle = ?, QuestionText = ?, ReviewDate = ?, CategoriesID = ? WHERE QuestionsAnswersID = ?
+Update values: [
+  'ทุนช่วยเหลือนักศึกษาต่างชาติทำให้อะไร?',
+  'ทุนนี้เพื่อช่วยเหลือนักศึกษาต่างชาติให้สามารถศึกษาต่อในประเทศไทยได้อย่างราบรื่น',
+  '2026-12-10',
+  '1-4',
+  11
+]
+Update result - affected rows: 1
+ℹ️ No orphaned keywords found
+🔄 Stopwords cache cleared
+📢 Broadcasting questions-answers update to 0 clients: { action: 'update', id: 11 }
+✅ Sent WebSocket message to 0 active clients (questions-answers)
+✅ Auto-exported 17 Q&As to: /Users/kriangkrai/pcru-chatbot-backend/files/managequestionsanswers/3001/questionsanswers_2025-12-16T22-34-56.csv
+📄 Latest CSV available at: /Users/kriangkrai/pcru-chatbot-backend/files/managequestionsanswers/3001/latest.csv
+✅ Auto-exported CSV after QA change
+Update request: {
+  qaId: 12,
+  questionTitle: 'ขั้นตอนการสมัครทุนช่วยเหลือนักศึกษาต่างชาติเป็นไงบ้าง?',
+  questionText: 'ให้ยื่นสมัครผ่านระบบออนไลน์ที่ศูนย์บริการนักศึกษา พร้อมเอกสารประกอบการสมัคร หลังจากนั้นจะมีการประเมินและเรียกสัมภาษณ์',
+  reviewDate: '2026-12-10',
+  categoriesId: '1-4'
+}
+Adding ReviewDate to update: 2026-12-10
+SQL Query: UPDATE QuestionsAnswers SET QuestionTitle = ?, QuestionText = ?, ReviewDate = ?, CategoriesID = ? WHERE QuestionsAnswersID = ?
+Update values: [
+  'ขั้นตอนการสมัครทุนช่วยเหลือนักศึกษาต่างชาติเป็นไงบ้าง?',
+  'ให้ยื่นสมัครผ่านระบบออนไลน์ที่ศูนย์บริการนักศึกษา พร้อมเอกสารประกอบการสมัคร หลังจากนั้นจะมีการประเมินและเรียกสัมภาษณ์',
+  '2026-12-10',
+  '1-4',
+  12
+]
+Update result - affected rows: 1
+ℹ️ No orphaned keywords found
+🔄 Stopwords cache cleared
+📢 Broadcasting questions-answers update to 0 clients: { action: 'update', id: 12 }
+✅ Sent WebSocket message to 0 active clients (questions-answers)
+✅ Auto-exported 17 Q&As to: /Users/kriangkrai/pcru-chatbot-backend/files/managequestionsanswers/3001/questionsanswers_2025-12-16T22-35-08.csv
+📄 Latest CSV available at: /Users/kriangkrai/pcru-chatbot-backend/files/managequestionsanswers/3001/latest.csv
+✅ Auto-exported CSV after QA change
+✅ Loaded 13 synonym mappings
+✅ Loaded 20 negative keywords
+🔄 Loading stopwords from database...
+  🛡️ Excluded keyword: "ทำให้"
+  🛡️ Excluded keyword: "รับ"
+  🛡️ Excluded keyword: "อย่าง"
+  🛡️ Excluded keyword: "อะไร"
+🛡️ Auto-whitelist: excluded 4 keyword(s) from stopwords (based on Keywords table)
+📝 Loaded 1007 stopwords from database
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+🔄 Synonym resolved: 'ยื่นสมัคร' -> 'การสมัคร'
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+🔍 Query tokens (after stopword removal): [ทุน, ศึกษา, ชาติ]
+📊 Total QA items in database: 17
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+✅ Semantic keyword match: Found 12 items
+[Domain Terms Loaded]: { dormTerms: 0, scholarshipTerms: 0, admissionsTerms: 0 }
+Domain detection (DB-only): {
+  query: 'ทุนช่วยเหลือนักศึกษาต่างชาติ',
+  dormTermsLoaded: 0,
+  scholarshipTermsLoaded: 0,
+  admissionsTermsLoaded: 0,
+  queryHasDorm: false,
+  queryHasScholarship: false,
+  queryHasAdmissions: false
+}
+🏅 Returning 12/12 relevant matches (generic search)
+✅ Loaded 13 synonym mappings
+✅ Loaded 20 negative keywords
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+🔄 Synonym resolved: 'ยื่นสมัคร' -> 'การสมัคร'
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+🔍 Query tokens (after stopword removal): [ชาติ]
+📊 Total QA items in database: 17
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+✅ Semantic keyword match: Found 0 items
+✅ Loaded 13 synonym mappings
+✅ Loaded 20 negative keywords
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+🔄 Synonym resolved: 'ยื่นสมัคร' -> 'การสมัคร'
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+⚠️  Query consists only of stopwords. Trying raw/exact match fallback for: "ช่วยเหลือ"
+📌 Found 2 partial matches for stopword query
+✅ Loaded 13 synonym mappings
+✅ Loaded 20 negative keywords
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+🔄 Synonym resolved: 'ยื่นสมัคร' -> 'การสมัคร'
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+🔍 Query tokens (after stopword removal): [ทุน, ศึกษา, ชาติ]
+📊 Total QA items in database: 17
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+✅ Semantic keyword match: Found 12 items
+[Domain Terms Loaded]: { dormTerms: 0, scholarshipTerms: 0, admissionsTerms: 0 }
+Domain detection (DB-only): {
+  query: 'ทุนช่วยเหลือนักศึกษาต่างชาติ',
+  dormTermsLoaded: 0,
+  scholarshipTermsLoaded: 0,
+  admissionsTermsLoaded: 0,
+  queryHasDorm: false,
+  queryHasScholarship: false,
+  queryHasAdmissions: false
+}
+🏅 Returning 12/12 relevant matches (generic search)
+Update request: {
+  qaId: 11,
+  questionTitle: 'ทุนช่วยเหลือนักศึกษาต่างชาติทำให้อะไร?',
+  questionText: 'ทุนนี้เพื่อช่วยเหลือนักศึกษาต่างชาติให้สามารถศึกษาต่อในประเทศไทยได้อย่างราบรื่น',
+  reviewDate: '2026-12-09',
+  categoriesId: '1-4'
+}
+Adding ReviewDate to update: 2026-12-09
+SQL Query: UPDATE QuestionsAnswers SET QuestionTitle = ?, QuestionText = ?, ReviewDate = ?, CategoriesID = ? WHERE QuestionsAnswersID = ?
+Update values: [
+  'ทุนช่วยเหลือนักศึกษาต่างชาติทำให้อะไร?',
+  'ทุนนี้เพื่อช่วยเหลือนักศึกษาต่างชาติให้สามารถศึกษาต่อในประเทศไทยได้อย่างราบรื่น',
+  '2026-12-09',
+  '1-4',
+  11
+]
+Update result - affected rows: 1
+✅ Cleaned up 1 orphaned keywords: ชาวทุนช่วยเหลือนักศึกษาต่างชาติ
+🔄 Stopwords cache cleared
+📢 Broadcasting questions-answers update to 0 clients: { action: 'update', id: 11 }
+✅ Sent WebSocket message to 0 active clients (questions-answers)
+✅ Auto-exported 17 Q&As to: /Users/kriangkrai/pcru-chatbot-backend/files/managequestionsanswers/3001/questionsanswers_2025-12-16T22-37-09.csv
+📄 Latest CSV available at: /Users/kriangkrai/pcru-chatbot-backend/files/managequestionsanswers/3001/latest.csv
+✅ Auto-exported CSV after QA change
+Update request: {
+  qaId: 12,
+  questionTitle: 'ขั้นตอนการสมัครทุนช่วยเหลือนักศึกษาต่างชาติเป็นไงบ้าง?',
+  questionText: 'ให้ยื่นสมัครผ่านระบบออนไลน์ที่ศูนย์บริการนักศึกษา พร้อมเอกสารประกอบการสมัคร หลังจากนั้นจะมีการประเมินและเรียกสัมภาษณ์',
+  reviewDate: '2026-12-09',
+  categoriesId: '1-4'
+}
+Adding ReviewDate to update: 2026-12-09
+SQL Query: UPDATE QuestionsAnswers SET QuestionTitle = ?, QuestionText = ?, ReviewDate = ?, CategoriesID = ? WHERE QuestionsAnswersID = ?
+Update values: [
+  'ขั้นตอนการสมัครทุนช่วยเหลือนักศึกษาต่างชาติเป็นไงบ้าง?',
+  'ให้ยื่นสมัครผ่านระบบออนไลน์ที่ศูนย์บริการนักศึกษา พร้อมเอกสารประกอบการสมัคร หลังจากนั้นจะมีการประเมินและเรียกสัมภาษณ์',
+  '2026-12-09',
+  '1-4',
+  12
+]
+Update result - affected rows: 1
+✅ Cleaned up 1 orphaned keywords: ทุนช่วยเหลือนักศึกษาต่างชาติ
+🔄 Stopwords cache cleared
+📢 Broadcasting questions-answers update to 0 clients: { action: 'update', id: 12 }
+✅ Sent WebSocket message to 0 active clients (questions-answers)
+✅ Auto-exported 17 Q&As to: /Users/kriangkrai/pcru-chatbot-backend/files/managequestionsanswers/3001/questionsanswers_2025-12-16T22-37-14.csv
+📄 Latest CSV available at: /Users/kriangkrai/pcru-chatbot-backend/files/managequestionsanswers/3001/latest.csv
+✅ Auto-exported CSV after QA change
+✅ Loaded 13 synonym mappings
+✅ Loaded 20 negative keywords
+🔄 Loading stopwords from database...
+  🛡️ Excluded keyword: "ทำให้"
+  🛡️ Excluded keyword: "รับ"
+  🛡️ Excluded keyword: "อย่าง"
+  🛡️ Excluded keyword: "อะไร"
+🛡️ Auto-whitelist: excluded 4 keyword(s) from stopwords (based on Keywords table)
+📝 Loaded 1007 stopwords from database
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+🔄 Synonym resolved: 'ยื่นสมัคร' -> 'การสมัคร'
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+🔍 Query tokens (after stopword removal): [ทุน, ศึกษา, ชาติ]
+📊 Total QA items in database: 17
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+✅ Semantic keyword match: Found 12 items
+[Domain Terms Loaded]: { dormTerms: 0, scholarshipTerms: 0, admissionsTerms: 0 }
+Domain detection (DB-only): {
+  query: 'ทุนช่วยเหลือนักศึกษาต่างชาติ',
+  dormTermsLoaded: 0,
+  scholarshipTermsLoaded: 0,
+  admissionsTermsLoaded: 0,
+  queryHasDorm: false,
+  queryHasScholarship: false,
+  queryHasAdmissions: false
+}
+🏅 Returning 12/12 relevant matches (generic search)
+Update request: {
+  qaId: 11,
+  questionTitle: 'ทุนช่วยเหลือนักศึกษาต่างชาติทำให้อะไร?',
+  questionText: 'ทุนนี้เพื่อช่วยเหลือนักศึกษาต่างชาติให้สามารถศึกษาต่อในประเทศไทยได้อย่างราบรื่น',
+  reviewDate: '2026-12-08',
+  categoriesId: '1-4'
+}
+Adding ReviewDate to update: 2026-12-08
+SQL Query: UPDATE QuestionsAnswers SET QuestionTitle = ?, QuestionText = ?, ReviewDate = ?, CategoriesID = ? WHERE QuestionsAnswersID = ?
+Update values: [
+  'ทุนช่วยเหลือนักศึกษาต่างชาติทำให้อะไร?',
+  'ทุนนี้เพื่อช่วยเหลือนักศึกษาต่างชาติให้สามารถศึกษาต่อในประเทศไทยได้อย่างราบรื่น',
+  '2026-12-08',
+  '1-4',
+  11
+]
+Update result - affected rows: 1
+ℹ️ No orphaned keywords found
+🔄 Stopwords cache cleared
+📢 Broadcasting questions-answers update to 0 clients: { action: 'update', id: 11 }
+✅ Sent WebSocket message to 0 active clients (questions-answers)
+✅ Auto-exported 17 Q&As to: /Users/kriangkrai/pcru-chatbot-backend/files/managequestionsanswers/3001/questionsanswers_2025-12-16T22-39-33.csv
+📄 Latest CSV available at: /Users/kriangkrai/pcru-chatbot-backend/files/managequestionsanswers/3001/latest.csv
+✅ Auto-exported CSV after QA change
+Update request: {
+  qaId: 12,
+  questionTitle: 'ขั้นตอนการสมัครทุนช่วยเหลือนักศึกษาต่างชาติเป็นไงบ้าง?',
+  questionText: 'ให้ยื่นสมัครผ่านระบบออนไลน์ที่ศูนย์บริการนักศึกษา พร้อมเอกสารประกอบการสมัคร หลังจากนั้นจะมีการประเมินและเรียกสัมภาษณ์',
+  reviewDate: '2026-12-08',
+  categoriesId: '1-4'
+}
+Adding ReviewDate to update: 2026-12-08
+SQL Query: UPDATE QuestionsAnswers SET QuestionTitle = ?, QuestionText = ?, ReviewDate = ?, CategoriesID = ? WHERE QuestionsAnswersID = ?
+Update values: [
+  'ขั้นตอนการสมัครทุนช่วยเหลือนักศึกษาต่างชาติเป็นไงบ้าง?',
+  'ให้ยื่นสมัครผ่านระบบออนไลน์ที่ศูนย์บริการนักศึกษา พร้อมเอกสารประกอบการสมัคร หลังจากนั้นจะมีการประเมินและเรียกสัมภาษณ์',
+  '2026-12-08',
+  '1-4',
+  12
+]
+Update result - affected rows: 1
+ℹ️ No orphaned keywords found
+🔄 Stopwords cache cleared
+📢 Broadcasting questions-answers update to 0 clients: { action: 'update', id: 12 }
+✅ Sent WebSocket message to 0 active clients (questions-answers)
+✅ Auto-exported 17 Q&As to: /Users/kriangkrai/pcru-chatbot-backend/files/managequestionsanswers/3001/questionsanswers_2025-12-16T22-39-48.csv
+📄 Latest CSV available at: /Users/kriangkrai/pcru-chatbot-backend/files/managequestionsanswers/3001/latest.csv
+✅ Auto-exported CSV after QA change
+✅ Loaded 13 synonym mappings
+✅ Loaded 20 negative keywords
+🔄 Loading stopwords from database...
+  🛡️ Excluded keyword: "ทำให้"
+  🛡️ Excluded keyword: "รับ"
+  🛡️ Excluded keyword: "อย่าง"
+  🛡️ Excluded keyword: "อะไร"
+🛡️ Auto-whitelist: excluded 4 keyword(s) from stopwords (based on Keywords table)
+📝 Loaded 1007 stopwords from database
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+🔄 Synonym resolved: 'ยื่นสมัคร' -> 'การสมัคร'
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+🔍 Query tokens (after stopword removal): [ทุน, ศึกษา, ชาติ]
+📊 Total QA items in database: 17
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+Tokenizer service unreachable: connect ECONNREFUSED localhost:8001
+✅ Semantic keyword match: Found 12 items
+[Domain Terms Loaded]: { dormTerms: 0, scholarshipTerms: 0, admissionsTerms: 0 }
+Domain detection (DB-only): {
+  query: 'ทุนช่วยเหลือนักศึกษาต่างชาติ',
+  dormTermsLoaded: 0,
+  scholarshipTermsLoaded: 0,
+  admissionsTermsLoaded: 0,
+  queryHasDorm: false,
+  queryHasScholarship: false,
+  queryHasAdmissions: false
+}
+🏅 Returning 12/12 relevant matches (generic search)

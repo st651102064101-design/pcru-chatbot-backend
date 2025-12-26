@@ -1,0 +1,24 @@
+[dotenv@17.2.3] injecting env (28) from .env -- tip: ⚙️  write to custom object with { processEnv: myObject }
+[dotenv@17.2.3] injecting env (0) from .env -- tip: 🔐 prevent committing .env to code: https://dotenvx.com/precommit
+[dotenv@17.2.3] injecting env (0) from .env -- tip: ⚙️  suppress all logs with { quiet: true }
+🚀 Auto-starting PyThaiNLP tokenizer at http://localhost:3000
+✅ Nodemailer Transporter Initialized.
+Server running at http://localhost:3000
+WebSocket server running at ws://localhost:3000
+🔄 Starting stopwords auto-sync...
+🔄 Starting stopwords sync from standard list...
+✅ MySQL Database Connected Successfully!
+✅ Connected to database
+📊 Found 1013 existing stopwords in database
+➕ Adding 3 new standard stopwords...
+✅ Successfully added new stopwords
+⚠️  Warning: Found 897 non-standard stopwords in database:
+    ก็คือ, ก็จะ, ก็ดี, ก็ต่อเมื่อ, ก็ตาม, ก็ตามที, ก็ตามแต่, กระทั่ง, กระทำ, กระนั้น ...
+   You may want to review and remove these manually if needed.
+
+📊 Final count: 1013 stopwords in database
+✅ Sync completed successfully!
+INFO:     Started server process [7470]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://localhost:3000 (Press CTRL+C to quit)

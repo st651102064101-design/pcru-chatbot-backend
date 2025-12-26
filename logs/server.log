@@ -1,0 +1,82 @@
+[dotenv@17.2.3] injecting env (25) from .env -- tip: ⚙️  enable debug logging with { debug: true }
+[dotenv@17.2.3] injecting env (0) from .env -- tip: 🔐 encrypt with Dotenvx: https://dotenvx.com
+✅ Mounted semantic suggestions routes at /api/semantic/suggestions*
+[startup] Running learnIntentHintsFromLogs at 2025-12-15T00:18:24.966Z
+[startup] Running evaluateIntentHints at 2025-12-15T00:18:24.972Z
+[scheduler] Intent jobs scheduled (*/1 * * * *)
+[scheduler] Auto-populate intent hints job scheduled (*/1 * * * *)
+[scheduler] Auto-tune thresholds job scheduled (*/1 * * * *)
+[scheduler] Cleanup old logs job scheduled (0 0 * * *)
+[scheduler] Auto-populate keywords job scheduled (0 2 * * *)
+✅ Nodemailer Transporter Initialized.
+Server running at http://localhost:3000
+WebSocket server running at ws://localhost:3000
+[startup] Running learnIntentHintsFromLogs at 2025-12-15T00:18:25.034Z
+[startup] Running evaluateIntentHints at 2025-12-15T00:18:25.034Z
+🤖 [AutoLearn Scheduler] Started (interval: 30 minutes)
+✅ MySQL Database Connected Successfully!
+[startup] Running autoPopulateIntentHints at 2025-12-15T00:18:25.084Z
+Learned hints: inserted 0 new count-intent hints.
+Evaluation complete. Deactivated 0 hints.
+📝 Loaded intent patterns from DB: condition(10), contact(10), count(18), document(15), list(17), location(10), process(10), time(12)
+📝 Loaded domain patterns from DB: admissions(6), dorm(7), scholarship(9)
+[autoPopulateIntentHints] Completed populating hints/terms from DB content (DB-ONLY patterns)
+[startup] autoPopulateIntentHints done
+[startup] Running batchPopulateKeywords at 2025-12-15T00:18:25.165Z
+[batchPopulateKeywords] Found 0 QAs without keywords
+[batchPopulateKeywords] Completed: added 0 keyword links
+[startup] batchPopulateKeywords done
+[startup] Running batchLearnIntentHints at 2025-12-15T00:18:25.166Z
+[AutoLearn] Starting batch intent hint learning...
+[AutoLearn] learnFromQuestionsAnswers failed: hints is not iterable
+[AutoLearn] learnFromKeywords failed: hints is not iterable
+[AutoLearn] learnDomainTermsFromQA failed: terms is not iterable
+[AutoLearn] Batch complete: 0 new items learned
+[startup] batchLearnIntentHints done
+
+🤖 [AutoLearn Scheduler] Starting incremental learning at 2025-12-15T00:18:30.035Z
+[AutoLearn Scheduler] Error: Table 'pcru_auto_response.chatlogs' doesn't exist
+[scheduler] Running learnIntentHintsFromLogs at 2025-12-15T00:19:00.027Z
+[scheduler] Running evaluateIntentHints at 2025-12-15T00:19:00.028Z
+[scheduler] Running autoPopulateIntentHints
+[scheduler] Running auto-tune thresholds
+[autoTune] Starting threshold analysis...
+[autoTune] Query patterns: {
+  repeatedQueryRate: 0.75,
+  uniqueQueries: 4,
+  totalQueriesWithAnswers: 16
+}
+[autoTune] Feedback metrics: {
+  repeatedQueryRate: 0.75,
+  uniqueQueries: 4,
+  totalQueriesWithAnswers: 16,
+  negativeRate: 0,
+  positiveRate: 1,
+  totalFeedback: 12
+}
+[autoTune] No-answer metrics: {
+  noAnswerCount: 47,
+  hasAnswerCount: 16,
+  noAnswerRate: 0.746031746031746
+}
+[autoTune] Tuning decision: {
+  reason: 'High no-answer rate (>30%) - lowering thresholds to improve coverage',
+  old: { domainThreshold: 0.25, fallbackThreshold: 0.15 },
+  new: { domainThreshold: 0.25, fallbackThreshold: 0.15 },
+  metrics: {
+    repeatedQueryRate: 0.75,
+    uniqueQueries: 4,
+    totalQueriesWithAnswers: 16,
+    negativeRate: 0,
+    positiveRate: 1,
+    totalFeedback: 12,
+    noAnswerRate: 0.746031746031746,
+    totalQueries: 63
+  }
+}
+[autoTune] Updated thresholds: DOMAIN=0.25, FALLBACK=0.15
+[autoTune] ✅ Thresholds updated successfully. Changes will take effect on next server restart.
+[scheduler] ⚙️  Thresholds auto-tuned: High no-answer rate (>30%) - lowering thresholds to improve coverage
+[scheduler] 🔄 Server restart recommended to apply new thresholds
+[autoPopulateIntentHints] Completed populating hints/terms from DB content (DB-ONLY patterns)
+[scheduler] autoPopulateIntentHints done
