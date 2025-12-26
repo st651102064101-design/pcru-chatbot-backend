@@ -637,6 +637,16 @@ app.get('/officers/last-upload', authenticateToken, downloadOfficersLastUploadSe
 app.get('/categories/last-upload', authenticateToken, downloadCategoriesLastUploadService());
 app.get('/questionsanswers/last-upload', authenticateToken, downloadQuestionsAnswersLastUploadService());
 
+// --- Global Error Handler ---
+app.use((err, req, res, next) => {
+  console.error('🔥 Unhandled Server Error:', err);
+  res.status(err.status || 500).json({
+    success: false,
+    message: err.message || 'Internal Server Error',
+    detail: process.env.NODE_ENV === 'development' ? err.stack : undefined
+  });
+});
+
 // 7. เปิด Server
 const HOST = process.env.HOST || 'project.3bbddns.com';
 server.listen(PORT, HOST, async () => {
