@@ -46,7 +46,9 @@ function getSemanticSimilarity(word1, word2) {
 async function normalize(text, pool) {
   const t = String(text || '').toLowerCase().trim();
   const cleaned = t.replace(/[\p{P}\p{S}]/gu, ' ');
-  const rawTokens = cleaned.split(/\s+/).filter(Boolean);
+  // Ensure separation between letters and numbers so tokens like "มี2.00" -> ["มี", "2", "00"]
+  const separated = cleaned.replace(/(\p{L})(\p{N})/gu, '$1 $2').replace(/(\p{N})(\p{L})/gu, '$1 $2');
+  const rawTokens = separated.split(/\s+/).filter(Boolean);
   
   const stopwords = await getStopwordsSet(pool);
   const tokens = rawTokens.filter(tok => !stopwords.has(tok));

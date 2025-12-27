@@ -19,8 +19,10 @@ async function normalize(text, pool) {
   const t = String(text || '').toLowerCase().trim();
   // remove punctuation
   const cleaned = t.replace(/[\p{P}\p{S}]/gu, ' ');
+  // Separate letters and numbers so tokens like "มี2.00" become ["มี", "2", "00"]
+  const separated = cleaned.replace(/(\p{L})(\p{N})/gu, '$1 $2').replace(/(\p{N})(\p{L})/gu, '$1 $2');
   // split by whitespace; Thai segmentation is complex, keep simple tokenization here
-  const rawTokens = cleaned.split(/\s+/).filter(Boolean);
+  const rawTokens = separated.split(/\s+/).filter(Boolean);
   
   // Get stopwords from database
   const stopwords = await getStopwordsSet(pool);
