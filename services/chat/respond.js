@@ -982,6 +982,44 @@ module.exports = (pool) => async (req, res) => {
     let keywordMatches = [];
     let keywordMatchesWithScore = [];
     
+    // 🆕 STRICT NUMERIC KEYWORD MATCH CHECK
+    // If the user's message contains a numeric value (e.g., "2.00"), prefer items whose keywords include that numeric token.
+    const numericParts = (message || '').match(/\d+(?:\.\d+)*/g);
+    if (numericParts && numericParts.length > 0) {
+      const numericToken = numericParts[0];
+      const numericMatchesItems = qaList.filter(item =>
+        (item.keywords || []).some(k => String(k || '').replace(/\s+/g, '').includes(numericToken))
+      );
+      if (numericMatchesItems.length === 1) {
+        const it = numericMatchesItems[0];
+        const formatted = formatAnswer(it.QuestionText, it.CategoriesID || null, it.CategoriesPDF || null);
+        return res.status(200).json({
+          success: true,
+          found: true,
+          multipleResults: false,
+          query: message,
+          message: '🎯 พบคำตอบที่ตรงกับตัวเลขที่ระบุ',
+          alternatives: [{
+            id: it.QuestionsAnswersID,
+            title: it.QuestionTitle,
+            preview: (it.QuestionText || '').slice(0, 200),
+            text: formatted.text,
+            summary: formatted.summary,
+            points: formatted.points,
+            sources: formatted.sources,
+            keywords: it.keywords,
+            categories: it.CategoriesID || null,
+            categoriesPDF: it.CategoriesPDF || null
+          }]
+        });
+      }
+      if (numericMatchesItems.length > 1) {
+        // If multiple items match the numeric token, restrict subsequent matching to them.
+        console.log(`🔢 Numeric token match found for "${numericToken}", restricting to ${numericMatchesItems.length} items.`);
+        qaList = numericMatchesItems;
+      }
+    }
+
     // 🆕 STRICT EXACT KEYWORD MATCH CHECK
     // Normalize by removing all whitespace to handle "A B" vs "AB"
     const normalizeForExact = (s) => String(s || '').toLowerCase().replace(/\s+/g, '');
