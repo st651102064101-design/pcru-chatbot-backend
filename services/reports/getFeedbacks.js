@@ -22,9 +22,9 @@ const getFeedbacksService = (pool) => async (req, res) => {
              FROM Feedbacks f
              LEFT JOIN ChatLogHasAnswers c ON f.ChatLogID = c.ChatLogID
              LEFT JOIN QuestionsAnswers qa ON c.QuestionsAnswersID = qa.QuestionsAnswersID
-             WHERE f.HandledAt IS NULL
              ORDER BY f.Timestamp ${order}`
         );
+        console.log('📊 getFeedbacks: returning', rows.length, 'feedbacks');
         res.status(200).json(rows);
     } catch (error) {
         console.error('❌ Error fetching feedbacks:', error);
