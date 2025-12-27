@@ -2213,7 +2213,7 @@ module.exports = (pool) => async (req, res) => {
             });
           });
 
-          const topKeywordMatches = reranked.map(m => m.item);
+          let topKeywordMatches = reranked.map(m => m.item);
 
           // Reduce result count when user provides multiple keywords: prefer items with highest matchCount only.
           const queryTokenCount = Array.isArray(queryTokens) ? queryTokens.length : 0;
@@ -2222,14 +2222,115 @@ module.exports = (pool) => async (req, res) => {
           if (queryTokenCount >= 2) {
             // Find the maximum matchCount among candidates and keep only those with that maximum
             try {
+              console.log(`🔍 Query tokens: [${(queryTokens||[]).join(', ')}]`);
               const counts = filteredReranked.map(r => Number(r.matchCount || 0));
               const maxMatch = counts.length > 0 ? Math.max(...counts) : 0;
+
+              // Debug: print each candidate's match info
+              filteredReranked.forEach(r => {
+                console.log(`   • ID${r.item.QuestionsAnswersID}: matchCount=${r.matchCount || 0}, titleMatch=${r.titleMatchCount || 0}, exactInTitle=${r.exactKeywordInTitleCount || 0}, maxSim=${(r.maxSimilarity||0).toFixed(3)}, hybrid=${(r.hybridScore||0).toFixed(3)}, keywords=[${(r.item.keywords||[]).join(', ')}]`);
+              });
+
               if (maxMatch > 0) {
+                // If any candidate fully matches all tokens, prefer those immediately
+                const fullMatchCount = queryTokenCount;
+                const fullMatches = filteredReranked.filter(r => Number(r.matchCount || 0) === fullMatchCount);
+                if (fullMatches.length === 1) {
+                  const fm = fullMatches[0];
+                  console.log(`🎯 Found unique full-match QA#${fm.item.QuestionsAnswersID} (matches all ${fullMatchCount} tokens) — returning it immediately.`);
+                  const formatted = formatAnswer(fm.item.QuestionText, fm.item.CategoriesID || null, fm.item.CategoriesPDF || null);
+                  return res.status(200).json({
+                    success: true,
+                    found: true,
+                    message: `🎯 Found exact full-match`,
+                    totalResults: 1,
+                    returnedResults: 1,
+                    alternatives: [{
+                      id: fm.item.QuestionsAnswersID,
+                      title: fm.item.QuestionTitle,
+                      preview: (fm.item.QuestionText || '').slice(0, 200),
+                      text: formatted.text,
+                      summary: formatted.summary,
+                      points: formatted.points,
+                      sources: formatted.sources,
+                      keywords: fm.item.keywords,
+                      categories: fm.item.CategoriesID || null,
+                      categoriesPDF: fm.item.CategoriesPDF || null,
+                      finalRanking: rankingById.get(fm.item.QuestionsAnswersID) || null
+                    }]
+                  });
+                }
+
+                // Otherwise, restrict to maximum matchCount candidates
                 filteredReranked = filteredReranked.filter(r => (r.matchCount || 0) === maxMatch);
                 console.log(`🔎 Restricting to ${filteredReranked.length} item(s) with max matchCount=${maxMatch}`);
+
+                // If multiple items tie on max matchCount, check if there's a dominant item.
+                // If no dominant item (scores close), keep ALL tied items so user sees every equally-matching answer.
+                if (filteredReranked.length > 1 && queryTokenCount >= 2) {
+                  // Compute a simple score for tie-breaking (similar to earlier heuristic)
+                  // Include backend finalRanking score (if available) to bias selection towards clearly better QA
+                  const scored = filteredReranked.map(r => {
+                    const finalRankScore = Number((rankingById.get(r.item.QuestionsAnswersID) || {}).score || 0);
+                    const score = (Number(r.maxSimilarity || 0) * Number(r.matchCount || 0))
+                                + (Number(r.titleMatchCount || 0) * 2)
+                                + (Number(r.exactKeywordInTitleCount || 0) * 1)
+                                + (Number(r.hybridScore || 0) * 0.5)
+                                + (finalRankScore * 1.5); // weight finalRanking higher
+                    return { r, score, finalRankScore };
+                  }).sort((a, b) => b.score - a.score);
+
+                  const best = scored[0];
+                  const second = scored[1] || { score: 0, finalRankScore: 0 };
+
+                  // If best is significantly better than second (>= 1.3x), choose it alone
+                  // Also choose it if backend finalRanking score is clearly higher (absolute delta)
+                  const dominantByRatio = (second.score > 0) ? (best.score / second.score) >= 1.3 : (best.score > 0);
+                  const dominantByFinalRank = (best.finalRankScore > 0) && ((best.finalRankScore - (second.finalRankScore || 0)) >= 0.5);
+
+                  if (dominantByRatio || dominantByFinalRank) {
+                    console.log(`🏆 Dominant match QA#${best.r.item.QuestionsAnswersID} chosen (computed score ${best.score.toFixed(3)}, finalRank ${best.finalRankScore})`);
+                    filteredReranked = [best.r];
+                  } else {
+                    console.log(`🤝 Multiple equal matches (${filteredReranked.length}) kept since no dominant candidate found (best.score=${best.score.toFixed(3)}, second.score=${second.score.toFixed(3)}, best.finalRank=${best.finalRankScore}, second.finalRank=${second.finalRankScore})`);
+                    // Keep filteredReranked as-is (all tied items)
+                  }
+                }
               }
             } catch (err) {
               console.warn('Error while selecting max matchCount items:', err && err.message);
+            }
+
+            // If after filtering we have exactly one top candidate and the user provided multiple keywords,
+            // return it immediately to avoid further expansion or multiple results.
+            try {
+              if (queryTokenCount >= 2 && Array.isArray(filteredReranked) && filteredReranked.length === 1) {
+                const chosen = filteredReranked[0];
+                console.log(`🎯 Returning single top candidate QA#${chosen.item.QuestionsAnswersID} after matchCount/dominance filtering`);
+                const formatted = formatAnswer(chosen.item.QuestionText, chosen.item.CategoriesID || null, chosen.item.CategoriesPDF || null);
+                return res.status(200).json({
+                  success: true,
+                  found: true,
+                  message: `🎯 Found best matching answer`,
+                  totalResults: 1,
+                  returnedResults: 1,
+                  alternatives: [{
+                    id: chosen.item.QuestionsAnswersID,
+                    title: chosen.item.QuestionTitle,
+                    preview: (chosen.item.QuestionText || '').slice(0, 200),
+                    text: formatted.text,
+                    summary: formatted.summary,
+                    points: formatted.points,
+                    sources: formatted.sources,
+                    keywords: chosen.item.keywords,
+                    categories: chosen.item.CategoriesID || null,
+                    categoriesPDF: chosen.item.CategoriesPDF || null,
+                    finalRanking: rankingById.get(chosen.item.QuestionsAnswersID) || null
+                  }]
+                });
+              }
+            } catch (err2) {
+              console.warn('Error while returning single top candidate:', err2 && err2.message);
             }
           }
 
@@ -2251,6 +2352,14 @@ module.exports = (pool) => async (req, res) => {
           // If we filtered the reranked list, use it to build topKeywordMatches
           const topMatchesSource = filteredReranked;
           const topKeywordMatchesFiltered = topMatchesSource.map(m => m.item);
+          // Replace the original topKeywordMatches with the filtered set so subsequent logic (expansion/selection)
+          // operates on the reduced candidates only
+          topKeywordMatches = topKeywordMatchesFiltered;
+
+          // If multiple equally-good matches exist, ensure we can return all of them (don't cap by small 'desired')
+          if (queryTokenCount >= 2 && Array.isArray(filteredReranked) && filteredReranked.length > 1) {
+            desired = Math.max(desired, filteredReranked.length);
+          }
 
           // 🆕 Domain-aware expansion: if we have fewer than desired and a domain is active, add extra domain items from corpus
           if (!isNarrow && domainName && topKeywordMatchesFiltered.length < desired) {
