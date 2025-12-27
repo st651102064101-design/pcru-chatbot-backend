@@ -317,7 +317,7 @@ if (fs.existsSync(FRONTEND_DIR)) {
   // Use a generic middleware instead of a path pattern to avoid path-to-regexp issues
   app.use((req, res, next) => {
     if (req.method !== 'GET') return next();
-    const skipPrefixes = ['/api', '/uploads', '/js', '/ranking', '/system', '/categories', '/getcategories', '/chat', '/login', '/forgotpassword', '/setnewpassword', '/validateresettoken', '/questionsanswers'];
+    const skipPrefixes = ['/api', '/uploads', '/js', '/ranking', '/system', '/categories', '/getcategories', '/chat', '/login', '/forgotpassword', '/setnewpassword', '/validateresettoken', '/questionsanswers', '/stopwords', '/synonyms', '/negativekeywords'];
     for (const p of skipPrefixes) {
       if (req.path.startsWith(p)) return next();
     }
@@ -669,23 +669,33 @@ app.use((err, req, res, next) => {
 });
 
 // 7. เปิด Server
-const HOST = process.env.HOST || 'project.3bbddns.com';
-server.listen(PORT, HOST, async () => {
-  // List non-internal IPv4 addresses for convenience when binding to 0.0.0.0
+// BIND_HOST: address to bind the TCP server to (use 0.0.0.0 for all interfaces)
+const BIND_HOST = process.env.HOST || '0.0.0.0';
+// PUBLIC_HOST: the canonical hostname shown to users (e.g. project.3bbddns.com)
+const PUBLIC_HOST = process.env.PUBLIC_HOST || 'project.3bbddns.com';
+
+server.listen(PORT, BIND_HOST, async () => {
+  // List non-internal, non-loopback IPv4 addresses for convenience when binding to 0.0.0.0
   const os = require('os');
   const nets = os.networkInterfaces();
   const addrs = [];
   for (const name of Object.keys(nets)) {
     for (const net of nets[name]) {
-      if (net.family === 'IPv4' && !net.internal) addrs.push(net.address);
+      if (net.family === 'IPv4' && !net.internal && !net.address.startsWith('127.')) {
+        addrs.push(net.address);
+      }
     }
   }
-  if (HOST === '0.0.0.0' && addrs.length > 0) {
-    console.log(`Server listening on ${HOST}:${PORT} (accessible via: ${addrs.map(a => `http://${a}:${PORT}`).join(', ')})`);
-  } else {
-    console.log(`Server running at http://${HOST}:${PORT}`);
+
+  // Always show the public host as the primary URL so logs do not expose loopback addresses
+  console.log(`Server running at http://${PUBLIC_HOST}:${PORT}`);
+
+  // Additionally list local interface addresses when binding to all interfaces (0.0.0.0)
+  if (BIND_HOST === '0.0.0.0' && addrs.length > 0) {
+    console.log(`Also accessible via: ${addrs.map(a => `http://${a}:${PORT}`).join(', ')}`);
   }
-  console.log(`WebSocket server running at ws://${HOST}:${PORT}`);
+
+  console.log(`WebSocket server running at ws://${PUBLIC_HOST}:${PORT}`);
   
   // Auto-sync stopwords on server start
   console.log('🔄 Starting stopwords auto-sync...');
