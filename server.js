@@ -515,6 +515,17 @@ app.get('/getQuestionsAnswers', authenticateToken, getQuestionsAnswersService(po
 app.get('/getChatLogHasAnswers', authenticateToken, getChatLogHasAnswersService(pool));
 app.get('/getChatLogNoAnswers', authenticateToken, getChatLogNoAnswersService(pool));
 
+// Temporary debug endpoint (no auth) to return chat logs without answers for UI debugging
+// NOTE: Remove or secure this in production.
+app.get('/debug/chatlognoanswers', async (req, res) => {
+  try {
+    await getChatLogNoAnswersService(pool)(req, res);
+  } catch (err) {
+    console.error('[debug] /debug/chatlognoanswers error:', err);
+    res.status(500).json({ success: false, message: 'Internal Server Error' });
+  }
+});
+
 // Temporary debug endpoint (no auth) to return all feedbacks for UI debugging only
 // NOTE: This is for local debugging. Remove or secure in production.
 app.get('/debug/feedbacks', async (req, res) => {
