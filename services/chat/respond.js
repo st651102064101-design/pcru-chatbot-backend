@@ -1,9 +1,9 @@
-// ✨ Enhanced respond.js - Fixed & Reordered
 const { getStopwordsSet } = require('../stopwords/loadStopwords');
 const NEG_KW_MODULE = require('../negativeKeywords/loadNegativeKeywords');
-// Extract functions safely (fallback if module structure differs)
-const simpleTokenize = NEG_KW_MODULE.simpleTokenize || ((t) => [t]);
-const analyzeQueryNegation = NEG_KW_MODULE.analyzeQueryNegation || (() => ({ hasNegation: false }));
+
+// Extract functions safely to avoid errors if module structure differs
+const simpleTokenize = NEG_KW_MODULE.simpleTokenize || ((t) => String(t || '').toLowerCase().split(/\s+/));
+const analyzeQueryNegation = NEG_KW_MODULE.analyzeQueryNegation || (() => ({ hasNegation: false, negatedKeywords: [] }));
 const checkNegation = NEG_KW_MODULE.checkNegation || (() => ({ isNegated: false }));
 const getNegativeKeywordsMap = NEG_KW_MODULE.getNegativeKeywordsMap || (() => ({}));
 const INLINE_NEGATION_PATTERNS = NEG_KW_MODULE.INLINE_NEGATION_PATTERNS || [];
@@ -271,22 +271,18 @@ async function rankCandidates(queryTokens, candidates, pool) {
     const kwTokens = await normalize((item.keywords || []).join(' '), pool);
     const qTextTokens = await normalize(item.QuestionText || '', pool);
     const titleTokens = await normalize(item.QuestionTitle || '', pool);
-    // 🆕 Also normalize Category Name for scoring
+    // Include Category Name in scoring
     const catTokens = await normalize(item.CategoriesID || '', pool);
 
     const scoreOverlap = overlapScore(queryTokens, kwTokens) * 2;
     const scoreSemanticKw = semanticOverlapScore(queryTokens, kwTokens) * 2.5;
     const scoreSemanticText = semanticOverlapScore(queryTokens, qTextTokens) * 1.0;
     const scoreSemanticTitle = semanticOverlapScore(queryTokens, titleTokens) * 2.0;
-    
-    // 🆕 Score Category Name overlap (Huge boost if user types category name)
-    const scoreCategory = overlapScore(queryTokens, catTokens) * 3.0;
-    const scoreSemanticCategory = semanticOverlapScore(queryTokens, catTokens) * 2.5;
+    const scoreCategory = overlapScore(queryTokens, catTokens) * 3.0; // Boost for category match
 
     const scoreSemantic = jaccardSimilarity(queryTokens, qTextTokens);
     const scoreTitle = jaccardSimilarity(queryTokens, titleTokens) * 2;
-    
-    const total = scoreOverlap + scoreSemantic + scoreTitle + scoreSemanticKw + scoreSemanticText + scoreSemanticTitle + scoreCategory + scoreSemanticCategory;
+    const total = scoreOverlap + scoreSemantic + scoreTitle + scoreSemanticKw + scoreSemanticText + scoreSemanticTitle + scoreCategory;
     
     results.push({ item, score: total, components: { overlap: scoreOverlap, semantic: scoreSemantic, title: scoreTitle, semanticKw: scoreSemanticKw, semanticText: scoreSemanticText, semanticTitle: scoreSemanticTitle, category: scoreCategory } });
   }
@@ -299,6 +295,7 @@ async function rankCandidates(queryTokens, candidates, pool) {
 
 module.exports = (pool) => async (req, res) => {
   if (req.body?.resetConversation) {
+    clearBlockedDomains(req);
     if (!req.body?.message && !req.body?.text && !req.body?.id) return res.status(200).json({ success: true, reset: true });
   }
 
@@ -329,47 +326,31 @@ module.exports = (pool) => async (req, res) => {
   try {
     connection = await pool.getConnection();
 
-    // 2. Fetch QA List FIRST (Moved up!)
+    // 2. Fetch QA List FIRST
     const qaList = await fetchQAWithKeywords(connection);
     if (!qaList || qaList.length === 0) return res.status(200).json({ success: true, found: false, message: 'ฐานข้อมูลยังไม่พร้อม', results: [] });
 
     // 3. Normalize Query
     let queryTokens = await normalize(message, pool);
     
-    // 3.1 Check Empty Tokens
-    if (!queryTokens || queryTokens.length === 0) {
-        const { getDefaultContacts } = require('../../utils/getDefaultContact_fixed');
-        const defaultContacts = await getDefaultContacts(connection);
-        return res.status(200).json({ success: true, found: false, message: `ขออภัย ไม่เข้าใจคำถาม`, contacts: defaultContacts });
-    }
-
-    // 3.2 Check Strict No-Match (English Only or Unknown Keywords)
+    // 3.1 Check Strict No-Match (English Only or Unknown Keywords)
     const isEnglishOnly = /^[a-zA-Z0-9\s.,?!]+$/.test(message);
     const allKeywords = new Set();
-    const allCategories = new Set(); // 🆕 Also check against Category Names
-    
+    const allCategories = new Set();
     for (const qa of qaList) {
         for (const k of (qa.keywords || [])) {
             allKeywords.add(String(k).toLowerCase().trim());
         }
-        if (qa.CategoriesID) {
-            allCategories.add(String(qa.CategoriesID).toLowerCase().trim());
-        }
+        if (qa.CategoriesID) allCategories.add(String(qa.CategoriesID).toLowerCase().trim());
     }
-    
-    // 🆕 Check if query tokens match any keyword OR any category name token
     const hasKnownKeyword = queryTokens.some(t => {
         const token = String(t).toLowerCase().trim();
         if (allKeywords.has(token)) return true;
-        // Check if token appears in any category name
-        for (const cat of allCategories) {
-            if (cat.includes(token)) return true;
-        }
+        for (const cat of allCategories) { if (cat.includes(token)) return true; }
         return false;
     });
 
     if (!hasKnownKeyword || isEnglishOnly) {
-        console.log(`❌ No valid keywords/categories found for query: "${message}"`);
         const { getDefaultContacts } = require('../../utils/getDefaultContact_fixed');
         try {
             const contacts = await getDefaultContacts(connection);
@@ -384,49 +365,107 @@ module.exports = (pool) => async (req, res) => {
         }
     }
 
-    // 4. Ranking
+    // 4. Negation Handling
+    const originalTokens = simpleTokenize(message);
+    const negationAnalysis = analyzeQueryNegation(originalTokens, queryTokens);
+    const blockedDomainsFromSession = loadBlockedDomains(req);
+    const blockedKeywordsFromSession = loadBlockedKeywords(req);
+
+    if (blockedKeywordsFromSession.size > 0) {
+      const msgLowerForBlock = message.toLowerCase().trim();
+      let matchedBlockedKeyword = null;
+      for (const blocked of blockedKeywordsFromSession) {
+        if (msgLowerForBlock === blocked) { matchedBlockedKeyword = blocked; break; }
+      }
+      if (matchedBlockedKeyword) {
+        return res.status(200).json({ success: true, found: false, message: `${BOT_PRONOUN}ได้ปิดเรื่อง "${matchedBlockedKeyword}" ไว้แล้วค่ะ`, blockedDomains: Array.from(blockedDomainsFromSession), blockedKeywords: Array.from(blockedKeywordsFromSession), blockedKeywordsDisplay: [matchedBlockedKeyword] });
+      }
+    }
+
+    const negMap = getNegativeKeywordsMap && getNegativeKeywordsMap();
+    const negationWordsSet = new Set();
+    if (negMap) Object.keys(negMap).forEach(w => { if (w.trim()) negationWordsSet.add(w.trim().toLowerCase()); });
+
+    let hasNegationTrigger = false;
+    const negatedKeywordsFromMessage = [];
+    const negatedKeywordsDisplayMap = new Map();
+    const negationPrefixes = Array.from(negationWordsSet).sort((a, b) => b.length - a.length);
+    const msgLower = message.toLowerCase();
+    
+    for (const prefix of negationPrefixes) {
+      const prefixIdx = msgLower.indexOf(prefix);
+      if (prefixIdx !== -1) {
+        hasNegationTrigger = true;
+        let afterPrefix = msgLower.slice(prefixIdx + prefix.length).trim();
+        if (afterPrefix.length > 0) {
+          let firstWord = afterPrefix.split(/[\s,.:;!?]+/)[0];
+          if (firstWord && firstWord.length >= 2) {
+             negatedKeywordsFromMessage.push(firstWord);
+             negatedKeywordsDisplayMap.set(firstWord, firstWord);
+          }
+        }
+        break;
+      }
+    }
+
+    const negatedDomains = [];
+    if (negationAnalysis.hasNegation) {
+      for (const n of negationAnalysis.negatedKeywords) {
+        const negWord = String(n.negativeWord || '').toLowerCase();
+        if (!negationWordsSet.has(negWord)) continue;
+        hasNegationTrigger = true;
+        let kw = String(n.keyword || '').toLowerCase();
+        if (kw.length >= 2) {
+            negatedKeywordsFromMessage.push(kw);
+            negatedKeywordsDisplayMap.set(kw, n.keyword || kw);
+        }
+        if (kw.includes('หอ')) negatedDomains.push('dorm');
+        if (kw.includes('รับสมัคร') || kw.includes('สมัคร')) negatedDomains.push('admissions');
+      }
+    }
+
+    const uniqueNegatedKeywords = [...new Set(negatedKeywordsFromMessage)].filter(k => k && k.length >= 2);
+    let filteredNegatedKeywords = uniqueNegatedKeywords;
+
+    if (hasNegationTrigger && (filteredNegatedKeywords.length > 0 || negatedDomains.length > 0)) {
+      if (filteredNegatedKeywords.length > 0) persistBlockedKeywords(req, filteredNegatedKeywords);
+      if (negatedDomains.length > 0) persistBlockedDomains(req, negatedDomains);
+      
+      const blockedNames = filteredNegatedKeywords.length > 0 ? filteredNegatedKeywords.join(', ') : 'หัวข้อที่คุณปฏิเสธ';
+      return res.status(200).json({ success: true, found: false, message: `รับทราบค่ะ จะไม่แนะนำ ${blockedNames} แล้วนะคะ`, blockedDomains: Array.from(loadBlockedDomains(req)), blockedKeywords: Array.from(loadBlockedKeywords(req)), blockedKeywordsDisplay: uniqueNegatedKeywords });
+    }
+
+    // 5. Ranking
     const ranked = await rankCandidates(queryTokens, qaList, pool);
     ranked.sort((a, b) => b.score - a.score);
 
-    // 5. 🆕 START FIX: Strict Filtering Logic (Keyword Enforcer)
+    // 6. Filtering (Smart & Strict)
     let finalResults = ranked;
-    
     if (ranked.length > 0) {
         const bestMatch = ranked[0];
         const bestScore = bestMatch.score;
 
-        // 5.1 Basic Score Threshold (70%)
+        // 6.1 Relative Threshold (70%)
         if (bestScore > 5.0) { 
              finalResults = finalResults.filter(r => r.score >= (bestScore * 0.7)); 
         }
 
-        // 5.2 Strict Keyword Enforcement
-        // Find if the top result matches a "Specific Keyword" (> 4 chars, e.g., "การชำระเงินสมัครเรียน")
+        // 6.2 Specific Keyword Constraint
         const rawQuery = message.toLowerCase().replace(/\s+/g, '');
         const bestKeywords = (bestMatch.item.keywords || []).map(k => k.toLowerCase().replace(/\s+/g, ''));
-        
-        // Find a specific keyword from the top result that is also present in the user's query
-        const specificTerm = bestKeywords.find(k => 
-             rawQuery.includes(k) && 
-             k.length > 4 && // Must be longer than 4 chars to be 'specific'
-             !['สมัครเรียน', 'ข้อมูล', 'ติดต่อ', 'มหาวิทยาลัย'].includes(k) // Exclude generic words
-        );
+        const specificTerm = bestKeywords.find(k => rawQuery.includes(k) && k.length > 4 && !['สมัครเรียน', 'ข้อมูล', 'ติดต่อ'].includes(k));
 
         if (specificTerm) {
              console.log(`🔒 Enforcing strict filter for term: "${specificTerm}"`);
-             // Filter out any result that DOES NOT contain this specific term
              finalResults = finalResults.filter(r => {
                  const rKw = (r.item.keywords || []).map(k => k.toLowerCase().replace(/\s+/g, ''));
                  const rTitle = (r.item.QuestionTitle || '').toLowerCase().replace(/\s+/g, '');
-                 
-                 // Check if the result has the specific term in keywords or title
-                 return rKw.some(k => k.includes(specificTerm) || specificTerm.includes(k)) || rTitle.includes(specificTerm);
+                 return rKw.some(k => k.includes(specificTerm)) || rTitle.includes(specificTerm);
              });
         }
     }
-    // 🆕 END FIX
 
-    // 6. Final Response
+    // 7. Final Response (Success or Fallback)
     if (finalResults.length === 0) {
         const { getDefaultContacts } = require('../../utils/getDefaultContact_fixed');
         try {
@@ -438,28 +477,27 @@ module.exports = (pool) => async (req, res) => {
     }
 
     const topRanked = finalResults.slice(0, 3);
+    
+    // 🆕 8. Contact Fetching Logic (Hide if 1 answer, Show if >1)
     let specificContacts = [];
-    try {
-      const qaIds = topRanked.map(r => r.item.QuestionsAnswersID).filter(id => !!id);
-      if (qaIds.length > 0) {
-        // Query to fetch contacts for the specific answers found
-        const [rows] = await connection.query(`
-          SELECT DISTINCT org.OrgName AS organization, c.CategoriesName AS category, cc.Contact AS contact 
-          FROM QuestionsAnswers qa 
-          LEFT JOIN Officers o ON qa.OfficerID = o.OfficerID 
-          LEFT JOIN Organizations org ON o.OrgID = org.OrgID 
-          LEFT JOIN Categories c ON qa.CategoriesID = c.CategoriesID 
-          LEFT JOIN Categories_Contact cc ON (c.CategoriesID = cc.CategoriesID OR c.ParentCategoriesID = cc.CategoriesID) 
-          WHERE qa.QuestionsAnswersID IN (?) AND ((cc.Contact IS NOT NULL AND TRIM(cc.Contact) <> '') OR (c.CategoriesID IS NULL)) 
-          ORDER BY org.OrgID ASC, c.CategoriesName ASC`, [qaIds]);
-        
-        specificContacts = (rows || []).map(row => ({ 
-            organization: row.organization, 
-            category: row.category || null, 
-            contact: row.contact || null 
-        }));
-      }
-    } catch (e) { specificContacts = []; }
+    if (topRanked.length > 1) { 
+        try {
+          const qaIds = topRanked.map(r => r.item.QuestionsAnswersID).filter(id => !!id);
+          if (qaIds.length > 0) {
+            const [rows] = await connection.query(`
+              SELECT DISTINCT org.OrgName AS organization, c.CategoriesName AS category, cc.Contact AS contact 
+              FROM QuestionsAnswers qa 
+              LEFT JOIN Officers o ON qa.OfficerID = o.OfficerID 
+              LEFT JOIN Organizations org ON o.OrgID = org.OrgID 
+              LEFT JOIN Categories c ON qa.CategoriesID = c.CategoriesID 
+              LEFT JOIN Categories_Contact cc ON (c.CategoriesID = cc.CategoriesID OR c.ParentCategoriesID = cc.CategoriesID) 
+              WHERE qa.QuestionsAnswersID IN (?) AND ((cc.Contact IS NOT NULL AND TRIM(cc.Contact) <> '') OR (c.CategoriesID IS NULL)) 
+              ORDER BY org.OrgID ASC, c.CategoriesName ASC`, [qaIds]);
+            
+            specificContacts = (rows || []).map(row => ({ organization: row.organization, category: row.category || null, contact: row.contact || null }));
+          }
+        } catch (e) { specificContacts = []; }
+    }
 
     const msgText = topRanked.length > 1 
       ? `✨ พบ ${topRanked.length} คำถามที่ใกล้เคียง\n(ลองเลือกซักอันดูสิ 😊)`
