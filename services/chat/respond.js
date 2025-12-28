@@ -1,13 +1,50 @@
+// ✨ Enhanced respond.js - Fixed & Reordered
 const { getStopwordsSet } = require('../stopwords/loadStopwords');
-const NEG_KW = require('../negativeKeywords/loadNegativeKeywords');
-const { simpleTokenize, analyzeQueryNegation, checkNegation, getNegativeKeywordsMap, INLINE_NEGATION_PATTERNS } = NEG_KW;
+const NEG_KW_MODULE = require('../negativeKeywords/loadNegativeKeywords');
+// Extract functions safely (fallback if module structure differs)
+const simpleTokenize = NEG_KW_MODULE.simpleTokenize || ((t) => [t]);
+const analyzeQueryNegation = NEG_KW_MODULE.analyzeQueryNegation || (() => ({ hasNegation: false }));
+const checkNegation = NEG_KW_MODULE.checkNegation || (() => ({ isNegated: false }));
+const getNegativeKeywordsMap = NEG_KW_MODULE.getNegativeKeywordsMap || (() => ({}));
+const INLINE_NEGATION_PATTERNS = NEG_KW_MODULE.INLINE_NEGATION_PATTERNS || [];
 const { calculateFinalRanking } = require('../ranking/calculateFinalRanking');
 
+// --- Global Caches ---
 let SEMANTIC_SIM_MAP = {};
 let getSemanticSimilarity = (a, b) => 0;
 let SYNONYMS_MAPPING = {};
 const BOT_PRONOUN = process.env.BOT_PRONOUN || 'หนู';
 const NEGATION_BLOCKS = new Map();
+
+// --- Configuration ---
+const KW_SIM_THRESHOLD = parseFloat(process.env.KW_SIM_THRESHOLD) || 0.5;
+const TOKENIZER_HOST = process.env.TOKENIZER_HOST || 'project.3bbddns.com';
+const TOKENIZER_PORT = process.env.TOKENIZER_PORT || '36146';
+const TOKENIZER_PATH = process.env.TOKENIZER_PATH || '/tokenize';
+const TOKENIZER_URL = process.env.TOKENIZER_URL || `http://${TOKENIZER_HOST}:${TOKENIZER_PORT}${TOKENIZER_PATH}`;
+
+// --------------------------------------------------------------------------------
+// HELPER FUNCTIONS (Defined BEFORE usage)
+// --------------------------------------------------------------------------------
+
+async function fetchQAWithKeywords(connection) {
+  const [rows] = await connection.query(`
+    SELECT qa.QuestionsAnswersID, qa.QuestionTitle, qa.ReviewDate, qa.QuestionText, qa.OfficerID,
+           c.CategoriesName AS CategoriesID, c.CategoriesPDF
+    FROM QuestionsAnswers qa
+    LEFT JOIN Categories c ON qa.CategoriesID = c.CategoriesID
+  `);
+  const result = [];
+  for (const row of rows) {
+    const [keywords] = await connection.query(`
+      SELECT k.KeywordText
+      FROM Keywords k
+      INNER JOIN AnswersKeywords ak ON k.KeywordID = ak.KeywordID
+      WHERE ak.QuestionsAnswersID = ?`, [row.QuestionsAnswersID]);
+    result.push({ ...row, keywords: (keywords || []).map(k => k.KeywordText) });
+  }
+  return result;
+}
 
 function getSessionKey(req) {
   try {
@@ -117,6 +154,25 @@ async function loadSynonymsMapping(pool) {
   }
 }
 
+async function tokenizeWithPython(text) {
+  if (!TOKENIZER_URL) return null;
+  let urlObj;
+  try { urlObj = new URL(TOKENIZER_URL); } catch (err) { return null; }
+  const payload = JSON.stringify({ text });
+  const client = urlObj.protocol === 'https:' ? require('https') : require('http');
+  return new Promise((resolve) => {
+    const req = client.request({ hostname: urlObj.hostname, port: urlObj.port || (urlObj.protocol === 'https:' ? 443 : 80), path: urlObj.pathname, method: 'POST', headers: { 'Content-Type': 'application/json', 'Content-Length': Buffer.byteLength(payload) }, timeout: 10000 }, (res) => {
+      let data = '';
+      res.on('data', (chunk) => { data += chunk; });
+      res.on('end', () => { try { const json = JSON.parse(data || '{}'); const tokens = Array.isArray(json.tokens) ? json.tokens : []; const cleaned = tokens.map((t) => String(t || '').trim()).filter(Boolean); resolve(cleaned); } catch (errParse) { resolve(null); } });
+    });
+    req.on('error', () => resolve(null));
+    req.on('timeout', () => { req.destroy(); resolve(null); });
+    req.write(payload);
+    req.end();
+  });
+}
+
 async function normalize(text, pool) {
   try {
     const t = String(text || '').toLowerCase().trim();
@@ -209,73 +265,53 @@ function semanticOverlapScore(queryTokens, targetTokens) {
   return totalScore;
 }
 
-const KW_SIM_THRESHOLD = parseFloat(process.env.KW_SIM_THRESHOLD) || 0.5;
-const TOKENIZER_HOST = process.env.TOKENIZER_HOST || 'project.3bbddns.com';
-const TOKENIZER_PORT = process.env.TOKENIZER_PORT || '36146';
-const TOKENIZER_PATH = process.env.TOKENIZER_PATH || '/tokenize';
-const TOKENIZER_URL = process.env.TOKENIZER_URL || `http://${TOKENIZER_HOST}:${TOKENIZER_PORT}${TOKENIZER_PATH}`;
-
-async function tokenizeWithPython(text) {
-  if (!TOKENIZER_URL) return null;
-  let urlObj;
-  try { urlObj = new URL(TOKENIZER_URL); } catch (err) { return null; }
-  const payload = JSON.stringify({ text });
-  const client = urlObj.protocol === 'https:' ? require('https') : require('http');
-  return new Promise((resolve) => {
-    const req = client.request({ hostname: urlObj.hostname, port: urlObj.port || (urlObj.protocol === 'https:' ? 443 : 80), path: urlObj.pathname, method: 'POST', headers: { 'Content-Type': 'application/json', 'Content-Length': Buffer.byteLength(payload) }, timeout: 10000 }, (res) => {
-      let data = '';
-      res.on('data', (chunk) => { data += chunk; });
-      res.on('end', () => { try { const json = JSON.parse(data || '{}'); const tokens = Array.isArray(json.tokens) ? json.tokens : []; const cleaned = tokens.map((t) => String(t || '').trim()).filter(Boolean); resolve(cleaned); } catch (errParse) { resolve(null); } });
-    });
-    req.on('error', () => resolve(null));
-    req.on('timeout', () => { req.destroy(); resolve(null); });
-    req.write(payload);
-    req.end();
-  });
-}
-
-async function fetchQAWithKeywords(connection) {
-  const [rows] = await connection.query(`SELECT qa.QuestionsAnswersID, qa.QuestionTitle, qa.ReviewDate, qa.QuestionText, qa.OfficerID, c.CategoriesName AS CategoriesID, c.CategoriesPDF FROM QuestionsAnswers qa LEFT JOIN Categories c ON qa.CategoriesID = c.CategoriesID`);
-  const result = [];
-  for (const row of rows) {
-    const [keywords] = await connection.query(`SELECT k.KeywordText FROM Keywords k INNER JOIN AnswersKeywords ak ON k.KeywordID = ak.KeywordID WHERE ak.QuestionsAnswersID = ?`, [row.QuestionsAnswersID]);
-    result.push({ ...row, keywords: (keywords || []).map(k => k.KeywordText) });
-  }
-  return result;
-}
-
 async function rankCandidates(queryTokens, candidates, pool) {
   const results = [];
   for (const item of candidates) {
     const kwTokens = await normalize((item.keywords || []).join(' '), pool);
     const qTextTokens = await normalize(item.QuestionText || '', pool);
     const titleTokens = await normalize(item.QuestionTitle || '', pool);
+    // 🆕 Also normalize Category Name for scoring
+    const catTokens = await normalize(item.CategoriesID || '', pool);
+
     const scoreOverlap = overlapScore(queryTokens, kwTokens) * 2;
     const scoreSemanticKw = semanticOverlapScore(queryTokens, kwTokens) * 2.5;
     const scoreSemanticText = semanticOverlapScore(queryTokens, qTextTokens) * 1.0;
     const scoreSemanticTitle = semanticOverlapScore(queryTokens, titleTokens) * 2.0;
+    
+    // 🆕 Score Category Name overlap (Huge boost if user types category name)
+    const scoreCategory = overlapScore(queryTokens, catTokens) * 3.0;
+    const scoreSemanticCategory = semanticOverlapScore(queryTokens, catTokens) * 2.5;
+
     const scoreSemantic = jaccardSimilarity(queryTokens, qTextTokens);
     const scoreTitle = jaccardSimilarity(queryTokens, titleTokens) * 2;
-    const total = scoreOverlap + scoreSemantic + scoreTitle + scoreSemanticKw + scoreSemanticText + scoreSemanticTitle;
-    results.push({ item, score: total, components: { overlap: scoreOverlap, semantic: scoreSemantic, title: scoreTitle, semanticKw: scoreSemanticKw, semanticText: scoreSemanticText, semanticTitle: scoreSemanticTitle } });
+    
+    const total = scoreOverlap + scoreSemantic + scoreTitle + scoreSemanticKw + scoreSemanticText + scoreSemanticTitle + scoreCategory + scoreSemanticCategory;
+    
+    results.push({ item, score: total, components: { overlap: scoreOverlap, semantic: scoreSemantic, title: scoreTitle, semanticKw: scoreSemanticKw, semanticText: scoreSemanticText, semanticTitle: scoreSemanticTitle, category: scoreCategory } });
   }
   return results.sort((a, b) => b.score - a.score);
 }
 
+// --------------------------------------------------------------------------------
+// MAIN MODULE
+// --------------------------------------------------------------------------------
+
 module.exports = (pool) => async (req, res) => {
   if (req.body?.resetConversation) {
-    clearBlockedDomains(req);
     if (!req.body?.message && !req.body?.text && !req.body?.id) return res.status(200).json({ success: true, reset: true });
   }
 
+  // Load basic data
   try { await loadSemanticData(pool); } catch (e) {}
   try { await loadSynonymsMapping(pool); } catch (e) {}
-  try { await NEG_KW.loadNegativeKeywords(pool); } catch (e) {}
+  try { await NEG_KW_MODULE.loadNegativeKeywords(pool); } catch (e) {}
   
   const message = req.body?.message || req.body?.text || '';
   const questionId = req.body?.id;
   let rankingById = new Map();
 
+  // 1. Handle Direct ID Request
   if (questionId) {
     let connection;
     try {
@@ -292,114 +328,113 @@ module.exports = (pool) => async (req, res) => {
   let connection;
   try {
     connection = await pool.getConnection();
+
+    // 2. Fetch QA List FIRST (Moved up!)
+    const qaList = await fetchQAWithKeywords(connection);
+    if (!qaList || qaList.length === 0) return res.status(200).json({ success: true, found: false, message: 'ฐานข้อมูลยังไม่พร้อม', results: [] });
+
+    // 3. Normalize Query
     let queryTokens = await normalize(message, pool);
+    
+    // 3.1 Check Empty Tokens
     if (!queryTokens || queryTokens.length === 0) {
         const { getDefaultContacts } = require('../../utils/getDefaultContact_fixed');
         const defaultContacts = await getDefaultContacts(connection);
         return res.status(200).json({ success: true, found: false, message: `ขออภัย ไม่เข้าใจคำถาม`, contacts: defaultContacts });
     }
+
+    // 3.2 Check Strict No-Match (English Only or Unknown Keywords)
+    const isEnglishOnly = /^[a-zA-Z0-9\s.,?!]+$/.test(message);
+    const allKeywords = new Set();
+    const allCategories = new Set(); // 🆕 Also check against Category Names
     
-    const originalTokens = simpleTokenize(message);
-    const negationAnalysis = analyzeQueryNegation(originalTokens, queryTokens);
-    const blockedDomainsFromSession = loadBlockedDomains(req);
-    const blockedKeywordsFromSession = loadBlockedKeywords(req);
-
-    if (blockedKeywordsFromSession.size > 0) {
-      const msgLowerForBlock = message.toLowerCase().trim();
-      let matchedBlockedKeyword = null;
-      for (const blocked of blockedKeywordsFromSession) {
-        if (msgLowerForBlock === blocked) { matchedBlockedKeyword = blocked; break; }
-      }
-      if (matchedBlockedKeyword) {
-        return res.status(200).json({ success: true, found: false, message: `${BOT_PRONOUN}ได้ปิดเรื่อง "${matchedBlockedKeyword}" ไว้แล้วค่ะ`, blockedDomains: Array.from(blockedDomainsFromSession), blockedKeywords: Array.from(blockedKeywordsFromSession), blockedKeywordsDisplay: [matchedBlockedKeyword] });
-      }
+    for (const qa of qaList) {
+        for (const k of (qa.keywords || [])) {
+            allKeywords.add(String(k).toLowerCase().trim());
+        }
+        if (qa.CategoriesID) {
+            allCategories.add(String(qa.CategoriesID).toLowerCase().trim());
+        }
     }
-
-    const negMap = getNegativeKeywordsMap && getNegativeKeywordsMap();
-    const negationWordsSet = new Set();
-    if (negMap) Object.keys(negMap).forEach(w => { if (w.trim()) negationWordsSet.add(w.trim().toLowerCase()); });
-
-    let hasNegationTrigger = false;
-    const negatedKeywordsFromMessage = [];
-    const negatedKeywordsDisplayMap = new Map();
-    const negationPrefixes = Array.from(negationWordsSet).sort((a, b) => b.length - a.length);
-    const msgLower = message.toLowerCase();
     
-    for (const prefix of negationPrefixes) {
-      const prefixIdx = msgLower.indexOf(prefix);
-      if (prefixIdx !== -1) {
-        hasNegationTrigger = true;
-        let afterPrefix = msgLower.slice(prefixIdx + prefix.length).trim();
-        if (afterPrefix.length > 0) {
-          let firstWord = afterPrefix.split(/[\s,.:;!?]+/)[0];
-          if (firstWord && firstWord.length >= 2) {
-             negatedKeywordsFromMessage.push(firstWord);
-             negatedKeywordsDisplayMap.set(firstWord, firstWord);
-          }
+    // 🆕 Check if query tokens match any keyword OR any category name token
+    const hasKnownKeyword = queryTokens.some(t => {
+        const token = String(t).toLowerCase().trim();
+        if (allKeywords.has(token)) return true;
+        // Check if token appears in any category name
+        for (const cat of allCategories) {
+            if (cat.includes(token)) return true;
         }
-        break;
-      }
-    }
+        return false;
+    });
 
-    const negatedDomains = [];
-    if (negationAnalysis.hasNegation) {
-      for (const n of negationAnalysis.negatedKeywords) {
-        const negWord = String(n.negativeWord || '').toLowerCase();
-        if (!negationWordsSet.has(negWord)) continue;
-        hasNegationTrigger = true;
-        let kw = String(n.keyword || '').toLowerCase();
-        if (kw.length >= 2) {
-            negatedKeywordsFromMessage.push(kw);
-            negatedKeywordsDisplayMap.set(kw, n.keyword || kw);
+    if (!hasKnownKeyword || isEnglishOnly) {
+        console.log(`❌ No valid keywords/categories found for query: "${message}"`);
+        const { getDefaultContacts } = require('../../utils/getDefaultContact_fixed');
+        try {
+            const contacts = await getDefaultContacts(connection);
+            return res.status(200).json({
+                success: true,
+                found: false,
+                message: `😓 ขออภัยจริงๆ ฉันไม่มีข้อมูลเกี่ยวกับคำถามนี้`,
+                contacts: contacts
+            });
+        } catch (e) {
+            return res.status(200).json({ success: true, found: false, message: `😓 ขออภัยจริงๆ ฉันไม่มีข้อมูลเกี่ยวกับคำถามนี้`, contacts: [] });
         }
-        if (kw.includes('หอ')) negatedDomains.push('dorm');
-        if (kw.includes('รับสมัคร') || kw.includes('สมัคร')) negatedDomains.push('admissions');
-      }
     }
 
-    const uniqueNegatedKeywords = [...new Set(negatedKeywordsFromMessage)].filter(k => k && k.length >= 2);
-    let filteredNegatedKeywords = uniqueNegatedKeywords;
-
-    if (hasNegationTrigger && (filteredNegatedKeywords.length > 0 || negatedDomains.length > 0)) {
-      if (filteredNegatedKeywords.length > 0) persistBlockedKeywords(req, filteredNegatedKeywords);
-      if (negatedDomains.length > 0) persistBlockedDomains(req, negatedDomains);
-      
-      const blockedNames = filteredNegatedKeywords.length > 0 ? filteredNegatedKeywords.join(', ') : 'หัวข้อที่คุณปฏิเสธ';
-      return res.status(200).json({ success: true, found: false, message: `รับทราบค่ะ จะไม่แนะนำ ${blockedNames} แล้วนะคะ`, blockedDomains: Array.from(loadBlockedDomains(req)), blockedKeywords: Array.from(loadBlockedKeywords(req)), blockedKeywordsDisplay: uniqueNegatedKeywords });
-    }
-
-    const qaList = await fetchQAWithKeywords(connection);
-    if (!qaList || qaList.length === 0) return res.status(200).json({ success: true, found: false, message: 'ฐานข้อมูลยังไม่พร้อม', results: [] });
-
+    // 4. Ranking
     const ranked = await rankCandidates(queryTokens, qaList, pool);
     ranked.sort((a, b) => b.score - a.score);
 
+    // 5. 🆕 START FIX: Strict Filtering Logic (Keyword Enforcer)
     let finalResults = ranked;
+    
     if (ranked.length > 0) {
         const bestMatch = ranked[0];
         const bestScore = bestMatch.score;
 
+        // 5.1 Basic Score Threshold (70%)
         if (bestScore > 5.0) { 
              finalResults = finalResults.filter(r => r.score >= (bestScore * 0.7)); 
         }
 
+        // 5.2 Strict Keyword Enforcement
+        // Find if the top result matches a "Specific Keyword" (> 4 chars, e.g., "การชำระเงินสมัครเรียน")
         const rawQuery = message.toLowerCase().replace(/\s+/g, '');
         const bestKeywords = (bestMatch.item.keywords || []).map(k => k.toLowerCase().replace(/\s+/g, ''));
-        const specificTerm = bestKeywords.find(k => rawQuery.includes(k) && k.length > 4 && !['สมัครเรียน', 'ข้อมูล', 'ติดต่อ'].includes(k));
+        
+        // Find a specific keyword from the top result that is also present in the user's query
+        const specificTerm = bestKeywords.find(k => 
+             rawQuery.includes(k) && 
+             k.length > 4 && // Must be longer than 4 chars to be 'specific'
+             !['สมัครเรียน', 'ข้อมูล', 'ติดต่อ', 'มหาวิทยาลัย'].includes(k) // Exclude generic words
+        );
 
         if (specificTerm) {
+             console.log(`🔒 Enforcing strict filter for term: "${specificTerm}"`);
+             // Filter out any result that DOES NOT contain this specific term
              finalResults = finalResults.filter(r => {
                  const rKw = (r.item.keywords || []).map(k => k.toLowerCase().replace(/\s+/g, ''));
                  const rTitle = (r.item.QuestionTitle || '').toLowerCase().replace(/\s+/g, '');
-                 return rKw.some(k => k.includes(specificTerm)) || rTitle.includes(specificTerm);
+                 
+                 // Check if the result has the specific term in keywords or title
+                 return rKw.some(k => k.includes(specificTerm) || specificTerm.includes(k)) || rTitle.includes(specificTerm);
              });
         }
     }
+    // 🆕 END FIX
 
+    // 6. Final Response
     if (finalResults.length === 0) {
         const { getDefaultContacts } = require('../../utils/getDefaultContact_fixed');
-        const contacts = await getDefaultContacts(connection);
-        return res.status(200).json({ success: true, found: false, message: `ไม่พบข้อมูลที่ตรงกัน`, contacts: contacts });
+        try {
+            const contacts = await getDefaultContacts(connection);
+            return res.status(200).json({ success: true, found: false, message: `ไม่พบข้อมูลที่ตรงกัน`, contacts: contacts });
+        } catch (e) {
+            return res.status(200).json({ success: true, found: false, message: `ไม่พบข้อมูลที่ตรงกัน`, contacts: [] });
+        }
     }
 
     const topRanked = finalResults.slice(0, 3);
@@ -407,21 +442,40 @@ module.exports = (pool) => async (req, res) => {
     try {
       const qaIds = topRanked.map(r => r.item.QuestionsAnswersID).filter(id => !!id);
       if (qaIds.length > 0) {
-        const [rows] = await connection.query(`SELECT DISTINCT org.OrgName AS organization, c.CategoriesName AS category, cc.Contact AS contact FROM QuestionsAnswers qa LEFT JOIN Officers o ON qa.OfficerID = o.OfficerID LEFT JOIN Organizations org ON o.OrgID = org.OrgID LEFT JOIN Categories c ON qa.CategoriesID = c.CategoriesID LEFT JOIN Categories_Contact cc ON (c.CategoriesID = cc.CategoriesID OR c.ParentCategoriesID = cc.CategoriesID) WHERE qa.QuestionsAnswersID IN (?) AND cc.Contact IS NOT NULL AND TRIM(cc.Contact) <> '' ORDER BY org.OrgID ASC, c.CategoriesName ASC`, [qaIds]);
-        specificContacts = (rows || []).map(row => ({ organization: row.organization, category: row.category || null, contact: row.contact || null }));
+        // Query to fetch contacts for the specific answers found
+        const [rows] = await connection.query(`
+          SELECT DISTINCT org.OrgName AS organization, c.CategoriesName AS category, cc.Contact AS contact 
+          FROM QuestionsAnswers qa 
+          LEFT JOIN Officers o ON qa.OfficerID = o.OfficerID 
+          LEFT JOIN Organizations org ON o.OrgID = org.OrgID 
+          LEFT JOIN Categories c ON qa.CategoriesID = c.CategoriesID 
+          LEFT JOIN Categories_Contact cc ON (c.CategoriesID = cc.CategoriesID OR c.ParentCategoriesID = cc.CategoriesID) 
+          WHERE qa.QuestionsAnswersID IN (?) AND ((cc.Contact IS NOT NULL AND TRIM(cc.Contact) <> '') OR (c.CategoriesID IS NULL)) 
+          ORDER BY org.OrgID ASC, c.CategoriesName ASC`, [qaIds]);
+        
+        specificContacts = (rows || []).map(row => ({ 
+            organization: row.organization, 
+            category: row.category || null, 
+            contact: row.contact || null 
+        }));
       }
     } catch (e) { specificContacts = []; }
+
+    const msgText = topRanked.length > 1 
+      ? `✨ พบ ${topRanked.length} คำถามที่ใกล้เคียง\n(ลองเลือกซักอันดูสิ 😊)`
+      : `✨ นี่คือคำตอบที่คุณหา`;
 
     return res.status(200).json({
       success: true,
       found: topRanked.length > 0,
       multipleResults: topRanked.length > 1,
       query: message,
-      message: topRanked.length > 0 ? `✨ พบ ${topRanked.length} คำถามที่ใกล้เคียง` : `ไม่พบข้อมูล`,
+      message: msgText,
       contacts: specificContacts,
       alternatives: topRanked.map(r => ({ id: r.item.QuestionsAnswersID, title: r.item.QuestionTitle, preview: (r.item.QuestionText || '').slice(0, 200), text: r.item.QuestionText, score: r.score.toFixed(2), keywords: r.item.keywords, categories: r.item.CategoriesID || null, categoriesPDF: r.item.CategoriesPDF || null }))
     });
   } catch (err) {
+    console.error('API Error:', err);
     res.status(500).json({ success: false, message: 'เกิดข้อผิดพลาด', detail: err.message });
   } finally {
     if (connection) connection.release();
