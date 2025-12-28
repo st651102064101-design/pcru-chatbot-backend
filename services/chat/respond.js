@@ -2543,7 +2543,7 @@ module.exports = (pool) => async (req, res) => {
         success: true,
         found: false,
         message: '🤔 หืม... ฉันหาคำตอบที่แน่นอนไม่เจอ\n\nแต่อาจจะเกี่ยวข้องกับสิ่งนี้นะ (อาจจะช่วยได้):',
-        results: ranked.slice(0, 1).map(r => ({
+        results: finalResults.slice(0, 1).map(r => ({
           id: r.item.QuestionsAnswersID,
           title: r.item.QuestionTitle,
           preview: (r.item.QuestionText || '').slice(0, 200),
@@ -2552,31 +2552,97 @@ module.exports = (pool) => async (req, res) => {
       });
     }
 
+    // 🆕 STRICTER FILTERING LOGIC
+    // Only keep results that are relevant enough compared to the best match
+    let finalResults = ranked;
+    
+    if (ranked.length > 0) {
+        const bestScore = ranked[0].score;
+        
+        // 1. Relative Threshold: Drop items with score < 60% of best score
+        finalResults = finalResults.filter(r => r.score >= (bestScore * 0.6));
+
+        // 2. Keyword Count Filter (Optional but good for specificity):
+        // If the top result matches 3 keywords, don't show results that match only 1 generic keyword
+        const bestMatchCount = ranked[0].matchCount || 0;
+        if (bestMatchCount >= 2) {
+             finalResults = finalResults.filter(r => (r.matchCount || 0) >= bestMatchCount - 1);
+        }
+    }
+
+    // If after filtering no results, fall back to default contacts
+    if (finalResults.length === 0) {
+      const { getDefaultContacts } = require('../../utils/getDefaultContact_fixed');
+      try {
+        const contacts = await getDefaultContacts(connection);
+        return res.status(200).json({
+          success: true,
+          found: false,
+          message: `😓 ขออภัยจริงๆ ฉันไม่มีข้อมูลเกี่ยวกับคำถามนี้`,
+          contacts: contacts
+        });
+      } catch (e) {
+        return res.status(200).json({ success: true, found: false, message: `😓 ขออภัยจริงๆ ฉันไม่มีข้อมูลเกี่ยวกับคำถามนี้`, contacts: [] });
+      }
+    }
+
     // Return top results with semantic scoring
-    
-    const topRanked = ranked.slice(0, 3);
-    
-    // 🛡️ QUALITY GUARD: Verify and calibrate before returning results
-    // Context tracking and verification removed
-    
+    const topRanked = finalResults.slice(0, 3);
+
+    // 🆕 1. เตรียมดึงข้อมูล Contact เฉพาะของ 3 คำตอบนี้ (ทำก่อนส่ง Response)
+    let specificContacts = [];
+    try {
+      // ดึง ID ของคำตอบทั้ง 3 ข้อ
+      const qaIds = topRanked.map(r => r.item.QuestionsAnswersID).filter(id => !!id);
+
+      if (qaIds.length > 0) {
+        // 🆕 2. SQL Query: ดึง Organization -> Category -> Contact 
+        // โดย Filter เฉพาะ QuestionsAnswersID ที่เราเจอ
+        // 🔥 แก้ไข: เพิ่มเงื่อนไข JOIN ให้หาเบอร์จาก Parent Category ได้ด้วย (กรณีหมวดย่อยไม่มีเบอร์)
+        const [rows] = await connection.query(`
+          SELECT DISTINCT
+              org.OrgName AS organization,
+              c.CategoriesName AS category,
+              cc.Contact AS contact
+          FROM QuestionsAnswers qa
+          LEFT JOIN Officers o ON qa.OfficerID = o.OfficerID
+          LEFT JOIN Organizations org ON o.OrgID = org.OrgID
+          LEFT JOIN Categories c ON qa.CategoriesID = c.CategoriesID
+          -- 🔥 JOIN แบบยืดหยุ่น: หา contact จากหมวดตัวเอง หรือ หมวดแม่
+          LEFT JOIN Categories_Contact cc ON (c.CategoriesID = cc.CategoriesID OR c.ParentCategoriesID = cc.CategoriesID)
+          WHERE 
+              qa.QuestionsAnswersID IN (?)
+              AND cc.Contact IS NOT NULL AND TRIM(cc.Contact) <> ''
+          ORDER BY 
+              org.OrgID ASC,
+              c.CategoriesName ASC
+        `, [qaIds]); // ส่ง array ของ IDs เข้าไปตรงๆ
+
+        // 🆕 3. Map ข้อมูลให้ตรง Format ที่ Frontend (Vue.js) รอรับ
+        specificContacts = (rows || []).map(row => ({
+          organization: row.organization,
+          category: row.category || null, // ส่ง null ถ้าไม่มีค่า (Frontend จะจัดการแสดงผลเอง)
+          contact: row.contact || null    // ส่ง null ถ้าไม่มีค่า
+        }));
+      }
+    } catch (e) {
+      console.error('Error fetching specific contacts:', e && e.message);
+      // ถ้า Error ให้เป็น array ว่าง หรือใส่ Default ตามต้องการ
+      specificContacts = []; 
+    }
+
+    // 🆕 4. ส่ง Response กลับไป
     return res.status(200).json({
       success: true,
-      found: false,
-      multipleResults: true,
+      found: topRanked.length > 0,
+      multipleResults: topRanked.length > 1,
       query: message,
-      message: '✨ พบ 3 คำถามที่ใกล้เคียง\n(ลองเลือกซักอันดูสิ 😊)',
-      // Include default contacts like in no-answer fallback
-      ...(await (async () => {
-        try {
-          const { getDefaultContacts } = require('../../utils/getDefaultContact_fixed');
-          const contacts = await getDefaultContacts(connection);
-          console.log('multipleResults fallback contacts count=', Array.isArray(contacts) ? contacts.length : 0, 'sample=', Array.isArray(contacts) ? contacts.slice(0,3) : contacts);
-          return { contacts: contacts };
-        } catch (e) {
-          console.warn('Failed to load default contacts for multipleResults:', e && (e.message || e));
-          return { contacts: [] };
-        }
-      })()),
+      message: topRanked.length > 0 
+        ? `✨ พบ ${topRanked.length} คำถามที่ใกล้เคียง\n(ลองเลือกซักอันดูสิ 😊)`
+        : `😓 ขออภัยจริงๆ ฉันไม่มีข้อมูลเกี่ยวกับคำถามนี้`,
+      
+      contacts: specificContacts, // ✅ ใส่ตัวแปรที่เราเตรียมไว้ตรงนี้
+
       alternatives: topRanked.map(r => ({
         id: r.item.QuestionsAnswersID,
         title: r.item.QuestionTitle,
