@@ -2588,12 +2588,26 @@ module.exports = (pool) => async (req, res) => {
             }
           }
 
-          return res.status(200).json({
-            success: true,
-            found: false,
-            message: `😅 ขออภัยนะ ฉันค่อนข้างงงกับคำถามนี้\n\nถ้าต้องการความช่วยเหลือ ลองติดต่อทีมที่เกี่ยวข้องของมหาวิทยาลัยได้นะ ฉันจะให้ข้อมูลติดต่อให้`,
-            contacts
-          });
+          // Instead of returning a single/small list of contacts, return the full Organizations list (names only)
+          try {
+            const [orgRows] = await connection.query(`SELECT OrgName AS organization FROM Organizations ORDER BY OrgName ASC`);
+            const orgContacts = (orgRows || []).map(r => ({ organization: r.organization || r.OrgName || '' })).filter(c => c.organization && c.organization.trim());
+            return res.status(200).json({
+              success: true,
+              found: false,
+              message: `😅 ขออภัยนะ ฉันค่อนข้างงงกับคำถามนี้\n\nถ้าต้องการความช่วยเหลือ ลองติดต่อทีมที่เกี่ยวข้องของมหาวิทยาลัยได้นะ ฉันจะให้ข้อมูลติดต่อให้`,
+              contacts: orgContacts
+            });
+          } catch (orgErr) {
+            console.error('Error fetching Organizations for fallback:', orgErr && orgErr.message);
+            // Fallback to previous contacts array if org query fails
+            return res.status(200).json({
+              success: true,
+              found: false,
+              message: `😅 ขออภัยนะ ฉันค่อนข้างงงกับคำถามนี้\n\nถ้าต้องการความช่วยเหลือ ลองติดต่อทีมที่เกี่ยวข้องของมหาวิทยาลัยได้นะ ฉันจะให้ข้อมูลติดต่อให้`,
+              contacts
+            });
+          }
         } catch (cErr) {
           console.error('Error fetching officer contacts:', cErr && cErr.message);
           // If defaultContact is available, return it; otherwise, try to return officers who authored QAs
@@ -2617,11 +2631,23 @@ module.exports = (pool) => async (req, res) => {
             }
           }
 
+          // Try to return organizations list first; if unavailable, fall back to organization names from fallbackContacts
+          try {
+            const [orgRows] = await connection.query(`SELECT OrgName AS organization FROM Organizations ORDER BY OrgName ASC`);
+            const orgContacts = (orgRows || []).map(r => ({ organization: r.organization || r.OrgName || '' })).filter(c => c.organization && c.organization.trim());
+            if (orgContacts.length > 0) {
+              return res.status(200).json({ success: true, found: false, message: `😓 ขออภัยจริงๆ ฉันไม่มีข้อมูลเกี่ยวกับคำถามนี้\n\n`, contacts: orgContacts });
+            }
+          } catch (orgErr) {
+            console.error('Error fetching organizations for fallback (respond):', orgErr && orgErr.message);
+          }
+
+          const orgsFromFallback = (fallbackContacts || []).map(c => ({ organization: c.organization || c.OrgName || null })).filter(Boolean);
           return res.status(200).json({
             success: true,
             found: false,
             message: `😓 ขออภัยจริงๆ ฉันไม่มีข้อมูลเกี่ยวกับคำถามนี้\n\n`,
-            contacts: fallbackContacts
+            contacts: orgsFromFallback
           });
         }
       }

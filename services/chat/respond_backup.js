@@ -343,12 +343,20 @@ module.exports = (pool) => async (req, res) => {
             }
           }
 
-          return res.status(200).json({
-            success: true,
-            found: false,
-            message: `ขออภัยค่ะ ในฐานะ Chatbot ของ\nมหาวิทยาลัยราชภัฏเพชรบูรณ์\n(PCRU) ไม่สามารถให้คำตอบสำหรับ\nคำถามนี้ได้ - หากต้องการความช่วย\nเหลือด้านการศึกษาหรือแนะแนวเพิ่ม\nเติม รบกวนติดต่อหน่วยงานที่เกี่ยวข้อง\nของมหาวิทยาลัยนะคะ`,
-            contacts
-          });
+          // Prefer to return organizations list (names only) for no-answer fallback (backup)
+          try {
+            const [orgRows] = await connection.query(`SELECT OrgName AS organization FROM Organizations ORDER BY OrgName ASC`);
+            const orgContacts = (orgRows || []).map(r => ({ organization: r.organization || r.OrgName || '' })).filter(c => c.organization && c.organization.trim());
+            return res.status(200).json({
+              success: true,
+              found: false,
+              message: `ขออภัยค่ะ ในฐานะ Chatbot ของ\nมหาวิทยาลัยราชภัฏเพชรบูรณ์\n(PCRU) ไม่สามารถให้คำตอบสำหรับ\nคำถามนี้ได้ - หากต้องการความช่วย\nเหลือด้านการศึกษาหรือแนะแนวเพิ่ม\nเติม รบกวนติดต่อหน่วยงานที่เกี่ยวข้อง\nของมหาวิทยาลัยนะคะ`,
+              contacts: orgContacts
+            });
+          } catch (orgErr) {
+            console.error('Error fetching organizations for fallback (backup):', orgErr && orgErr.message);
+            return res.status(200).json({ success: true, found: false, message: `ขออภัยค่ะ ในฐานะ Chatbot ของ\nมหาวิทยาลัยราชภัฏเพชรบูรณ์\n(PCRU) ไม่สามารถให้คำตอบสำหรับ\nคำถามนี้ได้`, contacts: [] });
+          }
         } catch (cErr) {
           console.error('Error fetching officer contacts for apology response:', cErr && cErr.message);
           let fallbackContacts = [];
@@ -370,11 +378,23 @@ module.exports = (pool) => async (req, res) => {
               console.error('Error fetching QA officers for fallback (backup):', e && e.message);
             }
           }
+          // Try to return the organizations list first; if that fails, fall back to any available org names from fallbackContacts
+          try {
+            const [orgRows] = await connection.query(`SELECT OrgName AS organization FROM Organizations ORDER BY OrgName ASC`);
+            const orgContacts = (orgRows || []).map(r => ({ organization: r.organization || r.OrgName || '' })).filter(c => c.organization && c.organization.trim());
+            if (orgContacts.length > 0) {
+              return res.status(200).json({ success: true, found: false, message: `ขออภัยค่ะ ในฐานะ Chatbot ของ\nมหาวิทยาลัยราชภัฏเพชรบูรณ์\n(PCRU) ไม่สามารถให้คำตอบสำหรับ\nคำถามนี้ได้ - หากต้องการความช่วย\nเหลือด้านการศึกษาหรือแนะแนวเพิ่ม\nเติม รบกวนติดต่อหน่วยงานที่เกี่ยวข้อง\nของมหาวิทยาลัยนะคะ`, contacts: orgContacts });
+            }
+          } catch (orgErr) {
+            console.error('Error fetching organizations for fallback (backup catch):', orgErr && orgErr.message);
+          }
+
+          const orgsFromFallback = (fallbackContacts || []).map(c => ({ organization: c.organization || c.OrgName || null })).filter(Boolean);
           return res.status(200).json({
             success: true,
             found: false,
             message: `ขออภัยค่ะ ในฐานะ Chatbot ของ\nมหาวิทยาลัยราชภัฏเพชรบูรณ์\n(PCRU) ไม่สามารถให้คำตอบสำหรับ\nคำถามนี้ได้ - หากต้องการความช่วย\nเหลือด้านการศึกษาหรือแนะแนวเพิ่ม\nเติม รบกวนติดต่อหน่วยงานที่เกี่ยวข้อง\nของมหาวิทยาลัยนะคะ`,
-            contacts: fallbackContacts
+            contacts: orgsFromFallback
           });
         }
       }

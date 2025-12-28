@@ -340,12 +340,20 @@ module.exports = (pool) => async (req, res) => {
             }
           }
 
-          return res.status(200).json({
-            success: true,
-            found: false,
-            message: \`ขออภัยค่ะ ในฐานะ Chatbot ของ\\nมหาวิทยาลัยราชภัฏเพชรบูรณ์\\n(PCRU) ไม่สามารถให้คำตอบสำหรับ\\nคำถามนี้ได้ - หากต้องการความช่วย\\nเหลือด้านการศึกษาหรือแนะแนวเพิ่ม\\nเติม รบกวนติดต่อหน่วยงานที่เกี่ยวข้อง\\nของมหาวิทยาลัยนะคะ\`,
-            contacts
-          });
+          // Prefer to return organizations list (names only) for no-answer fallback
+          try {
+            const [orgRows] = await connection.query(`SELECT OrgName AS organization FROM Organizations ORDER BY OrgName ASC`);
+            const contacts = (orgRows || []).map(r => ({ organization: r.organization || r.OrgName || '' })).filter(c => c.organization && c.organization.trim());
+            return res.status(200).json({
+              success: true,
+              found: false,
+              message: `ขออภัยค่ะ ในฐานะ Chatbot ของ\nมหาวิทยาลัยราชภัฏเพชรบูรณ์\n(PCRU) ไม่สามารถให้คำตอบสำหรับ\nคำถามนี้ได้ - หากต้องการความช่วย\nเหลือด้านการศึกษาหรือแนะแนวเพิ่ม\nเติม รบกวนติดต่อหน่วยงานที่เกี่ยวข้อง\nของมหาวิทยาลัยนะคะ`,
+              contacts
+            });
+          } catch (orgErr) {
+            console.error('Error fetching organizations for fallback (enhanced):', orgErr && orgErr.message);
+            return res.status(200).json({ success: true, found: false, message: `ขออภัยค่ะ ในฐานะ Chatbot ของ\nมหาวิทยาลัยราชภัฏเพชรบูรณ์\n(PCRU) ไม่สามารถให้คำตอบสำหรับ\nคำถามนี้ได้`, contacts: [] });
+          }
         } catch (cErr) {
           console.error('Error fetching officer contacts:', cErr && cErr.message);
           let fallbackContacts = [];
