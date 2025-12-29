@@ -329,6 +329,8 @@ router.delete('/delete/:id', async (req, res) => {
 
   const categoryId = req.params.id; // Keep as string since CategoriesID is varchar
 
+  console.log(`[categoriesCrud] DELETE request for id=${categoryId}, user=${JSON.stringify(req.user ? { userId: req.user.userId, usertype: req.user.usertype } : null)}`);
+
   if (!categoryId) {
     return res.status(400).json({ success: false, message: 'Invalid Category ID' });
   }
@@ -342,6 +344,8 @@ router.delete('/delete/:id', async (req, res) => {
       'SELECT COUNT(*) AS count FROM QuestionsAnswers WHERE CategoriesID = ? OR CategoriesID LIKE ?',
       [categoryId, `${categoryId}-%`]
     );
+
+    console.log(`[categoriesCrud] qaCount for id=${categoryId} => ${qaCount && qaCount[0] ? qaCount[0].count : 'unknown'}`);
 
     if (qaCount[0].count > 0) {
       return res.status(400).json({
@@ -366,8 +370,15 @@ router.delete('/delete/:id', async (req, res) => {
       [categoryId]
     );
 
+    console.log(`[categoriesCrud] DELETE query affectedRows for id=${categoryId} => ${result && typeof result.affectedRows !== 'undefined' ? result.affectedRows : JSON.stringify(result)}`);
+
     if (result.affectedRows === 0) {
-      return res.status(404).json({ success: false, message: 'ไม่พบหมวดหมู่ที่ต้องการลบ' });
+      console.warn(`[categoriesCrud] Category id=${categoryId} not found; treating DELETE as idempotent success`);
+      // Refresh clients so frontend list stays consistent
+      if (req.app.locals.notifyCategoriesUpdate) {
+        req.app.locals.notifyCategoriesUpdate({ action: 'delete', id: categoryId });
+      }
+      return res.status(200).json({ success: true, message: 'ไม่พบหมวดหมู่ที่ต้องการลบ (ถือว่าเรียบร้อยแล้ว)', data: { id: categoryId, alreadyRemoved: true } });
     }
 
     // Notify WebSocket clients

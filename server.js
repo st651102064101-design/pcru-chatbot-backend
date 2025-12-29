@@ -176,6 +176,18 @@ const PORT = process.env.PORT || 3001;
 // Assign after app is initialized
 app.locals.notifyQuestionsAnswersUpdate = notifyQuestionsAnswersUpdate;
 
+// --- Debug middleware: log incoming requests and auth status for troubleshooting 404/route issues ---
+app.use((req, res, next) => {
+  try {
+    const authHeader = req.headers && req.headers.authorization ? '[AUTH]' : '[NO_AUTH]';
+    console.log(`[req] ${req.method} ${req.path} ${authHeader} origin=${req.headers.origin || ''}`);
+  } catch (e) {
+    // ignore logging errors
+  }
+  next();
+});
+
+
 // Start tokenizer service when server boots (local TOKENIZER_URL only)
 startTokenizerService();
 
