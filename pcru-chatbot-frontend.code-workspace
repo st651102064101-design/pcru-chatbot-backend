@@ -1,12 +1,13 @@
 {
 	"folders": [
 		{
-			"name": "pcru-chatbot-frontend",
-			"path": "../pcru-chatbot-frontend"
+			"name": "PCRU-CHATBOT-FRONTEND-1",
+			"path": "../PCRU-CHATBOT-FRONTEND-1"
 		},
 		{
 			"name": "pcru-chatbot-backend",
 			"path": "."
 		}
-	]
+	],
+	"settings": {}
 }

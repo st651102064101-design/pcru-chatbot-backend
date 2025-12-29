@@ -1360,3 +1360,35 @@ Domain detection (DB-only): {
   queryHasAdmissions: false
 }
 🏅 Returning 12/12 relevant matches (generic search)
+npm error Missing script: "dev"
+npm error
+npm error To see a list of scripts, run:
+npm error   npm run
+npm error A complete log of this run can be found in: /Users/kriangkrai/.npm/_logs/2025-12-29T00_25_39_578Z-debug-0.log
+[dotenv@17.2.3] injecting env (32) from .env -- tip: ✅ audit secrets and track compliance: https://dotenvx.com/ops
+[dotenv@17.2.3] injecting env (0) from .env -- tip: 🔐 prevent building .env in docker: https://dotenvx.com/prebuild
+[dotenv@17.2.3] injecting env (0) from .env -- tip: ⚙️  suppress all logs with { quiet: true }
+✅ Nodemailer Transporter Initialized.
+📦 Serving frontend static files from /Users/kriangkrai/PCRU-CHATBOT-FRONTEND-1/dist
+Server running at http://project.3bbddns.com:36145
+Also accessible via: http://192.168.1.118:36145
+WebSocket server running at ws://project.3bbddns.com:36145
+🔄 Starting stopwords auto-sync...
+🔄 Starting stopwords sync from standard list...
+🚀 Auto-starting PyThaiNLP tokenizer at http://project.3bbddns.com:36146
+🔎 Using python: /Users/kriangkrai/pcru-chatbot-backend-1/.venv/bin/python3
+✅ MySQL Database Connected Successfully!
+✅ Connected to database
+📊 Found 118 existing stopwords in database
+➕ Adding 3 new standard stopwords...
+✅ Successfully added new stopwords
+⚠️  Warning: Found 2 non-standard stopwords in database:
+    หา, อยากรู้ 
+   You may want to review and remove these manually if needed.
+
+📊 Final count: 118 stopwords in database
+✅ Sync completed successfully!
+INFO:     Started server process [16435]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://project.3bbddns.com:36146 (Press CTRL+C to quit)
