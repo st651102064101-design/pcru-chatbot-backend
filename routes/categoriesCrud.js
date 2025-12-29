@@ -432,7 +432,7 @@ router.get('/template', (req, res) => {
   const path = require('path');
 
   try {
-    const headers = 'CategoriesName,ParentCategoriesID,CategoriesPDF';
+    const headers = 'CategoriesName,ParentCategoriesName,CategoriesPDF,Contact';
     
     // Create template directory if it doesn't exist
     const templateDir = path.join(__dirname, '..', 'files', 'managecategories', 'templates');

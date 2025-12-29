@@ -33,25 +33,50 @@ const writeCategoriesCSV = (pool, uploaderId = 1001) => async () => {
   // If CategoriesID is selected, export the category NAME instead of the numeric ID
   // and avoid duplicating the CategoriesName column if it's already present.
   const finalCols = selectedCols.slice();
+
+  // CategoriesID -> export as CategoriesName for readability
   const idIdx = finalCols.indexOf('CategoriesID');
   if (idIdx !== -1) {
     if (finalCols.includes('CategoriesName')) {
-      // Remove the ID column if name column is already present
       finalCols.splice(idIdx, 1);
     } else {
-      // Replace ID column header with CategoriesName so values show the name
       finalCols[idIdx] = 'CategoriesName';
+    }
+  }
+
+  // ParentCategoriesID -> export as ParentCategoriesName (show parent name instead of ID)
+  const parentIdx = finalCols.indexOf('ParentCategoriesID');
+  if (parentIdx !== -1) {
+    // if ParentCategoriesName already present, remove the ID column
+    if (finalCols.includes('ParentCategoriesName')) {
+      finalCols.splice(parentIdx, 1);
+    } else {
+      finalCols[parentIdx] = 'ParentCategoriesName';
     }
   }
 
   const selectSql = `SELECT ${selectedCols.join(', ')} FROM Categories ORDER BY CategoriesID ASC`;
   const [rows] = await pool.query(selectSql);
 
+  // Build a map of category ID -> name for Parent mapping
+  const idNameMap = new Map((rows || []).map(r => [String(r.CategoriesID), String(r.CategoriesName || '')]));
+
+  // Fetch aggregated Contact information from Categories_Contact and map by CategoriesID
+  const [contactsGrouped] = await pool.query(`SELECT CategoriesID, GROUP_CONCAT(Contact SEPARATOR ' ||| ') AS Contact FROM Categories_Contact GROUP BY CategoriesID`);
+  const contactMap = new Map((contactsGrouped || []).map(r => [String(r.CategoriesID), String(r.Contact || '')]));
+
+  // Ensure Contact column exists in finalCols (append it at the end)
+  if (!finalCols.includes('Contact')) finalCols.push('Contact');
+
   const headers = finalCols;
   const lines = [headers.join(',')];
   rows.forEach((r) => {
-    // Map values according to finalCols. If finalCols contains 'CategoriesName' it will use the name.
-    const cols = finalCols.map(c => escapeCsv(String(r[c] || '')));
+    // Map values according to finalCols. Use idNameMap for ParentCategoriesName and contactMap for Contact column.
+    const cols = finalCols.map(c => {
+      if (c === 'Contact') return escapeCsv(String(contactMap.get(String(r.CategoriesID)) || ''));
+      if (c === 'ParentCategoriesName') return escapeCsv(String(idNameMap.get(String(r.ParentCategoriesID)) || ''));
+      return escapeCsv(String(r[c] || ''));
+    });
     lines.push(cols.join(','));
   });
 
