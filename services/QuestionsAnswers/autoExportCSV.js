@@ -50,9 +50,20 @@ async function autoExportQuestionsAnswersCSV(pool, officerId = 3001) {
     const exportDir = path.join(__dirname, '../../files/managequestionsanswers', String(officerId));
     await fs.mkdir(exportDir, { recursive: true });
     
-    // 3. Generate filename with timestamp
-    const timestamp = new Date().toISOString().replace(/[:.]/g, '-').slice(0, -5);
-    const filename = `questionsanswers_${timestamp}.csv`;
+    // Clean old files
+    try {
+      const files = await fs.promises.readdir(exportDir);
+      for (const file of files) {
+        if (file !== 'latest.csv' && file.endsWith('.csv')) {
+          await fs.promises.unlink(path.join(exportDir, file)).catch(() => {});
+        }
+      }
+    } catch (e) {
+      // ignore
+    }
+
+    // 3. Generate filename
+    const filename = 'latest.csv';
     const filepath = path.join(exportDir, filename);
     
     // 4. Create CSV writer with UTF-8 BOM for Excel compatibility
@@ -88,23 +99,8 @@ async function autoExportQuestionsAnswersCSV(pool, officerId = 3001) {
     const withBom = Buffer.concat([bom, content]);
     await fs.writeFile(filepath, withBom);
     
-    // 7. Create symlink to "latest" for easy access
-    const latestPath = path.join(exportDir, 'latest.csv');
-    try {
-      await fs.unlink(latestPath);
-    } catch (e) {
-      // File doesn't exist, ignore
-    }
-    
-    try {
-      await fs.symlink(filename, latestPath);
-    } catch (e) {
-      // Symlink failed, copy instead
-      await fs.copyFile(filepath, latestPath);
-    }
-    
     console.log(`✅ Auto-exported ${rows.length} Q&As to: ${filepath}`);
-    console.log(`📄 Latest CSV available at: ${latestPath}`);
+    console.log(`📄 Latest CSV available at: ${filepath}`);
     
     return filepath;
     
