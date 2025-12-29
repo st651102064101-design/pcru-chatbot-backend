@@ -7,7 +7,9 @@ Requirements:
     pip install pythainlp mysql-connector-python python-dotenv
 
 Usage:
-    python scripts/sync_stopwords_pythainlp.py
+    python scripts/sync_stopwords_pythainlp.py                    # Insert all at once
+    python scripts/sync_stopwords_pythainlp.py --batch-size 100   # Insert in batches of 100
+    python scripts/sync_stopwords_pythainlp.py --daily-limit 100  # Daily incremental updates (100 per day)
 """
 
 import os
@@ -154,8 +156,20 @@ def sync_stopwords(connection, stopwords, batch_size=None):
         cursor.close()
 
 def main():
+    import argparse
+    
+    parser = argparse.ArgumentParser(description='Sync Thai stopwords from pythainlp to MySQL database')
+    parser.add_argument('--batch-size', type=int, help='Number of stopwords to insert per batch (default: insert all at once)')
+    parser.add_argument('--daily-limit', type=int, default=100, help='Daily limit for batch processing (default: 100)')
+    
+    args = parser.parse_args()
+    
     print("=" * 60)
     print("🔄 Syncing Thai Stopwords from pythainlp to MySQL")
+    if args.batch_size:
+        print(f"📦 Using batch size: {args.batch_size}")
+    elif args.daily_limit:
+        print(f"📅 Using daily limit: {args.daily_limit} (run daily for incremental updates)")
     print("=" * 60)
     
     # Step 1: Get stopwords from pythainlp
@@ -164,9 +178,10 @@ def main():
     # Step 2: Connect to database
     connection = connect_to_database()
     
-    # Step 3: Sync stopwords
+    # Step 3: Sync stopwords with batch processing if specified
     try:
-        sync_stopwords(connection, stopwords)
+        batch_size = args.batch_size if args.batch_size else (args.daily_limit if not args.batch_size else None)
+        sync_stopwords(connection, stopwords, batch_size)
     finally:
         if connection.is_connected():
             connection.close()
