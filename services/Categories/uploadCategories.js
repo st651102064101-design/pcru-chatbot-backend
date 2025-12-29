@@ -142,7 +142,7 @@ const uploadCategoriesService = (pool) => async (req, res) => {
         connection = await pool.getConnection();
         await connection.beginTransaction();
 
-        const ownerOfficerId = (req.user && req.user.usertype === 'Officer') ? uploaderId : null;
+        let ownerOfficerId = (req.user && req.user.usertype === 'Officer') ? uploaderId : null;
 
         if (ownerOfficerId !== null) {
             const [officerCheck] = await connection.query('SELECT 1 FROM Officers WHERE OfficerID = ? LIMIT 1', [ownerOfficerId]);
@@ -270,8 +270,17 @@ const uploadCategoriesService = (pool) => async (req, res) => {
 
                 const finalSql = allowDuplicates ? upsertSql : sql;
                 
-                await connection.query(finalSql, [id, name, parentID, pdf, ownerOfficerId]);
-                
+                try {
+                    await connection.query(finalSql, [id, name, parentID, pdf, ownerOfficerId]);
+                } catch (err) {
+                    if ((err && err.code === 'ER_NO_REFERENCED_ROW_2') || (err && String(err.message || '').toLowerCase().includes('foreign key'))) {
+                        console.warn(`[uploadCategories] FK error inserting category ${id} with OwnerOfficerId=${ownerOfficerId}: ${err.message}. Retrying with OfficerID=null`);
+                        await connection.query(finalSql, [id, name, parentID, pdf, null]);
+                    } else {
+                        throw err;
+                    }
+                }
+
                 // Track contact to add later
                 if (contact) {
                     contactOps.push({ id, contact });

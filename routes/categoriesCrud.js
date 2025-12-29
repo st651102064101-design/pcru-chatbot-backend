@@ -104,14 +104,36 @@ router.post('/create', async (req, res) => {
       newCategoryId = `${parentCategoriesID}-${maxSubNum + 1}`;
     }
 
-    // Get OfficerID from authenticated user (or use default)
-    const officerID = req.user?.OfficerID || 3001;
+    // Determine OfficerID from authenticated user (prefer numeric userId when available), or null
+    let officerID = req.user?.userId ?? req.user?.OfficerID ?? null;
 
-    // Insert new category with generated ID
-    await connection.query(
-      `INSERT INTO Categories (CategoriesID, CategoriesName, OfficerID, ParentCategoriesID, CategoriesPDF) VALUES (?, ?, ?, ?, ?)`,
-      [newCategoryId, categoriesName.trim(), officerID, parentCategoriesID || newCategoryId, categoriesPDF || null]
-    );
+    // Verify OfficerID exists in Officers table; if not, set to null to avoid FK errors
+    if (officerID !== null) {
+      const [foundOfficer] = await connection.query('SELECT 1 FROM Officers WHERE OfficerID = ? LIMIT 1', [officerID]);
+      if (!foundOfficer || foundOfficer.length === 0) {
+        console.warn(`[categoriesCrud] OfficerID ${officerID} not found, setting OfficerID=null`);
+        officerID = null;
+      }
+    }
+
+    // Insert new category with generated ID (retry with OfficerID=null if FK reference fails)
+    try {
+      await connection.query(
+        `INSERT INTO Categories (CategoriesID, CategoriesName, OfficerID, ParentCategoriesID, CategoriesPDF) VALUES (?, ?, ?, ?, ?)`,
+        [newCategoryId, categoriesName.trim(), officerID, parentCategoriesID || newCategoryId, categoriesPDF || null]
+      );
+    } catch (err) {
+      // Defensive retry: if FK to Officers fails, retry with OfficerID=null
+      if ((err && err.code === 'ER_NO_REFERENCED_ROW_2') || (err && String(err.message || '').toLowerCase().includes('foreign key'))) {
+        console.warn(`[categoriesCrud] FK error inserting category ${newCategoryId} with OfficerID=${officerID}: ${err.message}. Retrying with OfficerID=null`);
+        await connection.query(
+          `INSERT INTO Categories (CategoriesID, CategoriesName, OfficerID, ParentCategoriesID, CategoriesPDF) VALUES (?, ?, ?, ?, ?)`,
+          [newCategoryId, categoriesName.trim(), null, parentCategoriesID || newCategoryId, categoriesPDF || null]
+        );
+      } else {
+        throw err;
+      }
+    }
 
     // Also store Contact if provided
     if (req.body && typeof req.body.contact !== 'undefined') {
