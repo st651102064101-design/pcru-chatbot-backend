@@ -288,8 +288,10 @@ function semanticOverlapScore(queryTokens, targetTokens) {
   return totalScore;
 }
 
-async function rankCandidates(queryTokens, candidates, pool) {
+async function rankCandidates(queryTokens, candidates, pool, injectedTokens = []) {
   const results = [];
+  const injectedSet = new Set(injectedTokens.map(t => String(t).toLowerCase()));
+
   for (const item of candidates) {
     const kwTokens = await normalize((item.keywords || []).join(' '), pool);
     const qTextTokens = await normalize(item.QuestionText || '', pool);
@@ -299,6 +301,16 @@ async function rankCandidates(queryTokens, candidates, pool) {
 
     // 🔥 Keyword dominance: compute raw overlap count and scaled score so we can compare counts for strict filtering
     const rawOverlapCount = overlapScore(queryTokens, kwTokens);
+
+    // 💡 NEW: Calculate overlap specifically for INJECTED synonyms
+    // This tells us if this item contains the "Golden Keyword" (e.g., "365") that we forced in.
+    let injectedOverlapCount = 0;
+    if (injectedSet.size > 0) {
+        for (const t of kwTokens) {
+            if (injectedSet.has(String(t).toLowerCase())) injectedOverlapCount++;
+        }
+    }
+
     const scoreOverlap = rawOverlapCount * 10;
     const scoreSemanticKw = semanticOverlapScore(queryTokens, kwTokens) * 2.5;
     const scoreSemanticText = semanticOverlapScore(queryTokens, qTextTokens) * 1.0;
@@ -309,10 +321,24 @@ async function rankCandidates(queryTokens, candidates, pool) {
     const scoreTitle = jaccardSimilarity(queryTokens, titleTokens) * 2;
     const total = scoreOverlap + scoreSemantic + scoreTitle + scoreSemanticKw + scoreSemanticText + scoreSemanticTitle + scoreCategory;
     
-    results.push({ item, score: total, components: { overlapScore: scoreOverlap, overlapCount: rawOverlapCount, semantic: scoreSemantic, title: scoreTitle, semanticKw: scoreSemanticKw, semanticText: scoreSemanticText, semanticTitle: scoreSemanticTitle, category: scoreCategory } });
+    results.push({ 
+        item, 
+        score: total, 
+        components: { 
+            overlapScore: scoreOverlap, 
+            overlapCount: rawOverlapCount, 
+            injectedOverlap: injectedOverlapCount, // Store this for filtering
+            semantic: scoreSemantic, 
+            title: scoreTitle, 
+            semanticKw: scoreSemanticKw, 
+            semanticText: scoreSemanticText, 
+            semanticTitle: scoreSemanticTitle, 
+            category: scoreCategory 
+        } 
+    });
   }
   return results.sort((a, b) => b.score - a.score);
-}
+} 
 
 // --------------------------------------------------------------------------------
 // MAIN MODULE
@@ -358,6 +384,9 @@ module.exports = (pool) => async (req, res) => {
     // 3. Normalize Query
     let queryTokens = await normalize(message, pool);
 
+    // Track tokens that were force-injected via synonyms
+    const injectedTokens = [];
+
     // 🔥 FORCE SYNONYM INJECTION (Fix for tokenization splitting synonyms like "สามหกห้า" -> "สาม","หก","ห้า")
     // If the raw message contains a key in SYNONYMS_MAPPING (e.g. "สามหกห้า"),
     // but the tokens don't contain the target (e.g. "365"), force add it to guarantee a keyword hit.
@@ -370,9 +399,26 @@ module.exports = (pool) => async (req, res) => {
             try {
                 if (msgLower.includes(cleanKey)) {
                     const targetLower = String(target || '').toLowerCase();
-                    if (targetLower && !queryTokens.some(t => String(t || '').toLowerCase() === targetLower)) {
-                        console.log(`🔧 Force injecting synonym: "${key}" -> "${target}"`);
-                        queryTokens.push(targetLower);
+                    if (targetLower) {
+                        // 🌟 Normalize the target before injecting to match DB-normalized tokens (e.g. "e-book" -> ["e","book"]).
+                        try {
+                            const normalizedTargets = await normalize(targetLower, pool);
+                            for (const nt of normalizedTargets) {
+                                const ntLower = String(nt || '').toLowerCase();
+                                if (ntLower && !queryTokens.some(t => String(t || '').toLowerCase() === ntLower)) {
+                                    console.log(`🔧 Force injecting normalized synonym: "${key}" -> "${ntLower}"`);
+                                    queryTokens.push(ntLower);
+                                    injectedTokens.push(ntLower); // Mark as injected
+                                }
+                            }
+                        } catch (e) {
+                            // Fallback: inject raw target if normalization fails
+                            if (!queryTokens.some(t => String(t || '').toLowerCase() === targetLower)) {
+                                console.log(`🔧 Force injecting synonym (fallback): "${key}" -> "${target}"`);
+                                queryTokens.push(targetLower);
+                                injectedTokens.push(targetLower);
+                            }
+                        }
                     }
                 }
             } catch (e) { continue; }
@@ -549,27 +595,34 @@ module.exports = (pool) => async (req, res) => {
         }
     }
 
-    // 5. Ranking
-    const ranked = await rankCandidates(queryTokens, qaList, pool);
+    // 5. Ranking (Pass injected tokens for priority calculation)
+    const ranked = await rankCandidates(queryTokens, qaList, pool, injectedTokens);
     ranked.sort((a, b) => b.score - a.score);
 
     // 6. Filtering (Smart & Strict)
     let finalResults = ranked;
     if (ranked.length > 0) {
-        // 🔥 LOGIC ใหม่: หาคะแนน Overlap สูงสุดจากทุกข้อที่พบ
-        // (เผื่อกรณีข้อที่มี Keyword จริงๆ ไม่ได้อยู่อันดับ 1 เพราะแพ้คะแนน Semantic)
-        const maxOverlap = Math.max(...ranked.map(r => r.components?.overlapCount || 0));
+        // 🔥 LOGIC ใหม่ (2-Stage Filtering):
+        // 1. ตรวจสอบว่ามี "Injected Keyword" (คำพ้องที่ถูกบังคับใส่) หรือไม่
+        const maxInjectedOverlap = Math.max(...ranked.map(r => r.components?.injectedOverlap || 0));
 
-        if (maxOverlap > 0) {
-             console.log(`🎯 Keyword Dominance Enforced (Max Overlap: ${maxOverlap}): Removing non-keyword matches.`);
-             // STRICT MODE: ถ้ามีข้อใดข้อหนึ่งเจอ Keyword, ให้กรองเอาเฉพาะข้อที่เจอ Keyword เท่านั้น (ต้องเท่ากับค่าสูงสุด)
-             // ตัดข้อที่คะแนน Overlap เป็น 0 หรือน้อยกว่า Max ทิ้งไปเลย
-             finalResults = finalResults.filter(r => (r.components?.overlapCount || 0) >= maxOverlap);
-        } else {
-             // Standard Mode: ถ้าไม่มี Keyword เลย (maxOverlap = 0) ก็ใช้คะแนน Relative ปกติ
-             const bestScore = ranked[0].score;
-             if (bestScore > 5.0) {
-                 finalResults = finalResults.filter(r => r.score >= (bestScore * 0.7));
+        if (maxInjectedOverlap > 0) {
+             console.log(`🎯 Injected Keyword Dominance (Max: ${maxInjectedOverlap}): Filtering strictly for injected terms.`);
+             // ถ้ามี Injected Keyword (เช่น 365) ให้กรองเอาเฉพาะข้อที่มีคำนี้อยู่จริงเท่านั้น
+             // (วิธีนี้จะแก้ปัญหา "สามหกห้า" -> เจอ "สาม", "หก", "ห้า" ที่คะแนนเท่ากันได้ เพราะข้ออื่นจะไม่มี injected keyword นี้)
+             finalResults = finalResults.filter(r => (r.components?.injectedOverlap || 0) >= maxInjectedOverlap);
+        } 
+        else {
+             // 2. ถ้าไม่มี Injected Keyword ก็ใช้ Logic เดิม (Max Overlap)
+             const maxOverlap = Math.max(...ranked.map(r => r.components?.overlapCount || 0));
+             if (maxOverlap > 0) {
+                  finalResults = finalResults.filter(r => (r.components?.overlapCount || 0) >= maxOverlap);
+             } else {
+                  // Fallback: ใช้คะแนน Relative
+                  const bestScore = ranked[0].score;
+                  if (bestScore > 5.0) {
+                      finalResults = finalResults.filter(r => r.score >= (bestScore * 0.7));
+                  }
              }
         }
 
