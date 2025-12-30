@@ -297,7 +297,8 @@ async function rankCandidates(queryTokens, candidates, pool) {
     // Include Category Name in scoring
     const catTokens = await normalize(item.CategoriesID || '', pool);
 
-    const scoreOverlap = overlapScore(queryTokens, kwTokens) * 2;
+    // 🔥 Keyword dominance: scale keyword overlap higher so keyword matches win decisively
+    const scoreOverlap = overlapScore(queryTokens, kwTokens) * 10;
     const scoreSemanticKw = semanticOverlapScore(queryTokens, kwTokens) * 2.5;
     const scoreSemanticText = semanticOverlapScore(queryTokens, qTextTokens) * 1.0;
     const scoreSemanticTitle = semanticOverlapScore(queryTokens, titleTokens) * 2.0;
