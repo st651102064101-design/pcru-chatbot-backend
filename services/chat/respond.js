@@ -360,20 +360,40 @@ module.exports = (pool) => async (req, res) => {
     const isEnglishOnly = /^[a-zA-Z0-9\s.,?!]+$/.test(message);
     const allKeywords = new Set();
     const allCategories = new Set();
+    // เก็บ Keywords แบบ Array เพื่อใช้ตรวจสอบ substring (กรณีพิมพ์ 365 แต่ keyword คือ Office 365)
+    const rawKeywordsList = []; 
+
     for (const qa of qaList) {
         for (const k of (qa.keywords || [])) {
-            allKeywords.add(String(k).toLowerCase().trim());
+            const kwStr = String(k).toLowerCase().trim();
+            allKeywords.add(kwStr);
+            rawKeywordsList.push(kwStr); // เก็บไว้เช็ค partial match
         }
         if (qa.CategoriesID) allCategories.add(String(qa.CategoriesID).toLowerCase().trim());
     }
+
     const hasKnownKeyword = queryTokens.some(t => {
         const token = String(t).toLowerCase().trim();
+        
+        // 1. เช็คแบบตรงตัว (Exact Match)
         if (allKeywords.has(token)) return true;
+        
+        // 2. เช็ค Category
         for (const cat of allCategories) { if (cat.includes(token)) return true; }
+        
+        // 3. (เพิ่มใหม่) เช็ค Partial Match สำหรับตัวเลขหรือภาษาอังกฤษ (เช่น พิมพ์ 365 ให้เจอ Office 365)
+        if (isEnglishOnly && token.length > 2) {
+             // เช็คว่า token นี้เป็นส่วนหนึ่งของ Keyword ใดๆ หรือไม่
+             if (rawKeywordsList.some(k => k.includes(token))) return true;
+        }
+
         return false;
     });
 
-    if (!hasKnownKeyword || isEnglishOnly) {
+    // แก้ไขเงื่อนไขตรงนี้: เปลี่ยน || เป็น &&
+    // ความหมาย: บล็อกเฉพาะถ้า "เป็นอังกฤษล้วน" และ "ไม่มี Keyword"
+    // (ถ้าเป็นภาษาไทย ยอมให้ผ่านไปทำ Semantic Search ได้แม้ไม่มี Keyword)
+    if (isEnglishOnly && !hasKnownKeyword) {
         const { getDefaultContacts } = require('../../utils/getDefaultContact_fixed');
         try {
             const contacts = await getDefaultContacts(connection);
@@ -514,25 +534,40 @@ module.exports = (pool) => async (req, res) => {
     let finalResults = ranked;
     if (ranked.length > 0) {
         const bestMatch = ranked[0];
-        const bestScore = bestMatch.score;
 
-        // 6.1 Relative Threshold (70%)
-        if (bestScore > 5.0) { 
-             finalResults = finalResults.filter(r => r.score >= (bestScore * 0.7)); 
+        // 🌟 FEATURE: Keyword Dominance
+        // ถ้า Top Rank เกิดจากการ Match Keyword (components.overlap > 0)
+        // ให้ตัดผลลัพธ์ที่ "ไม่ได้ Match Keyword" ออกไปเลย (เช่นพวกที่ Match แค่ Text/Title)
+        // จะได้ไม่เจอ "กยศ" เวลาค้น "365" (ที่มีแค่ใน Text แต่ไม่ใช่ Keyword)
+        if (bestMatch.components && bestMatch.components.overlap > 0) {
+             console.log('🎯 Keyword Hit Detected: Filtering out non-keyword text matches.');
+             finalResults = finalResults.filter(r => r.components && r.components.overlap > 0);
         }
 
-        // 6.2 Specific Keyword Constraint
-        const rawQuery = message.toLowerCase().replace(/\s+/g, '');
-        const bestKeywords = (bestMatch.item.keywords || []).map(k => k.toLowerCase().replace(/\s+/g, ''));
-        const specificTerm = bestKeywords.find(k => rawQuery.includes(k) && k.length > 4 && !['สมัครเรียน', 'ข้อมูล', 'ติดต่อ'].includes(k));
+        // Re-calculate based on filtered results
+        if (finalResults.length > 0) {
+            const currentBestScore = finalResults[0].score;
 
-        if (specificTerm) {
-             console.log(`🔒 Enforcing strict filter for term: "${specificTerm}"`);
-             finalResults = finalResults.filter(r => {
-                 const rKw = (r.item.keywords || []).map(k => k.toLowerCase().replace(/\s+/g, ''));
-                 const rTitle = (r.item.QuestionTitle || '').toLowerCase().replace(/\s+/g, '');
-                 return rKw.some(k => k.includes(specificTerm)) || rTitle.includes(specificTerm);
-             });
+            // 6.1 Relative Threshold (70%)
+            if (currentBestScore > 5.0) { 
+                 finalResults = finalResults.filter(r => r.score >= (currentBestScore * 0.7)); 
+            }
+
+            // 6.2 Specific Keyword Constraint
+            const rawQuery = message.toLowerCase().replace(/\s+/g, '');
+            // Use the current best match from the filtered list
+            const currentBestMatch = finalResults[0]; 
+            const bestKeywords = (currentBestMatch.item.keywords || []).map(k => k.toLowerCase().replace(/\s+/g, ''));
+            const specificTerm = bestKeywords.find(k => rawQuery.includes(k) && k.length > 4 && !['สมัครเรียน', 'ข้อมูล', 'ติดต่อ'].includes(k));
+
+            if (specificTerm) {
+                 console.log(`🔒 Enforcing strict filter for term: "${specificTerm}"`);
+                 finalResults = finalResults.filter(r => {
+                     const rKw = (r.item.keywords || []).map(k => k.toLowerCase().replace(/\s+/g, ''));
+                     const rTitle = (r.item.QuestionTitle || '').toLowerCase().replace(/\s+/g, '');
+                     return rKw.some(k => k.includes(specificTerm)) || rTitle.includes(specificTerm);
+                 });
+            }
         }
     }
 
