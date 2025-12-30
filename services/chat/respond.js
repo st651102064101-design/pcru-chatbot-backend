@@ -297,8 +297,9 @@ async function rankCandidates(queryTokens, candidates, pool) {
     // Include Category Name in scoring
     const catTokens = await normalize(item.CategoriesID || '', pool);
 
-    // 🔥 Keyword dominance: scale keyword overlap higher so keyword matches win decisively
-    const scoreOverlap = overlapScore(queryTokens, kwTokens) * 10;
+    // 🔥 Keyword dominance: compute raw overlap count and scaled score so we can compare counts for strict filtering
+    const rawOverlapCount = overlapScore(queryTokens, kwTokens);
+    const scoreOverlap = rawOverlapCount * 10;
     const scoreSemanticKw = semanticOverlapScore(queryTokens, kwTokens) * 2.5;
     const scoreSemanticText = semanticOverlapScore(queryTokens, qTextTokens) * 1.0;
     const scoreSemanticTitle = semanticOverlapScore(queryTokens, titleTokens) * 2.0;
@@ -308,7 +309,7 @@ async function rankCandidates(queryTokens, candidates, pool) {
     const scoreTitle = jaccardSimilarity(queryTokens, titleTokens) * 2;
     const total = scoreOverlap + scoreSemantic + scoreTitle + scoreSemanticKw + scoreSemanticText + scoreSemanticTitle + scoreCategory;
     
-    results.push({ item, score: total, components: { overlap: scoreOverlap, semantic: scoreSemantic, title: scoreTitle, semanticKw: scoreSemanticKw, semanticText: scoreSemanticText, semanticTitle: scoreSemanticTitle, category: scoreCategory } });
+    results.push({ item, score: total, components: { overlapScore: scoreOverlap, overlapCount: rawOverlapCount, semantic: scoreSemantic, title: scoreTitle, semanticKw: scoreSemanticKw, semanticText: scoreSemanticText, semanticTitle: scoreSemanticTitle, category: scoreCategory } });
   }
   return results.sort((a, b) => b.score - a.score);
 }
@@ -356,6 +357,27 @@ module.exports = (pool) => async (req, res) => {
 
     // 3. Normalize Query
     let queryTokens = await normalize(message, pool);
+
+    // 🔥 FORCE SYNONYM INJECTION (Fix for tokenization splitting synonyms like "สามหกห้า" -> "สาม","หก","ห้า")
+    // If the raw message contains a key in SYNONYMS_MAPPING (e.g. "สามหกห้า"),
+    // but the tokens don't contain the target (e.g. "365"), force add it to guarantee a keyword hit.
+    if (SYNONYMS_MAPPING && Object.keys(SYNONYMS_MAPPING).length > 0) {
+        const msgLower = String(message || '').toLowerCase().replace(/\s+/g, '');
+        for (const [key, target] of Object.entries(SYNONYMS_MAPPING)) {
+            if (!key) continue;
+            const cleanKey = String(key).toLowerCase().replace(/\s+/g, '');
+            if (!cleanKey) continue;
+            try {
+                if (msgLower.includes(cleanKey)) {
+                    const targetLower = String(target || '').toLowerCase();
+                    if (targetLower && !queryTokens.some(t => String(t || '').toLowerCase() === targetLower)) {
+                        console.log(`🔧 Force injecting synonym: "${key}" -> "${target}"`);
+                        queryTokens.push(targetLower);
+                    }
+                }
+            } catch (e) { continue; }
+        }
+    }
     
     // 3.1 Check Strict No-Match (English Only or Unknown Keywords)
     const isEnglishOnly = /^[a-zA-Z0-9\s.,?!]+$/.test(message);
@@ -534,29 +556,26 @@ module.exports = (pool) => async (req, res) => {
     // 6. Filtering (Smart & Strict)
     let finalResults = ranked;
     if (ranked.length > 0) {
-        const bestMatch = ranked[0];
+        // 🔥 LOGIC ใหม่: หาคะแนน Overlap สูงสุดจากทุกข้อที่พบ
+        // (เผื่อกรณีข้อที่มี Keyword จริงๆ ไม่ได้อยู่อันดับ 1 เพราะแพ้คะแนน Semantic)
+        const maxOverlap = Math.max(...ranked.map(r => r.components?.overlapCount || 0));
 
-        // 🌟 FEATURE: Keyword Dominance
-        // ถ้า Top Rank เกิดจากการ Match Keyword (components.overlap > 0)
-        // ให้ตัดผลลัพธ์ที่ "ไม่ได้ Match Keyword" ออกไปเลย (เช่นพวกที่ Match แค่ Text/Title)
-        // จะได้ไม่เจอ "กยศ" เวลาค้น "365" (ที่มีแค่ใน Text แต่ไม่ใช่ Keyword)
-        if (bestMatch.components && bestMatch.components.overlap > 0) {
-             console.log('🎯 Keyword Hit Detected: Filtering out non-keyword text matches.');
-             finalResults = finalResults.filter(r => r.components && r.components.overlap > 0);
+        if (maxOverlap > 0) {
+             console.log(`🎯 Keyword Dominance Enforced (Max Overlap: ${maxOverlap}): Removing non-keyword matches.`);
+             // STRICT MODE: ถ้ามีข้อใดข้อหนึ่งเจอ Keyword, ให้กรองเอาเฉพาะข้อที่เจอ Keyword เท่านั้น (ต้องเท่ากับค่าสูงสุด)
+             // ตัดข้อที่คะแนน Overlap เป็น 0 หรือน้อยกว่า Max ทิ้งไปเลย
+             finalResults = finalResults.filter(r => (r.components?.overlapCount || 0) >= maxOverlap);
+        } else {
+             // Standard Mode: ถ้าไม่มี Keyword เลย (maxOverlap = 0) ก็ใช้คะแนน Relative ปกติ
+             const bestScore = ranked[0].score;
+             if (bestScore > 5.0) {
+                 finalResults = finalResults.filter(r => r.score >= (bestScore * 0.7));
+             }
         }
 
-        // Re-calculate based on filtered results
+        // 6.2 Specific Keyword Constraint (Re-apply if needed inside remaining results)
         if (finalResults.length > 0) {
-            const currentBestScore = finalResults[0].score;
-
-            // 6.1 Relative Threshold (70%)
-            if (currentBestScore > 5.0) { 
-                 finalResults = finalResults.filter(r => r.score >= (currentBestScore * 0.7)); 
-            }
-
-            // 6.2 Specific Keyword Constraint
             const rawQuery = message.toLowerCase().replace(/\s+/g, '');
-            // Use the current best match from the filtered list
             const currentBestMatch = finalResults[0]; 
             const bestKeywords = (currentBestMatch.item.keywords || []).map(k => k.toLowerCase().replace(/\s+/g, ''));
             const specificTerm = bestKeywords.find(k => rawQuery.includes(k) && k.length > 4 && !['สมัครเรียน', 'ข้อมูล', 'ติดต่อ'].includes(k));
