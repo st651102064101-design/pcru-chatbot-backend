@@ -658,7 +658,7 @@ module.exports = (pool) => async (req, res) => {
     // 🚀 FIXED: Pagination & Read More Logic
     // เปลี่ยนจาก .slice(0, 3) เป็น dynamic limit
     const offset = parseInt(req.body.offset) || 0;
-    const limit = parseInt(req.body.limit) || 6; // เพิ่ม Default เป็น 6 รายการ เพื่อให้แสดงผลเยอะขึ้น (หรือปรับเป็น 10 ก็ได้)
+    const limit = parseInt(req.body.limit) || 30; // เพิ่ม Default เป็น 30 รายการ เพื่อให้แสดงผลเยอะขึ้น (หรือปรับเป็น 10 ก็ได้)
     
     const topRanked = finalResults.slice(offset, offset + limit);
     
