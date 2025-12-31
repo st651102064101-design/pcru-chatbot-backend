@@ -655,7 +655,12 @@ module.exports = (pool) => async (req, res) => {
         }
     }
 
-    const topRanked = finalResults.slice(0, 3);
+    // 🚀 FIXED: Pagination & Read More Logic
+    // เปลี่ยนจาก .slice(0, 3) เป็น dynamic limit
+    const offset = parseInt(req.body.offset) || 0;
+    const limit = parseInt(req.body.limit) || 6; // เพิ่ม Default เป็น 6 รายการ เพื่อให้แสดงผลเยอะขึ้น (หรือปรับเป็น 10 ก็ได้)
+    
+    const topRanked = finalResults.slice(offset, offset + limit);
     
     // 🆕 8. Contact Fetching Logic (Hide if 1 answer, Show if >1)
     let specificContacts = [];
@@ -679,12 +684,15 @@ module.exports = (pool) => async (req, res) => {
     }
 
     const msgText = topRanked.length > 1 
-      ? `✨ พบ ${topRanked.length} คำถามที่ใกล้เคียง\n(ลองเลือกซักอันดูสิ 😊)`
+      ? `✨ พบ ${finalResults.length} คำถามที่ใกล้เคียง\n(ลองเลือกซักอันดูสิ 😊)`
       : `✨ นี่คือคำตอบที่คุณหา`;
 
     return res.status(200).json({
       success: true,
       found: topRanked.length > 0,
+      totalMatches: finalResults.length, // ✅ เพิ่ม totalMatches ส่งกลับไปเพื่อให้ Frontend ทำปุ่ม Read more
+      limit: limit,
+      offset: offset,
       multipleResults: topRanked.length > 1,
       query: message,
       message: msgText,
