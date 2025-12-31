@@ -2,22 +2,421 @@
 > pcru-chatbot-backend@1.0.0 start
 > node server.js
 
-[dotenv@17.2.3] injecting env (28) from .env -- tip: 🔐 prevent committing .env to code: https://dotenvx.com/precommit
-[dotenv@17.2.3] injecting env (0) from .env -- tip: 📡 add observability to secrets: https://dotenvx.com/ops
-/Users/kriangkrai/pcru-chatbot-backend/services/Categories/uploadCategories.js:428
-	} catch (err) {
-	  ^^^^^
+[dotenv@17.2.3] injecting env (35) from .env -- tip: 👥 sync secrets across teammates & machines: https://dotenvx.com/ops
+[dotenv@17.2.3] injecting env (0) from .env -- tip: ⚙️  override existing env vars with { override: true }
+[dotenv@17.2.3] injecting env (0) from .env -- tip: ⚙️  enable debug logging with { debug: true }
+✅ Nodemailer Transporter Initialized.
+📦 Serving frontend static files from /Users/kriangkrai/PCRU-CHATBOT-FRONTEND-1/dist
+Server running at http://project.3bbddns.com:36145
+Also accessible via: http://192.168.1.118:36145
+WebSocket server running at ws://project.3bbddns.com:36145
+🔄 Starting stopwords auto-sync...
+🔄 Starting stopwords sync from standard list...
+🚀 Auto-starting PyThaiNLP tokenizer at http://project.3bbddns.com:36146
+🔎 Using python: /Users/kriangkrai/pcru-chatbot-backend-1/.venv/bin/python3
+✅ Connected to database
+✅ MySQL Database Connected Successfully!
+📊 Found 118 existing stopINFO:     Started sINFO:     Started server process [56621]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://project.3bbddns.com:36146 (Press CTRL+C to quit)
+in database:
+    หา, อยากรู้, เอา 
+   You may want to review and remove these manually if needed.
 
-SyntaxError: Unexpected token 'catch'
-    at wrapSafe (node:internal/modules/cjs/loader:1691:18)
-    at Module._compile (node:internal/modules/cjs/loader:1734:20)
-    at Object..js (node:internal/modules/cjs/loader:1892:10)
-    at Module.load (node:internal/modules/cjs/loader:1480:32)
-    at Module._load (node:internal/modules/cjs/loader:1299:12)
-    at TracingChannel.traceSync (node:diagnostics_channel:328:14)
-    at wrapModuleLoad (node:internal/modules/cjs/loader:245:24)
-    at Module.require (node:internal/modules/cjs/loader:1503:12)
-    at require (node:internal/modules/helpers:152:16)
-    at Object.<anonymous> (/Users/kriangkrai/pcru-chatbot-backend/server.js:127:33)
-
-Node.js v25.2.1
+📊 Final count: 118 stopwords in database
+✅ Sync completed successfully!
+INFO:     Started server process [57073]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://project.3bbddns.com:36146 (Press CTRL+C to quit)
+[req] GET /keywords/insights [AUTH] origin=
+[spa-fallback] Skipping SPA fallback for path: /keywords/insights (matched prefix: /keywords)
+[req] GET /keywords/insights [AUTH] origin=
+[spa-fallback] Skipping SPA fallback for path: /keywords/insights (matched prefix: /keywords)
+[req] GET /keywords/insights [AUTH] origin=
+[spa-fallback] Skipping SPA fallback for path: /keywords/insights (matched prefix: /keywords)
+[req] GET /keywords/insights [AUTH] origin=
+[spa-fallback] Skipping SPA fallback for path: /keywords/insights (matched prefix: /keywords)
+[req] GET /keywords/insights [AUTH] origin=
+[spa-fallback] Skipping SPA fallback for path: /keywords/insights (matched prefix: /keywords)
+✅ New WebSocket client connected on /ws/keywords
+[req] OPTIONS /keywords [NO_AUTH] origin=http://project.3bbddns.com:36144
+[req] GET /keywords [AUTH] origin=http://project.3bbddns.com:36144
+[spa-fallback] Skipping SPA fallback for path: /keywords (matched prefix: /keywords)
+❌ WebSocket client disconnected
+[req] OPTIONS /login [NO_AUTH] origin=http://project.3bbddns.com:36144
+[req] POST /login [NO_AUTH] origin=http://project.3bbddns.com:36144
+Login attempt: ID=3020
+Database Query Error: Error: PROCEDURE pcru_auto_response.sp_login_check does not exist
+    at PromisePool.query (/Users/kriangkrai/pcru-chatbot-backend-1/node_modules/mysql2/lib/promise/pool.js:36:22)
+    at /Users/kriangkrai/pcru-chatbot-backend-1/services/login.js:31:38
+    at Layer.handleRequest (/Users/kriangkrai/pcru-chatbot-backend-1/node_modules/router/lib/layer.js:152:17)
+    at next (/Users/kriangkrai/pcru-chatbot-backend-1/node_modules/router/lib/route.js:157:13)
+    at Route.dispatch (/Users/kriangkrai/pcru-chatbot-backend-1/node_modules/router/lib/route.js:117:3)
+    at handle (/Users/kriangkrai/pcru-chatbot-backend-1/node_modules/router/index.js:435:11)
+    at Layer.handleRequest (/Users/kriangkrai/pcru-chatbot-backend-1/node_modules/router/lib/layer.js:152:17)
+    at /Users/kriangkrai/pcru-chatbot-backend-1/node_modules/router/index.js:295:15
+    at processParams (/Users/kriangkrai/pcru-chatbot-backend-1/node_modules/router/index.js:582:12)
+    at next (/Users/kriangkrai/pcru-chatbot-backend-1/node_modules/router/index.js:291:5) {
+  code: 'ER_SP_DOES_NOT_EXIST',
+  errno: 1305,
+  sql: "CALL sp_login_check(3020, '12345678A')",
+  sqlState: '42000',
+  sqlMessage: 'PROCEDURE pcru_auto_response.sp_login_check does not exist'
+}
+ℹ️ Stored procedure failure detected — attempting fallback direct queries (AdminUsers/Officers)
+Login Successful (fallback) for officer: นางสาวทะเบียน แจ่มใส (ID: 3020)
+[req] OPTIONS /categories [NO_AUTH] origin=http://project.3bbddns.com:36144
+[req] OPTIONS /questionsanswers [NO_AUTH] origin=http://project.3bbddns.com:36144
+[req] OPTIONS /organizations [NO_AUTH] origin=http://project.3bbddns.com:36144
+[req] OPTIONS /keywords [NO_AUTH] origin=http://project.3bbddns.com:36144
+[req] OPTIONS /feedbacks/handled [NO_AUTH] origin=http://project.3bbddns.com:36144
+[req] OPTIONS /officers [NO_AUTH] origin=http://project.3bbddns.com:36144
+[req] OPTIONS /feedbacks [NO_AUTH] origin=http://project.3bbddns.com:36144
+[req] GET /categories [AUTH] origin=http://project.3bbddns.com:36144
+[req] OPTIONS /adminusers [NO_AUTH] origin=http://project.3bbddns.com:36144
+[req] OPTIONS /getChatLogHasAnswers [NO_AUTH] origin=http://project.3bbddns.com:36144
+[req] GET /questionsanswers [AUTH] origin=http://project.3bbddns.com:36144
+[req] GET /organizations [AUTH] origin=http://project.3bbddns.com:36144
+[spa-fallback] Skipping SPA fallback for path: /categories (matched prefix: /categories)
+[req] OPTIONS /getChatLogNoAnswers [NO_AUTH] origin=http://project.3bbddns.com:36144
+[req] GET /keywords [AUTH] origin=http://project.3bbddns.com:36144
+[spa-fallback] Skipping SPA fallback for path: /questionsanswers (matched prefix: /questionsanswers)
+🔍 getQuestionsAnswers called for officerId: 3020 role: Officer raw user: {
+  userId: 3020,
+  usertype: 'Officer',
+  role: 'Officer',
+  iat: 1767162569,
+  exp: 1767166169
+}
+✅ Got database connection
+📝 Fetching questions for officer: 3020
+[spa-fallback] Skipping SPA fallback for path: /organizations (matched prefix: /organizations)
+[req] GET /officers [AUTH] origin=http://project.3bbddns.com:36144
+[req] GET /feedbacks/handled [AUTH] origin=http://project.3bbddns.com:36144
+[spa-fallback] Skipping SPA fallback for path: /keywords (matched prefix: /keywords)
+[spa-fallback] Skipping SPA fallback for path: /officers (matched prefix: /officers)
+[spa-fallback] Skipping SPA fallback for path: /feedbacks/handled (matched prefix: /feedbacks)
+✅ Found 22 questions
+🔍 Fetching keywords for question: 73
+🔍 Fetching keywords for question: 71
+🔍 Fetching keywords for question: 70
+🔍 Fetching keywords for question: 62
+🔍 Fetching keywords for question: 61
+🔍 Fetching keywords for question: 60
+🔍 Fetching keywords for question: 59
+🔍 Fetching keywords for question: 58
+🔍 Fetching keywords for question: 57
+🔍 Fetching keywords for question: 56
+🔍 Fetching keywords for question: 55
+🔍 Fetching keywords for question: 54
+🔍 Fetching keywords for question: 53
+🔍 Fetching keywords for question: 52
+🔍 Fetching keywords for question: 51
+🔍 Fetching keywords for question: 50
+🔍 Fetching keywords for question: 49
+🔍 Fetching keywords for question: 48
+🔍 Fetching keywords for question: 47
+🔍 Fetching keywords for question: 46
+🔍 Fetching keywords for question: 45
+🔍 Fetching keywords for question: 44
+[getCategoriesPublic] sample: [
+  { CategoriesID: '3-3', Contact: '' },
+  { CategoriesID: '1', Contact: '' },
+  { CategoriesID: '5-5', Contact: '' },
+  { CategoriesID: '3-1', Contact: '' },
+  { CategoriesID: '5-6', Contact: '' }
+]
+[req] GET /feedbacks [AUTH] origin=http://project.3bbddns.com:36144
+[spa-fallback] Skipping SPA fallback for path: /feedbacks (matched prefix: /feedbacks)
+✅ Found 11 keywords for question 73
+🔍 Fetching feedback counts for question: 73
+✅ Found 9 keywords for question 71
+🔍 Fetching feedback counts for question: 71
+✅ Found 6 keywords for question 70
+🔍 Fetching feedback counts for question: 70
+✅ Found 12 keywords for question 62
+🔍 Fetching feedback counts for question: 62
+✅ Found 5 keywords for question 61
+🔍 Fetching feedback counts for question: 61
+✅ Found 6 keywords for question 60
+🔍 Fetching feedback counts for question: 60
+📊 getFeedbacks: returning 16 feedbacks
+✅ Found 5 keywords for question 59
+🔍 Fetching feedback counts for question: 59
+[req] GET /adminusers [AUTH] origin=http://project.3bbddns.com:36144
+[req] GET /getChatLogHasAnswers [AUTH] origin=http://project.3bbddns.com:36144
+✅ Found 4 keywords for question 58
+🔍 Fetching feedback counts for question: 58
+[req] GET /getChatLogNoAnswers [AUTH] origin=http://project.3bbddns.com:36144
+[spa-fallback] Skipping SPA fallback for path: /adminusers (matched prefix: /adminusers)
+[spa-fallback] Skipping SPA fallback for path: /getChatLogHasAnswers (matched prefix: /getChatLogHasAnswers)
+✅ Found 4 keywords for question 57
+🔍 Fetching feedback counts for question: 57
+[spa-fallback] Skipping SPA fallback for path: /getChatLogNoAnswers (matched prefix: /getChatLogNoAnswers)
+✅ Found 8 keywords for question 56
+🔍 Fetching feedback counts for question: 56
+✅ Found 7 keywords for question 55
+🔍 Fetching feedback counts for question: 55
+✅ Found 7 keywords for question 54
+🔍 Fetching feedback counts for question: 54
+✅ Found 5 keywords for question 53
+🔍 Fetching feedback counts for question: 53
+✅ Found 8 keywords for question 52
+🔍 Fetching feedback counts for question: 52
+✅ Found 7 keywords for question 51
+🔍 Fetching feedback counts for question: 51
+✅ Found 7 keywords for question 50
+🔍 Fetching feedback counts for question: 50
+✅ Found 6 keywords for question 49
+🔍 Fetching feedback counts for question: 49
+✅ Found 7 keywords for question 48
+🔍 Fetching feedback counts for question: 48
+✅ Found 5 keywords for question 47
+🔍 Fetching feedback counts for question: 47
+✅ Found 5 keywords for question 46
+🔍 Fetching feedback counts for question: 46
+✅ Found 5 keywords for question 45
+🔍 Fetching feedback counts for question: 45
+✅ Found 4 keywords for question 44
+🔍 Fetching feedback counts for question: 44
+✅ Found 2 likes and 1 unlikes for question 73
+✅ Found 1 likes and 0 unlikes for question 71
+✅ Found 0 likes and 0 unlikes for question 70
+✅ Found 2 likes and 0 unlikes for question 62
+✅ Found 0 likes and 0 unlikes for question 61
+✅ Found 0 likes and 0 unlikes for question 60
+✅ Found 0 likes and 0 unlikes for question 59
+✅ Found 0 likes and 0 unlikes for question 58
+✅ Found 0 likes and 0 unlikes for question 57
+✅ Found 0 likes and 0 unlikes for question 56
+✅ Found 1 likes and 0 unlikes for question 55
+✅ Found 1 likes and 0 unlikes for question 54
+✅ Found 0 likes and 0 unlikes for question 53
+✅ Found 0 likes and 0 unlikes for question 52
+✅ Found 0 likes and 0 unlikes for question 51
+✅ Found 5 likes and 0 unlikes for question 50
+✅ Found 0 likes and 0 unlikes for question 49
+✅ Found 0 likes and 0 unlikes for question 48
+✅ Found 3 likes and 0 unlikes for question 47
+✅ Found 0 likes and 0 unlikes for question 46
+✅ Found 0 likes and 0 unlikes for question 45
+✅ Found 0 likes and 0 unlikes for question 44
+✅ Sending response with 22 questions
+🔄 Releasing connection
+[req] OPTIONS /categories [NO_AUTH] origin=http://project.3bbddns.com:36144
+[req] OPTIONS /organizations [NO_AUTH] origin=http://project.3bbddns.com:36144
+[req] OPTIONS /questionsanswers [NO_AUTH] origin=http://project.3bbddns.com:36144
+[req] OPTIONS /officers [NO_AUTH] origin=http://project.3bbddns.com:36144
+[req] OPTIONS /keywords [NO_AUTH] origin=http://project.3bbddns.com:36144
+[req] OPTIONS /feedbacks/handled [NO_AUTH] origin=http://project.3bbddns.com:36144
+[req] OPTIONS /feedbacks [NO_AUTH] origin=http://project.3bbddns.com:36144
+[req] GET /organizations [AUTH] origin=http://project.3bbddns.com:36144
+[req] OPTIONS /adminusers [NO_AUTH] origin=http://project.3bbddns.com:36144
+[spa-fallback] Skipping SPA fallback for path: /organizations (matched prefix: /organizations)
+⏱️  Idle timeout triggered for user 3020 (idle for 1931s)
+[req] GET /categories [AUTH] origin=http://project.3bbddns.com:36144
+[req] OPTIONS /getChatLogHasAnswers [NO_AUTH] origin=http://project.3bbddns.com:36144
+[req] GET /keywords [AUTH] origin=http://project.3bbddns.com:36144
+[req] GET /officers [AUTH] origin=http://project.3bbddns.com:36144
+[req] GET /questionsanswers [AUTH] origin=http://project.3bbddns.com:36144
+[spa-fallback] Skipping SPA fallback for path: /categories (matched prefix: /categories)
+[spa-fallback] Skipping SPA fallback for path: /keywords (matched prefix: /keywords)
+⏱️  Idle timeout triggered for user 3020 (idle for 1932s)
+[spa-fallback] Skipping SPA fallback for path: /officers (matched prefix: /officers)
+⏱️  Idle timeout triggered for user 3020 (idle for 1932s)
+[req] OPTIONS /getChatLogNoAnswers [NO_AUTH] origin=http://project.3bbddns.com:36144
+[req] GET /feedbacks [AUTH] origin=http://project.3bbddns.com:36144
+[spa-fallback] Skipping SPA fallback for path: /questionsanswers (matched prefix: /questionsanswers)
+⏱️  Idle timeout triggered for user 3020 (idle for 1932s)
+[req] GET /feedbacks/handled [AUTH] origin=http://project.3bbddns.com:36144
+[spa-fallback] Skipping SPA fallback for path: /feedbacks (matched prefix: /feedbacks)
+⏱️  Idle timeout triggered for user 3020 (idle for 1932s)
+[req] GET /adminusers [AUTH] origin=http://project.3bbddns.com:36144
+[req] GET /getChatLogHasAnswers [AUTH] origin=http://project.3bbddns.com:36144
+[req] GET /getChatLogNoAnswers [AUTH] origin=http://project.3bbddns.com:36144
+[spa-fallback] Skipping SPA fallback for path: /feedbacks/handled (matched prefix: /feedbacks)
+⏱️  Idle timeout triggered for user 3020 (idle for 1932s)
+[spa-fallback] Skipping SPA fallback for path: /adminusers (matched prefix: /adminusers)
+⏱️  Idle timeout triggered for user 3020 (idle for 1932s)
+[spa-fallback] Skipping SPA fallback for path: /getChatLogHasAnswers (matched prefix: /getChatLogHasAnswers)
+⏱️  Idle timeout triggered for user 3020 (idle for 1932s)
+[spa-fallback] Skipping SPA fallback for path: /getChatLogNoAnswers (matched prefix: /getChatLogNoAnswers)
+⏱️  Idle timeout triggered for user 3020 (idle for 1932s)
+[getCategoriesPublic] sample: [
+  { CategoriesID: '3-3', Contact: '' },
+  { CategoriesID: '1', Contact: '' },
+  { CategoriesID: '5-5', Contact: '' },
+  { CategoriesID: '3-1', Contact: '' },
+  { CategoriesID: '5-6', Contact: '' }
+]
+[req] OPTIONS /login [NO_AUTH] origin=http://project.3bbddns.com:36144
+[req] POST /login [NO_AUTH] origin=http://project.3bbddns.com:36144
+Login attempt: ID=3020
+Database Query Error: Error: PROCEDURE pcru_auto_response.sp_login_check does not exist
+    at PromisePool.query (/Users/kriangkrai/pcru-chatbot-backend-1/node_modules/mysql2/lib/promise/pool.js:36:22)
+    at /Users/kriangkrai/pcru-chatbot-backend-1/services/login.js:31:38
+    at Layer.handleRequest (/Users/kriangkrai/pcru-chatbot-backend-1/node_modules/router/lib/layer.js:152:17)
+    at next (/Users/kriangkrai/pcru-chatbot-backend-1/node_modules/router/lib/route.js:157:13)
+    at Route.dispatch (/Users/kriangkrai/pcru-chatbot-backend-1/node_modules/router/lib/route.js:117:3)
+    at handle (/Users/kriangkrai/pcru-chatbot-backend-1/node_modules/router/index.js:435:11)
+    at Layer.handleRequest (/Users/kriangkrai/pcru-chatbot-backend-1/node_modules/router/lib/layer.js:152:17)
+    at /Users/kriangkrai/pcru-chatbot-backend-1/node_modules/router/index.js:295:15
+    at processParams (/Users/kriangkrai/pcru-chatbot-backend-1/node_modules/router/index.js:582:12)
+    at next (/Users/kriangkrai/pcru-chatbot-backend-1/node_modules/router/index.js:291:5) {
+  code: 'ER_SP_DOES_NOT_EXIST',
+  errno: 1305,
+  sql: "CALL sp_login_check(3020, '12345678A')",
+  sqlState: '42000',
+  sqlMessage: 'PROCEDURE pcru_auto_response.sp_login_check does not exist'
+}
+ℹ️ Stored procedure failure detected — attempting fallback direct queries (AdminUsers/Officers)
+Login Successful (fallback) for officer: นางสาวทะเบียน แจ่มใส (ID: 3020)
+[req] OPTIONS /categories [NO_AUTH] origin=http://project.3bbddns.com:36144
+[req] OPTIONS /organizations [NO_AUTH] origin=http://project.3bbddns.com:36144
+[req] OPTIONS /questionsanswers [NO_AUTH] origin=http://project.3bbddns.com:36144
+[req] OPTIONS /officers [NO_AUTH] origin=http://project.3bbddns.com:36144
+[req] OPTIONS /keywords [NO_AUTH] origin=http://project.3bbddns.com:36144
+[req] OPTIONS /adminusers [NO_AUTH] origin=http://project.3bbddns.com:36144
+[req] OPTIONS /feedbacks/handled [NO_AUTH] origin=http://project.3bbddns.com:36144
+[req] OPTIONS /feedbacks [NO_AUTH] origin=http://project.3bbddns.com:36144
+[req] GET /organizations [AUTH] origin=http://project.3bbddns.com:36144
+[req] GET /categories [AUTH] origin=http://project.3bbddns.com:36144
+[req] OPTIONS /getChatLogHasAnswers [NO_AUTH] origin=http://project.3bbddns.com:36144
+[req] GET /keywords [AUTH] origin=http://project.3bbddns.com:36144
+[req] GET /questionsanswers [AUTH] origin=http://project.3bbddns.com:36144
+[req] GET /officers [AUTH] origin=http://project.3bbddns.com:36144
+[spa-fallback] Skipping SPA fallback for path: /organizations (matched prefix: /organizations)
+[spa-fallback] Skipping SPA fallback for path: /categories (matched prefix: /categories)
+[spa-fallback] Skipping SPA fallback for path: /keywords (matched prefix: /keywords)
+[spa-fallback] Skipping SPA fallback for path: /questionsanswers (matched prefix: /questionsanswers)
+🔍 getQuestionsAnswers called for officerId: 3020 role: Officer raw user: {
+  userId: 3020,
+  usertype: 'Officer',
+  role: 'Officer',
+  iat: 1767165629,
+  exp: 1767169229
+}
+✅ Got database connection
+📝 Fetching questions for officer: 3020
+[spa-fallback] Skipping SPA fallback for path: /officers (matched prefix: /officers)
+[req] OPTIONS /getChatLogNoAnswers [NO_AUTH] origin=http://project.3bbddns.com:36144
+[req] GET /adminusers [AUTH] origin=http://project.3bbddns.com:36144
+✅ Found 22 questions
+🔍 Fetching keywords for question: 73
+🔍 Fetching keywords for question: 71
+🔍 Fetching keywords for question: 70
+🔍 Fetching keywords for question: 62
+🔍 Fetching keywords for question: 61
+🔍 Fetching keywords for question: 60
+🔍 Fetching keywords for question: 59
+🔍 Fetching keywords for question: 58
+🔍 Fetching keywords for question: 57
+🔍 Fetching keywords for question: 56
+🔍 Fetching keywords for question: 55
+🔍 Fetching keywords for question: 54
+🔍 Fetching keywords for question: 53
+🔍 Fetching keywords for question: 52
+🔍 Fetching keywords for question: 51
+🔍 Fetching keywords for question: 50
+🔍 Fetching keywords for question: 49
+🔍 Fetching keywords for question: 48
+🔍 Fetching keywords for question: 47
+🔍 Fetching keywords for question: 46
+🔍 Fetching keywords for question: 45
+🔍 Fetching keywords for question: 44
+[req] GET /feedbacks/handled [AUTH] origin=http://project.3bbddns.com:36144
+[spa-fallback] Skipping SPA fallback for path: /adminusers (matched prefix: /adminusers)
+[spa-fallback] Skipping SPA fallback for path: /feedbacks/handled (matched prefix: /feedbacks)
+✅ Found 11 keywords for question 73
+🔍 Fetching feedback counts for question: 73
+[getCategoriesPublic] sample: [
+  { CategoriesID: '3-3', Contact: '' },
+  { CategoriesID: '1', Contact: '' },
+  { CategoriesID: '5-5', Contact: '' },
+  { CategoriesID: '3-1', Contact: '' },
+  { CategoriesID: '5-6', Contact: '' }
+]
+✅ Found 9 keywords for question 71
+🔍 Fetching feedback counts for question: 71
+[req] GET /feedbacks [AUTH] origin=http://project.3bbddns.com:36144
+[req] GET /getChatLogHasAnswers [AUTH] origin=http://project.3bbddns.com:36144
+[req] GET /getChatLogNoAnswers [AUTH] origin=http://project.3bbddns.com:36144
+✅ Found 6 keywords for question 70
+🔍 Fetching feedback counts for question: 70
+[spa-fallback] Skipping SPA fallback for path: /feedbacks (matched prefix: /feedbacks)
+[spa-fallback] Skipping SPA fallback for path: /getChatLogHasAnswers (matched prefix: /getChatLogHasAnswers)
+[spa-fallback] Skipping SPA fallback for path: /getChatLogNoAnswers (matched prefix: /getChatLogNoAnswers)
+✅ Found 12 keywords for question 62
+🔍 Fetching feedback counts for question: 62
+✅ Found 5 keywords for question 61
+🔍 Fetching feedback counts for question: 61
+✅ Found 6 keywords for question 60
+🔍 Fetching feedback counts for question: 60
+📊 getFeedbacks: returning 16 feedbacks
+✅ Found 5 keywords for question 59
+🔍 Fetching feedback counts for question: 59
+✅ Found 4 keywords for question 58
+🔍 Fetching feedback counts for question: 58
+✅ Found 4 keywords for question 57
+🔍 Fetching feedback counts for question: 57
+✅ Found 8 keywords for question 56
+🔍 Fetching feedback counts for question: 56
+✅ Found 7 keywords for question 55
+🔍 Fetching feedback counts for question: 55
+✅ Found 7 keywords for question 54
+🔍 Fetching feedback counts for question: 54
+✅ Found 5 keywords for question 53
+🔍 Fetching feedback counts for question: 53
+✅ Found 8 keywords for question 52
+🔍 Fetching feedback counts for question: 52
+✅ Found 7 keywords for question 51
+🔍 Fetching feedback counts for question: 51
+✅ Found 7 keywords for question 50
+🔍 Fetching feedback counts for question: 50
+✅ Found 6 keywords for question 49
+🔍 Fetching feedback counts for question: 49
+✅ Found 7 keywords for question 48
+🔍 Fetching feedback counts for question: 48
+✅ Found 5 keywords for question 47
+🔍 Fetching feedback counts for question: 47
+✅ Found 5 keywords for question 46
+🔍 Fetching feedback counts for question: 46
+✅ Found 5 keywords for question 45
+🔍 Fetching feedback counts for question: 45
+✅ Found 4 keywords for question 44
+🔍 Fetching feedback counts for question: 44
+✅ Found 2 likes and 1 unlikes for question 73
+✅ Found 1 likes and 0 unlikes for question 71
+✅ Found 0 likes and 0 unlikes for question 70
+✅ Found 2 likes and 0 unlikes for question 62
+✅ Found 0 likes and 0 unlikes for question 61
+✅ Found 0 likes and 0 unlikes for question 60
+✅ Found 0 likes and 0 unlikes for question 59
+✅ Found 0 likes and 0 unlikes for question 58
+✅ Found 0 likes and 0 unlikes for question 57
+✅ Found 0 likes and 0 unlikes for question 56
+✅ Found 1 likes and 0 unlikes for question 55
+✅ Found 1 likes and 0 unlikes for question 54
+✅ Found 0 likes and 0 unlikes for question 53
+✅ Found 0 likes and 0 unlikes for question 52
+✅ Found 0 likes and 0 unlikes for question 51
+✅ Found 5 likes and 0 unlikes for question 50
+✅ Found 0 likes and 0 unlikes for question 49
+✅ Found 0 likes and 0 unlikes for question 48
+✅ Found 3 likes and 0 unlikes for question 47
+✅ Found 0 likes and 0 unlikes for question 46
+✅ Found 0 likes and 0 unlikes for question 45
+✅ Found 0 likes and 0 unlikes for question 44
+✅ Sending response with 22 questions
+🔄 Releasing connection
+✅ New WebSocket client connected on /ws/keywords
+[req] GET /keywords [AUTH] origin=http://project.3bbddns.com:36144
+[spa-fallback] Skipping SPA fallback for path: /keywords (matched prefix: /keywords)
+[req] OPTIONS /keywords/insights [NO_AUTH] origin=http://project.3bbddns.com:36144
+[req] GET /keywords/insights [AUTH] origin=http://project.3bbddns.com:36144
+[spa-fallback] Skipping SPA fallback for path: /keywords/insights (matched prefix: /keywords)
+[req] OPTIONS /keywords/insights [NO_AUTH] origin=http://project.3bbddns.com:36144
+[req] GET /keywords/insights [AUTH] origin=http://project.3bbddns.com:36144
+[spa-fallback] Skipping SPA fallback for path: /keywords/insights (matched prefix: /keywords)

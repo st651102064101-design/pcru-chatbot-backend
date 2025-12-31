@@ -11,10 +11,12 @@ const getKeywordsService = (pool) => async (req, res) => {
         }
         const order = req.query && String(req.query.order || '').toLowerCase() === 'asc' ? 'ASC' : 'DESC';
         const [rows] = await pool.query(
-            `SELECT KeywordID, KeywordText, OfficerID
-             FROM Keywords
-             WHERE OfficerID = ?
-             ORDER BY KeywordText ${order}`,
+            `SELECT k.KeywordID, k.KeywordText, k.OfficerID, COUNT(ak.QuestionsAnswersID) AS MatchesCount
+             FROM Keywords k
+             LEFT JOIN AnswersKeywords ak ON ak.KeywordID = k.KeywordID
+             WHERE k.OfficerID = ?
+             GROUP BY k.KeywordID
+             ORDER BY k.KeywordText ${order}`,
             [officerId]
         );
         res.status(200).json(rows);
