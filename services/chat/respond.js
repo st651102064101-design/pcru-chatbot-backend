@@ -479,9 +479,11 @@ module.exports = (pool) => async (req, res) => {
 
     // --- DEBUG START: วางตรงนี้เพื่อดู log ใน Terminal ---
     const debugNegMap = (NEG_KW_MODULE.getNegativeKeywordsMap && NEG_KW_MODULE.getNegativeKeywordsMap()) || {};
+    const debugStopwords = await getStopwordsSet(pool); // ✅ เพิ่มการ Debug Stopwords
     console.log('--- DEBUG NEGATION ---');
     console.log('User Message:', message);
     console.log('Loaded Negative Words:', Object.keys(debugNegMap).length); 
+    console.log('Loaded Stopwords:', debugStopwords.size); // ✅ แสดงจำนวน Stopwords ที่โหลดได้
     // ถ้า Loaded Negative Words เป็น 0 แสดงว่า Module ไม่ส่งค่ามา ต้องใช้การ Query สด
     // --- DEBUG END ---
 
@@ -508,10 +510,11 @@ module.exports = (pool) => async (req, res) => {
         }
       }
       if (matchedBlockedKeyword) {
+        // ✅ เพิ่ม ✨ ให้เหมือนตอนเจอ Keyword
         return res.status(200).json({ 
             success: true, 
             found: false, 
-            message: `${BOT_PRONOUN}จำได้ว่าคุณไม่สนใจเรื่อง "${matchedBlockedKeyword}" แล้วค่ะ (พิมพ์ค้นหาเรื่องอื่นได้เลยนะคะ)`, 
+            message: `✨ ${BOT_PRONOUN}จำได้ว่าคุณไม่สนใจเรื่อง "${matchedBlockedKeyword}" แล้วค่ะ (พิมพ์ค้นหาเรื่องอื่นได้เลยนะคะ)`, 
             blockedDomains: Array.from(blockedDomainsFromSession), 
             blockedKeywords: Array.from(blockedKeywordsFromSession), 
             blockedKeywordsDisplay: [matchedBlockedKeyword] 
@@ -576,10 +579,11 @@ module.exports = (pool) => async (req, res) => {
     if (hasNegationTrigger) {
         if (targetRejection.length > 1) {
              persistBlockedKeywords(req, [targetRejection]);
+             // ✅ เพิ่ม ✨ ให้เหมือนตอนเจอ Keyword
              return res.status(200).json({ 
                 success: true, 
                 found: false, 
-                message: `รับทราบค่ะ ${BOT_PRONOUN}จะไม่แสดงข้อมูลเกี่ยวกับ "${targetRejection}" ให้กวนใจแล้วค่ะ`,
+                message: `✨ รับทราบค่ะ ${BOT_PRONOUN}จะไม่แสดงข้อมูลเกี่ยวกับ "${targetRejection}" ให้กวนใจแล้วค่ะ`,
                 blockedDomains: Array.from(loadBlockedDomains(req)), 
                 blockedKeywords: Array.from(loadBlockedKeywords(req)), 
                 blockedKeywordsDisplay: [targetRejection] 
