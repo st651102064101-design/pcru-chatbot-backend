@@ -14,7 +14,7 @@ module.exports = (pool) => async (req, res) => {
     const limitRaw = parseInt((req.query.limit ?? '30').toString(), 10);
     const limit = Number.isFinite(limitRaw) ? Math.max(1, Math.min(50, limitRaw)) : 30;
 
-    if (!query || query.length < 2) {
+    if (!query) {
       return res.status(200).json({
         success: true,
         data: { query, suggestions: [] }
@@ -23,34 +23,41 @@ module.exports = (pool) => async (req, res) => {
 
     const qLower = query.toLowerCase();
 
+    // For very short queries (1 char), return stopwords only to avoid noisy results
+    const stopwordsOnly = query.length === 1;
+
     // Split limit budget across sources, with preference to keywords/synonyms
     const kwLimit = Math.min(limit, 20);
     const synLimit = Math.min(limit, 20);
     const swLimit = Math.min(limit, 15);
 
-    const [kwRows] = await pool.query(
-      `SELECT DISTINCT KeywordText AS text
-       FROM Keywords
-       WHERE KeywordText IS NOT NULL
-         AND TRIM(KeywordText) <> ''
-         AND LOWER(KeywordText) LIKE CONCAT(?, '%')
-       ORDER BY KeywordText ASC
-       LIMIT ?`,
-      [qLower, kwLimit]
-    );
+    const kwRows = stopwordsOnly
+      ? []
+      : (await pool.query(
+          `SELECT DISTINCT KeywordText AS text
+           FROM Keywords
+           WHERE KeywordText IS NOT NULL
+             AND TRIM(KeywordText) <> ''
+             AND LOWER(KeywordText) LIKE CONCAT(?, '%')
+           ORDER BY KeywordText ASC
+           LIMIT ?`,
+          [qLower, kwLimit]
+        ))[0];
 
-    const [synRows] = await pool.query(
-      `SELECT DISTINCT s.InputWord AS text, k.KeywordText AS target
-       FROM KeywordSynonyms s
-       LEFT JOIN Keywords k ON s.TargetKeywordID = k.KeywordID
-       WHERE s.IsActive = 1
-         AND s.InputWord IS NOT NULL
-         AND TRIM(s.InputWord) <> ''
-         AND LOWER(s.InputWord) LIKE CONCAT(?, '%')
-       ORDER BY s.InputWord ASC
-       LIMIT ?`,
-      [qLower, synLimit]
-    );
+    const synRows = stopwordsOnly
+      ? []
+      : (await pool.query(
+          `SELECT DISTINCT s.InputWord AS text, k.KeywordText AS target
+           FROM KeywordSynonyms s
+           LEFT JOIN Keywords k ON s.TargetKeywordID = k.KeywordID
+           WHERE s.IsActive = 1
+             AND s.InputWord IS NOT NULL
+             AND TRIM(s.InputWord) <> ''
+             AND LOWER(s.InputWord) LIKE CONCAT(?, '%')
+           ORDER BY s.InputWord ASC
+           LIMIT ?`,
+          [qLower, synLimit]
+        ))[0];
 
     const [swRows] = await pool.query(
       `SELECT DISTINCT StopwordText AS text
