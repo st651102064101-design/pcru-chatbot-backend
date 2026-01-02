@@ -128,6 +128,7 @@ const getCategoriesService = require('./services/reports/getCategories');
 const getCategoriesPublicService = require('./services/public/getCategoriesPublic');
 const getKeywordsService = require('./services/reports/getKeywords');
 const getKeywordsPublicService = require('./services/public/getKeywordsPublic');
+const getAutocompleteSuggestionsService = require('./services/public/getAutocompleteSuggestions');
 const getFeedbacksService = require('./services/reports/getFeedbacks');
 const { markFeedbackHandledService, getHandledFeedbacksService, cleanupHandledFeedbacksService, unhandleFeedbackService } = require('./services/reports/feedbackHandled');
 const getAnswersKeywordsService = require('./services/reports/getAnswersKeywords');
@@ -329,7 +330,7 @@ if (fs.existsSync(FRONTEND_DIR)) {
   // Use a generic middleware instead of a path pattern to avoid path-to-regexp issues
   app.use((req, res, next) => {
     if (req.method !== 'GET') return next();
-    const skipPrefixes = ['/api', '/uploads', '/js', '/ranking', '/system', '/categories', '/getcategories', '/chat', '/login', '/forgotpassword', '/setnewpassword', '/validateresettoken', '/questionsanswers', '/getQuestionsAnswers', '/stopwords', '/synonyms', '/negativekeywords', '/adminusers', '/admin', '/officers', '/organizations', '/ai-image', '/health', '/keywords', '/getChatLogHasAnswers', '/getChatLogNoAnswers', '/getChatLogNoAnswers', '/feedbacks', '/debug', '/debug/feedbacks'];
+    const skipPrefixes = ['/api', '/uploads', '/js', '/ranking', '/system', '/categories', '/getcategories', '/chat', '/login', '/forgotpassword', '/setnewpassword', '/validateresettoken', '/questionsanswers', '/getQuestionsAnswers', '/stopwords', '/synonyms', '/negativekeywords', '/adminusers', '/admin', '/officers', '/organizations', '/ai-image', '/health', '/keywords', '/autocomplete', '/getChatLogHasAnswers', '/getChatLogNoAnswers', '/getChatLogNoAnswers', '/feedbacks', '/debug', '/debug/feedbacks'];
     // Debug: log the requested path and whether it will be skipped
     for (const p of skipPrefixes) {
       if (req.path.startsWith(p)) {
@@ -511,6 +512,9 @@ app.get('/officers', authenticateToken, getOfficersService(pool));
 app.get('/categories_protected', authenticateToken, getCategoriesService(pool));
 // Public keywords endpoint for stopwords management UI (distinct KeywordText)
 app.get('/keywords/public', getKeywordsPublicService(pool));
+
+// Public autocomplete suggestions endpoint (keywords + synonyms + stopwords)
+app.get('/autocomplete/suggest', getAutocompleteSuggestionsService(pool));
 // Protected keywords endpoint
 app.get('/keywords', authenticateToken, getKeywordsService(pool));
 app.get('/feedbacks', authenticateToken, getFeedbacksService(pool));
