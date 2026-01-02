@@ -301,15 +301,35 @@ function analyzeQueryNegation(queryTokensOriginal, matchedKeywords) {
 
   if (!Array.isArray(queryTokensOriginal)) return result;
 
-  // First, find all negative words in the query
+  // First, find all negative words in the query (both from database and inline patterns)
   for (let i = 0; i < queryTokensOriginal.length; i++) {
     const token = String(queryTokensOriginal[i] || '').toLowerCase().trim();
+    
+    // Check database negative keywords
     if (isNegativeKeyword(token)) {
       result.negativeWordsFound.push({
         word: token,
         index: i,
         modifier: getNegativeModifier(token)
       });
+      result.hasNegation = true; // Mark as having negation even if standalone
+    }
+    
+    // Also check inline patterns (e.g., "ไม่เอา" might be inside a longer token)
+    const sortedPatterns = [...INLINE_NEGATION_PATTERNS].sort((a, b) => b.word.length - a.word.length);
+    for (const pattern of sortedPatterns) {
+      if (token.includes(pattern.word)) {
+        const existingIndex = result.negativeWordsFound.findIndex(n => n.word === pattern.word);
+        if (existingIndex === -1) {
+          result.negativeWordsFound.push({
+            word: pattern.word,
+            index: i,
+            modifier: pattern.modifier
+          });
+          result.hasNegation = true;
+        }
+        break; // Found match, no need to check other patterns for this token
+      }
     }
   }
 
