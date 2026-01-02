@@ -95,11 +95,21 @@ function loadBlockedKeywords(req) {
 
 function clearBlockedDomains(req) {
   try {
+    // 1. Clear session data
     if (req && req.session) {
       req.session.blockedDomains = [];
       req.session.blockedKeywords = [];
     }
-  } catch (e) { }
+    
+    // 2. 🗑️ Clear global NEGATION_BLOCKS cache for this session
+    const key = getSessionKey(req);
+    if (key && NEGATION_BLOCKS.has(key)) {
+      NEGATION_BLOCKS.delete(key);
+      console.log(`🗑️ Cleared blocked keywords cache for session: ${key}`);
+    }
+  } catch (e) { 
+    console.warn('clearBlockedDomains error:', e && (e.message || e));
+  }
 }
 
 function persistBlockedKeywords(req, keywords) {
@@ -556,17 +566,33 @@ module.exports = (pool) => async (req, res) => {
     // เรียงคำปฏิเสธจาก "ยาวไปสั้น" (สำคัญมาก: 'ไม่เอา' ต้องมาก่อน 'ไม่')
     negativeWordsList.sort((a, b) => b.length - a.length);
 
+    // DEBUG: แสดงรายการคำปฏิเสธที่โหลดได้
+    console.log('🔴 Negative Words List (sorted):', negativeWordsList.slice(0, 10), '... total:', negativeWordsList.length);
+
     let hasNegationTrigger = false;
     let targetRejection = ''; 
     const msgLower = message.toLowerCase().trim();
 
+    // DEBUG: แสดงข้อความที่จะตรวจสอบ
+    console.log('🔴 Checking message:', msgLower);
+
     for (const prefix of negativeWordsList) {
         // เช็คว่าประโยค "ขึ้นต้นด้วย" หรือ "มีคำว่า" คำปฏิเสธหรือไม่
-        if (msgLower.startsWith(prefix) || msgLower.indexOf(prefix) === 0) {
+        const startsWithPrefix = msgLower.startsWith(prefix);
+        const indexOfPrefix = msgLower.indexOf(prefix);
+        
+        // DEBUG: Log การตรวจสอบแต่ละคำ (เฉพาะ 5 คำแรก)
+        if (negativeWordsList.indexOf(prefix) < 5) {
+            console.log(`🔴 Checking prefix "${prefix}": startsWith=${startsWithPrefix}, indexOf=${indexOfPrefix}`);
+        }
+        
+        if (startsWithPrefix || indexOfPrefix === 0) {
             hasNegationTrigger = true;
             
             // ตัดคำปฏิเสธออก: "ไม่เอาทุน" -> ตัด "ไม่เอา" -> เหลือ "ทุน"
             let remainingText = msgLower.substring(prefix.length).trim();
+            
+            console.log(`🔴 MATCH! prefix="${prefix}", remaining="${remainingText}"`);
             
             if (remainingText.length > 0) {
                 targetRejection = remainingText;
@@ -574,6 +600,9 @@ module.exports = (pool) => async (req, res) => {
             break; 
         }
     }
+    
+    console.log(`🔴 Negation Result: hasNegationTrigger=${hasNegationTrigger}, targetRejection="${targetRejection}"`);
+
 
     // 4.3 ตัดสินใจ (Decision Logic)
     if (hasNegationTrigger) {
