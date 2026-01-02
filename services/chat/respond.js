@@ -509,8 +509,13 @@ module.exports = (pool) => async (req, res) => {
     // ถ้าตรงนี้ขึ้นว่า "เอาทุน" แสดงว่า "ไม่" ถูกตัดมาจาก Frontend หรือ Middleware อื่น
     console.log('------------------------------------------------');
 
+    // 🆕 Check if this message has "want" pattern - if so, skip session check and parse properly
+    const wantTriggersForCheck = /(?:แต่|ส่วน)[\s]*(?:หนู|ผม|เรา|ฉัน)?[\s]*(?:จะ)?[\s]*(?:เอา|ต้องการ|อยากได้|อยาก|หา|ขอ|สนใจ)/gi;
+    const hasWantPattern = wantTriggersForCheck.test(message.toLowerCase());
+    
     // 4.1 ตรวจสอบว่าคำที่ user พิมพ์มา เคยถูกบล็อกไปแล้วหรือยัง
-    if (blockedKeywordsFromSession.size > 0) {
+    // 🆕 BUT skip this check if message has "want" pattern - user wants to search AND reject
+    if (blockedKeywordsFromSession.size > 0 && !hasWantPattern) {
       const msgLowerForBlock = message.toLowerCase();
       let matchedBlockedKeyword = null;
       for (const blocked of blockedKeywordsFromSession) {
@@ -569,63 +574,177 @@ module.exports = (pool) => async (req, res) => {
     // DEBUG: แสดงรายการคำปฏิเสธที่โหลดได้
     console.log('🔴 Negative Words List (sorted):', negativeWordsList.slice(0, 10), '... total:', negativeWordsList.length);
 
-    let hasNegationTrigger = false;
-    let targetRejection = ''; 
     const msgLower = message.toLowerCase().trim();
-
-    // DEBUG: แสดงข้อความที่จะตรวจสอบ
     console.log('🔴 Checking message:', msgLower);
 
-    for (const prefix of negativeWordsList) {
-        // เช็คว่าประโยค "ขึ้นต้นด้วย" หรือ "มีคำว่า" คำปฏิเสธหรือไม่
-        const startsWithPrefix = msgLower.startsWith(prefix);
-        const indexOfPrefix = msgLower.indexOf(prefix);
-        
-        // DEBUG: Log การตรวจสอบแต่ละคำ (เฉพาะ 5 คำแรก)
-        if (negativeWordsList.indexOf(prefix) < 5) {
-            console.log(`🔴 Checking prefix "${prefix}": startsWith=${startsWithPrefix}, indexOf=${indexOfPrefix}`);
-        }
-        
-        if (startsWithPrefix || indexOfPrefix === 0) {
-            hasNegationTrigger = true;
-            
-            // ตัดคำปฏิเสธออก: "ไม่เอาทุน" -> ตัด "ไม่เอา" -> เหลือ "ทุน"
-            let remainingText = msgLower.substring(prefix.length).trim();
-            
-            console.log(`🔴 MATCH! prefix="${prefix}", remaining="${remainingText}"`);
-            
-            if (remainingText.length > 0) {
-                targetRejection = remainingText;
-            }
-            break; 
-        }
+    // 🆕 Advanced Multi-Rejection & Multi-Search Parser
+    // รองรับ: "ไม่เอา ทุน และ ไม่เอาทุนเรียนดี แต่หนูจะเอา เกณฑ์ และ กยศ"
+    // ผลลัพธ์: rejections = ["ทุน", "ทุนเรียนดี"], searches = ["เกณฑ์", "กยศ"]
+    
+    const rejections = [];  // คำที่ต้องปฏิเสธ
+    const searches = [];    // คำที่ต้องค้นหา
+    
+    // 🆕 Pattern-based approach: แยกส่วน "ไม่เอา" และ "เอา/ต้องการ" ออกจากกัน
+    // Step 1: หาตำแหน่งที่เปลี่ยนจาก "ไม่เอา" เป็น "เอา"
+    const wantTriggers = /(?:แต่|ส่วน)[\s]*(?:หนู|ผม|เรา|ฉัน)?[\s]*(?:จะ)?[\s]*(?:เอา|ต้องการ|อยากได้|อยาก|หา|ขอ|สนใจ)/gi;
+    
+    // หาตำแหน่งที่เริ่มส่วน "want"
+    const wantMatch = msgLower.match(wantTriggers);
+    let rejectPart = msgLower;
+    let wantPart = '';
+    
+    if (wantMatch && wantMatch.length > 0) {
+      const wantIndex = msgLower.indexOf(wantMatch[0]);
+      rejectPart = msgLower.substring(0, wantIndex).trim();
+      wantPart = msgLower.substring(wantIndex).trim();
+      // ตัดคำ trigger ออกจาก wantPart
+      wantPart = wantPart.replace(wantTriggers, ' ').trim();
     }
     
-    console.log(`🔴 Negation Result: hasNegationTrigger=${hasNegationTrigger}, targetRejection="${targetRejection}"`);
-
+    console.log('🔴 Reject part:', rejectPart);
+    console.log('🟢 Want part:', wantPart);
+    
+    // Step 2: Parse ส่วน reject
+    if (rejectPart) {
+      // แยกด้วย และ/กับ/,
+      const rejectSegments = rejectPart.split(/[\s]*(?:และ|กับ|,|;)[\s]*/);
+      for (const seg of rejectSegments) {
+        if (!seg.trim()) continue;
+        let keyword = seg.trim();
+        
+        // ตัดคำปฏิเสธออก
+        for (const negWord of negativeWordsList) {
+          if (keyword.includes(negWord)) {
+            keyword = keyword.replace(new RegExp(negWord.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'gi'), '').trim();
+            break;
+          }
+        }
+        
+        // ลบคำฟุ่มเฟือย
+        keyword = keyword.replace(/^[\s]*(แต่|ส่วน|หนู|ผม|เรา|ฉัน|จะ|ว่า|นะ|ค่ะ|ครับ)[\s]*/gi, '').trim();
+        
+        if (keyword.length > 0) {
+          rejections.push(keyword);
+        }
+      }
+    }
+    
+    // Step 3: Parse ส่วน want
+    if (wantPart) {
+      // แยกด้วย และ/กับ/,
+      const wantSegments = wantPart.split(/[\s]*(?:และ|กับ|,|;)[\s]*/);
+      for (const seg of wantSegments) {
+        if (!seg.trim()) continue;
+        let keyword = seg.trim();
+        
+        // ลบคำฟุ่มเฟือย
+        keyword = keyword.replace(/^[\s]*(แต่|ส่วน|หนู|ผม|เรา|ฉัน|จะ|ว่า|นะ|ค่ะ|ครับ|เอา|ต้องการ|อยาก|หา|ขอ|สนใจ)[\s]*/gi, '').trim();
+        
+        if (keyword.length > 0) {
+          searches.push(keyword);
+        }
+      }
+    }
+    
+    // ถ้าไม่พบ pattern ใหม่ ลองใช้ logic เดิม (simple check)
+    if (rejections.length === 0 && searches.length === 0) {
+      for (const prefix of negativeWordsList) {
+        if (msgLower.startsWith(prefix)) {
+          const remaining = msgLower.substring(prefix.length).trim();
+          if (remaining.length > 0) {
+            rejections.push(remaining);
+          }
+          break;
+        }
+      }
+    }
+    
+    console.log('🔴 Parsed rejections:', rejections);
+    console.log('🟢 Parsed searches:', searches);
 
     // 4.3 ตัดสินใจ (Decision Logic)
-    if (hasNegationTrigger) {
-        if (targetRejection.length > 1) {
-             persistBlockedKeywords(req, [targetRejection]);
-             // ✅ เพิ่ม ✨ ให้เหมือนตอนเจอ Keyword
-             return res.status(200).json({ 
-                success: true, 
-                found: false, 
-                message: `✨ รับทราบค่ะ ${BOT_PRONOUN}จะไม่แสดงข้อมูลเกี่ยวกับ "${targetRejection}" ให้กวนใจแล้วค่ะ`,
-                blockedDomains: Array.from(loadBlockedDomains(req)), 
-                blockedKeywords: Array.from(loadBlockedKeywords(req)), 
-                blockedKeywordsDisplay: [targetRejection] 
-            });
-        } else {
-             return res.status(200).json({ 
-                success: true, 
-                found: false, 
-                message: `รับทราบค่ะ ${BOT_PRONOUN}ยกเลิกการค้นหาให้แล้วนะคะ`, 
-                blockedDomains: Array.from(loadBlockedDomains(req)), 
-                blockedKeywords: Array.from(loadBlockedKeywords(req))
-            });
+    const hasRejections = rejections.length > 0;
+    const hasSearches = searches.length > 0;
+    
+    if (hasRejections) {
+      // บันทึกคำปฏิเสธทั้งหมด
+      persistBlockedKeywords(req, rejections);
+      
+      if (hasSearches) {
+        // 🆕 มีทั้งคำปฏิเสธและคำค้นหา → ปฏิเสธ + ค้นหาให้
+        console.log(`🔴🟢 Mixed mode: Rejecting [${rejections.join(', ')}], Searching [${searches.join(', ')}]`);
+        
+        // แทนที่ข้อความค้นหาด้วยคำที่ต้องการเท่านั้น
+        const searchMessage = searches.join(' ');
+        
+        // Re-tokenize ด้วยคำค้นหาใหม่
+        const searchTokens = await tokenizeWithPython(searchMessage) || searchMessage.split(/\s+/).filter(Boolean);
+        
+        // ค้นหาแบบใหม่ด้วยคำที่ต้องการ
+        const searchRanked = await rankCandidates(searchTokens, qaList, pool, []);
+        searchRanked.sort((a, b) => b.score - a.score);
+        
+        // กรองผลลัพธ์ที่ไม่ตรงกับคำปฏิเสธ
+        const blockedSet = new Set([...rejections, ...Array.from(loadBlockedKeywords(req))].map(k => k.toLowerCase()));
+        let filteredResults = searchRanked.filter(r => {
+          const title = (r.item.QuestionTitle || '').toLowerCase();
+          const keywords = (r.item.keywords || []).map(k => k.toLowerCase());
+          // ถ้า title หรือ keywords มีคำที่ถูก block ให้ตัดออก
+          for (const blocked of blockedSet) {
+            if (title.includes(blocked) || keywords.some(k => k.includes(blocked))) {
+              return false;
+            }
+          }
+          return true;
+        });
+        
+        if (filteredResults.length === 0) {
+          return res.status(200).json({
+            success: true,
+            found: false,
+            message: `✨ รับทราบค่ะ ${BOT_PRONOUN}จะไม่แสดงข้อมูลเกี่ยวกับ ${rejections.map(r => `<span style="color:#e74c3c">"${r}"</span>`).join(' กับ ')} ให้กวนใจแล้ว แต่ไม่พบข้อมูลเกี่ยวกับ ${searches.map(s => `<span style="color:#27ae60">"${s}"</span>`).join(' กับ ')} ที่ไม่เกี่ยวกับเรื่องที่ปฏิเสธค่ะ`,
+            blockedKeywords: Array.from(loadBlockedKeywords(req)),
+            blockedKeywordsDisplay: rejections
+          });
         }
+        
+        // ส่งผลลัพธ์กลับ
+        const topResults = filteredResults.slice(0, 30);
+        const rejectMsg = rejections.length > 0 ? `✨ รับทราบค่ะ ${BOT_PRONOUN}จะไม่แสดงข้อมูลเกี่ยวกับ ${rejections.map(r => `<span style="color:#e74c3c">"${r}"</span>`).join(' กับ ')} ให้กวนใจแล้ว และจะหาคำตอบเกี่ยวกับ ${searches.map(s => `<span style="color:#27ae60">"${s}"</span>`).join(' กับ ')} ให้นะคะ\n\n` : '';
+        const foundCount = topResults.length;
+        
+        return res.status(200).json({
+          success: true,
+          found: true,
+          message: `${rejectMsg}✨ พบ ${foundCount} คำตอบที่ใกล้เคียง\n(ลองเลือกซักอันดูสิ 😊)`,
+          multipleResults: topResults.length > 1,
+          query: searchMessage,
+          blockedKeywords: Array.from(loadBlockedKeywords(req)),
+          blockedKeywordsDisplay: rejections,
+          alternatives: topResults.map(r => ({
+            id: r.item.QuestionsAnswersID,
+            title: r.item.QuestionTitle,
+            preview: (r.item.QuestionText || '').slice(0, 200),
+            text: r.item.QuestionText,
+            score: r.score.toFixed(2),
+            keywords: r.item.keywords,
+            categories: r.item.CategoriesID || null,
+            categoriesPDF: r.item.CategoriesPDF || null
+          }))
+        });
+        
+      } else {
+        // มีแค่คำปฏิเสธ ไม่มีคำค้นหา
+        const rejectListHtml = rejections.map(r => `<span style="color:#e74c3c">"${r}"</span>`).join(' กับ ');
+        return res.status(200).json({ 
+          success: true, 
+          found: false, 
+          message: `✨ รับทราบค่ะ ${BOT_PRONOUN}จะไม่แสดงข้อมูลเกี่ยวกับ ${rejectListHtml} ให้กวนใจแล้วค่ะ`,
+          blockedDomains: Array.from(loadBlockedDomains(req)), 
+          blockedKeywords: Array.from(loadBlockedKeywords(req)), 
+          blockedKeywordsDisplay: rejections 
+        });
+      }
     }
 
     // 5. Ranking (Pass injected tokens for priority calculation)
