@@ -28,6 +28,8 @@ const dotenv = require('dotenv');
 const http = require('http');
 const WebSocket = require('ws');
 const { spawn } = require('child_process');
+const cron = require('node-cron');
+const { cleanupOldLogs } = require('./services/cleanup/cleanupOldLogs');
 const { URL } = require('url');
 const fs = require('fs');
 
@@ -192,6 +194,20 @@ app.use((req, res, next) => {
 
 // Start tokenizer service when server boots (local TOKENIZER_URL only)
 startTokenizerService();
+
+// Schedule daily cleanup of old logs (runs at 03:00 AM)
+cron.schedule('0 3 * * *', async () => {
+  console.log('⏰ Running daily cleanup of old logs...');
+  try {
+    if (global.__DB_POOL__) {
+      await cleanupOldLogs(global.__DB_POOL__);
+    } else {
+      console.error('❌ Daily cleanup failed: Database pool not available');
+    }
+  } catch (err) {
+    console.error('❌ Daily cleanup failed:', err.message);
+  }
+});
 
 // WebSocket connection handler
 wss.on('connection', (ws, req) => {

@@ -67,7 +67,7 @@ const getQuestionsAnswersService = (pool) => async (req, res) => {
                     const [feedbackCounts] = await connection.query(
                         `SELECT 
                             SUM(CASE WHEN f.FeedbackValue = 1 THEN 1 ELSE 0 END) as likeCount,
-                            SUM(CASE WHEN f.FeedbackValue = 0 THEN 1 ELSE 0 END) as unlikeCount
+                            SUM(CASE WHEN f.FeedbackValue = 0 AND f.HandledAt IS NULL THEN 1 ELSE 0 END) as unlikeCount
                          FROM Feedbacks f
                          INNER JOIN ChatLogHasAnswers c ON f.ChatLogID = c.ChatLogID
                          WHERE c.QuestionsAnswersID = ?`,

@@ -9,12 +9,14 @@
             const order = req.query && String(req.query.order || '').toLowerCase() === 'asc' ? 'ASC' : 'DESC';
             // Only return feedbacks that are still unhandled and are related to questions/answers authored by the logged-in officer
             const officerId = req.user && req.user.userId ? req.user.userId : null;
+            const userRole = req.user?.role;
+            const isAdmin = userRole === 'Super Admin' || userRole === 'Admin';
+
             if (!officerId) {
                 return res.status(401).json({ success: false, message: 'Unauthorized: officer id not found in token' });
             }
 
-            const [rows] = await pool.query(
-                `SELECT 
+            let query = `SELECT 
                     f.FeedbackID, 
                     f.FeedbackValue, 
                     f.Timestamp, 
@@ -28,10 +30,18 @@
                 FROM Feedbacks f
                 INNER JOIN ChatLogHasAnswers c ON f.ChatLogID = c.ChatLogID
                 INNER JOIN QuestionsAnswers qa ON c.QuestionsAnswersID = qa.QuestionsAnswersID
-                WHERE f.HandledAt IS NULL AND qa.OfficerID = ?
-                ORDER BY f.Timestamp ${order}`,
-                [officerId]
-            );
+                WHERE f.HandledAt IS NULL`;
+            
+            const params = [];
+
+            if (!isAdmin) {
+                query += ` AND qa.OfficerID = ?`;
+                params.push(officerId);
+            }
+
+            query += ` ORDER BY f.Timestamp ${order}`;
+
+            const [rows] = await pool.query(query, params);
             console.log('📊 getFeedbacks: returning', rows.length, 'feedbacks');
             res.status(200).json(rows);
         } catch (error) {
