@@ -469,7 +469,7 @@ router.get('/single/:id', async (req, res) => {
 
 /**
  * GET /questionsanswers/categories
- * ดึงรายการหมวดหมู่ทั้งหมด
+ * ดึงรายการหมวดหมู่ของหน่วยงานตัวเอง (ตาม OrgID)
  */
 router.get('/categories', async (req, res) => {
   const pool = req.pool;
@@ -478,14 +478,66 @@ router.get('/categories', async (req, res) => {
   }
 
   try {
-    // Return only categories that have QAs owned by the logged-in officer
+    const userId = req.user?.userId;
+    const userRole = req.user?.role;
+    
+    let userOrgID = null;
+    
+    // Check if user is Admin/Super Admin or Officer
+    if (userRole === 'Admin' || userRole === 'Super Admin') {
+      // Admin - get OrgID via Officers table where AdminUserID matches
+      const [adminOfficers] = await pool.query(
+        'SELECT DISTINCT OrgID FROM Officers WHERE AdminUserID = ? LIMIT 1',
+        [userId]
+      );
+      if (adminOfficers && adminOfficers.length > 0) {
+        userOrgID = adminOfficers[0].OrgID;
+      }
+    } else {
+      // Officer - get OrgID directly from Officers table
+      const [userInfo] = await pool.query(
+        'SELECT OrgID FROM Officers WHERE OfficerID = ? LIMIT 1',
+        [userId]
+      );
+      if (userInfo && userInfo.length > 0) {
+        userOrgID = userInfo[0].OrgID;
+      }
+    }
+    
+    // If no OrgID found, return all categories (fallback for Super Admin)
+    if (userOrgID === null) {
+      const [allCategories] = await pool.query(
+        'SELECT CategoriesID, CategoriesName FROM Categories ORDER BY CategoriesID'
+      );
+      return res.status(200).json({
+        success: true,
+        categories: allCategories,
+        data: allCategories
+      });
+    }
+    
+    // Return categories that belong to officers in the same organization (OrgID)
+    // Include main categories (ParentCategoriesID IS NULL) if they have sub-categories owned by this org
     const [categories] = await pool.query(
       `SELECT DISTINCT c.CategoriesID, c.CategoriesName
        FROM Categories c
-       INNER JOIN QuestionsAnswers qa ON qa.CategoriesID = c.CategoriesID
-       WHERE qa.OfficerID = ?
-       ORDER BY c.CategoriesName`,
-      [req.user?.userId]
+       LEFT JOIN Officers o ON c.OfficerID = o.OfficerID
+       WHERE o.OrgID = ?
+       
+       UNION
+       
+       SELECT DISTINCT parent.CategoriesID, parent.CategoriesName
+       FROM Categories parent
+       WHERE parent.ParentCategoriesID IS NULL
+       AND EXISTS (
+         SELECT 1 FROM Categories sub
+         LEFT JOIN Officers o2 ON sub.OfficerID = o2.OfficerID
+         WHERE sub.ParentCategoriesID = parent.CategoriesID
+         AND o2.OrgID = ?
+       )
+       
+       ORDER BY CategoriesID`,
+      [userOrgID, userOrgID]
     );
 
     res.status(200).json({

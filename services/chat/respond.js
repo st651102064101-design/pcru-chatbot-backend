@@ -515,7 +515,13 @@ module.exports = (pool) => async (req, res) => {
     
     // 4.1 ตรวจสอบว่าคำที่ user พิมพ์มา เคยถูกบล็อกไปแล้วหรือยัง
     // 🆕 BUT skip this check if message has "want" pattern - user wants to search AND reject
-    if (blockedKeywordsFromSession.size > 0 && !hasWantPattern) {
+    // 🆕🆕 ALSO skip if there's NO negative word in the current message - user is searching, not rejecting!
+    
+    // ก่อนอื่น: ตรวจว่าข้อความปัจจุบันมีคำปฏิเสธหรือไม่ (เช็คง่ายๆ ก่อน)
+    const quickNegCheck = ['ไม่', 'ไม่เอา', 'ยกเลิก', 'พอ', 'หยุด', 'ไม่ต้องการ', 'บ่เอา', 'อย่า', 'ห้าม', 'เลิก'];
+    const hasNegativeInMessage = quickNegCheck.some(neg => message.toLowerCase().includes(neg));
+    
+    if (blockedKeywordsFromSession.size > 0 && !hasWantPattern && hasNegativeInMessage) {
       const msgLowerForBlock = message.toLowerCase();
       let matchedBlockedKeyword = null;
       for (const blocked of blockedKeywordsFromSession) {
@@ -604,8 +610,11 @@ module.exports = (pool) => async (req, res) => {
     console.log('🔴 Reject part:', rejectPart);
     console.log('🟢 Want part:', wantPart);
     
-    // Step 2: Parse ส่วน reject
-    if (rejectPart) {
+    // 🆕 เช็คว่า rejectPart มีคำปฏิเสธจริงๆ หรือไม่ก่อนที่จะ parse
+    const rejectPartHasNegative = negativeWordsList.some(neg => rejectPart.includes(neg));
+    
+    // Step 2: Parse ส่วน reject (เฉพาะเมื่อมีคำปฏิเสธจริงๆ)
+    if (rejectPart && rejectPartHasNegative) {
       // แยกด้วย และ/กับ/,
       const rejectSegments = rejectPart.split(/[\s]*(?:และ|กับ|,|;)[\s]*/);
       for (const seg of rejectSegments) {
@@ -647,14 +656,20 @@ module.exports = (pool) => async (req, res) => {
     }
     
     // ถ้าไม่พบ pattern ใหม่ ลองใช้ logic เดิม (simple check)
+    // 🆕 แต่ต้องเช็คว่ามีคำปฏิเสธจริงๆ ใน message ก่อน!
     if (rejections.length === 0 && searches.length === 0) {
-      for (const prefix of negativeWordsList) {
-        if (msgLower.startsWith(prefix)) {
-          const remaining = msgLower.substring(prefix.length).trim();
-          if (remaining.length > 0) {
-            rejections.push(remaining);
+      // 🆕 เช็คว่ามีคำปฏิเสธจริงๆ หรือไม่ก่อนที่จะทำการ parse
+      const hasActualNegative = negativeWordsList.some(neg => msgLower.includes(neg));
+      
+      if (hasActualNegative) {
+        for (const prefix of negativeWordsList) {
+          if (msgLower.startsWith(prefix)) {
+            const remaining = msgLower.substring(prefix.length).trim();
+            if (remaining.length > 0) {
+              rejections.push(remaining);
+            }
+            break;
           }
-          break;
         }
       }
     }
@@ -702,7 +717,7 @@ module.exports = (pool) => async (req, res) => {
           return res.status(200).json({
             success: true,
             found: false,
-            message: `✨ รับทราบค่ะ ${BOT_PRONOUN}จะไม่แสดงข้อมูลเกี่ยวกับ ${rejections.map(r => `<span style="color:#e74c3c">"${r}"</span>`).join(' กับ ')} ให้กวนใจแล้ว แต่ไม่พบข้อมูลเกี่ยวกับ ${searches.map(s => `<span style="color:#27ae60">"${s}"</span>`).join(' กับ ')} ที่ไม่เกี่ยวกับเรื่องที่ปฏิเสธค่ะ`,
+            message: `✨ รับทราบค่ะ ${BOT_PRONOUN}จะไม่แสดงข้อมูลเกี่ยวกับ ${rejections.map(r => `"<span style="color:#e74c3c;text-decoration:line-through">${r}</span>"`).join(' และ ')} ให้กวนใจแล้ว แต่ไม่พบข้อมูลเกี่ยวกับ ${searches.map(s => `"<span style="color:#27ae60">${s}</span>"`).join(' และ ')} ที่ไม่เกี่ยวกับเรื่องที่ปฏิเสธค่ะ`,
             blockedKeywords: Array.from(loadBlockedKeywords(req)),
             blockedKeywordsDisplay: rejections
           });
@@ -710,7 +725,7 @@ module.exports = (pool) => async (req, res) => {
         
         // ส่งผลลัพธ์กลับ
         const topResults = filteredResults.slice(0, 30);
-        const rejectMsg = rejections.length > 0 ? `✨ รับทราบค่ะ ${BOT_PRONOUN}จะไม่แสดงข้อมูลเกี่ยวกับ ${rejections.map(r => `<span style="color:#e74c3c">"${r}"</span>`).join(' กับ ')} ให้กวนใจแล้ว และจะหาคำตอบเกี่ยวกับ ${searches.map(s => `<span style="color:#27ae60">"${s}"</span>`).join(' กับ ')} ให้นะคะ\n\n` : '';
+        const rejectMsg = rejections.length > 0 ? `✨ รับทราบค่ะ ${BOT_PRONOUN}จะไม่แสดงข้อมูลเกี่ยวกับ ${rejections.map(r => `"<span style="color:#e74c3c;text-decoration:line-through">${r}</span>"`).join(' และ ')} ให้กวนใจแล้ว และจะหาคำตอบเกี่ยวกับ ${searches.map(s => `"<span style="color:#27ae60">${s}</span>"`).join(' และ ')} ให้นะคะ\n\n` : '';
         const foundCount = topResults.length;
         
         return res.status(200).json({
@@ -735,7 +750,7 @@ module.exports = (pool) => async (req, res) => {
         
       } else {
         // มีแค่คำปฏิเสธ ไม่มีคำค้นหา
-        const rejectListHtml = rejections.map(r => `<span style="color:#e74c3c">"${r}"</span>`).join(' กับ ');
+        const rejectListHtml = rejections.map(r => `"<span style="color:#e74c3c;text-decoration:line-through">${r}</span>"`).join(' และ ');
         return res.status(200).json({ 
           success: true, 
           found: false, 
@@ -842,6 +857,7 @@ module.exports = (pool) => async (req, res) => {
     return res.status(200).json({
       success: true,
       found: topRanked.length > 0,
+      title: topRanked.length > 0 ? topRanked[0].item.QuestionTitle : null, // 🆕 Add question title
       totalMatches: finalResults.length, // ✅ เพิ่ม totalMatches ส่งกลับไปเพื่อให้ Frontend ทำปุ่ม Read more
       limit: limit,
       offset: offset,

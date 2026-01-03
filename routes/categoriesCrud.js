@@ -67,14 +67,44 @@ router.post('/create', async (req, res) => {
   try {
     connection = await pool.getConnection();
 
-    // Check if category name already exists
-    const [existing] = await connection.query(
-      'SELECT CategoriesID FROM Categories WHERE CategoriesName = ?',
-      [categoriesName.trim()]
-    );
+    // Determine OfficerID from authenticated user
+    let officerID = req.user?.userId ?? req.user?.OfficerID ?? null;
 
-    if (existing.length > 0) {
-      return res.status(400).json({ success: false, message: 'ชื่อหมวดหมู่นี้มีอยู่แล้ว' });
+    // Verify OfficerID exists in Officers table; if not, set to null to avoid FK errors
+    let currentOfficerOrgID = null;
+    if (officerID !== null) {
+      const [foundOfficer] = await connection.query('SELECT OfficerID, OrgID FROM Officers WHERE OfficerID = ? LIMIT 1', [officerID]);
+      if (!foundOfficer || foundOfficer.length === 0) {
+        console.warn(`[categoriesCrud] OfficerID ${officerID} not found, setting OfficerID=null`);
+        officerID = null;
+      } else {
+        currentOfficerOrgID = foundOfficer[0].OrgID;
+      }
+    }
+
+    // For sub-categories: check duplicate name within same parent (parent must be same)
+    if (parentCategoriesID) {
+      const [duplicateCheck] = await connection.query(`
+        SELECT c.CategoriesID, c.OfficerID, o.OrgID 
+        FROM Categories c 
+        LEFT JOIN Officers o ON c.OfficerID = o.OfficerID
+        WHERE c.CategoriesName = ? 
+          AND c.ParentCategoriesID = ?
+      `, [categoriesName.trim(), parentCategoriesID]);
+
+      if (duplicateCheck.length > 0) {
+        // Check if any duplicate shares same officer OR same organization
+        for (const dup of duplicateCheck) {
+          // Same officer (including NULL)
+          if (dup.OfficerID === officerID) {
+            return res.status(400).json({ success: false, message: 'ข้อมูลซ้ำ - ชื่อหมวดหมู่ย่อยนี้มีอยู่แล้วสำหรับเจ้าหน้าที่คนนี้' });
+          }
+          // Same organization
+          if (currentOfficerOrgID && dup.OrgID === currentOfficerOrgID) {
+            return res.status(400).json({ success: false, message: 'ข้อมูลซ้ำ - ชื่อหมวดหมู่ย่อยนี้มีอยู่แล้วในหน่วยงานเดียวกัน' });
+          }
+        }
+      }
     }
 
     // Generate new CategoriesID
@@ -102,18 +132,6 @@ router.post('/create', async (req, res) => {
         .filter(n => !isNaN(n));
       const maxSubNum = subNumbers.length > 0 ? Math.max(...subNumbers) : 0;
       newCategoryId = `${parentCategoriesID}-${maxSubNum + 1}`;
-    }
-
-    // Determine OfficerID from authenticated user (prefer numeric userId when available), or null
-    let officerID = req.user?.userId ?? req.user?.OfficerID ?? null;
-
-    // Verify OfficerID exists in Officers table; if not, set to null to avoid FK errors
-    if (officerID !== null) {
-      const [foundOfficer] = await connection.query('SELECT 1 FROM Officers WHERE OfficerID = ? LIMIT 1', [officerID]);
-      if (!foundOfficer || foundOfficer.length === 0) {
-        console.warn(`[categoriesCrud] OfficerID ${officerID} not found, setting OfficerID=null`);
-        officerID = null;
-      }
     }
 
     // Insert new category with generated ID (retry with OfficerID=null if FK reference fails)
@@ -209,7 +227,7 @@ router.put('/update/:id', async (req, res) => {
 
     // Check if category exists
     const [existingCategory] = await connection.query(
-      'SELECT CategoriesID FROM Categories WHERE CategoriesID = ?',
+      'SELECT CategoriesID, ParentCategoriesID FROM Categories WHERE CategoriesID = ?',
       [categoryId]
     );
 
@@ -217,15 +235,44 @@ router.put('/update/:id', async (req, res) => {
       return res.status(404).json({ success: false, message: 'ไม่พบหมวดหมู่ที่ต้องการแก้ไข' });
     }
 
-    // Check if new name conflicts with another category
-    if (categoriesName) {
-      const [nameConflict] = await connection.query(
-        'SELECT CategoriesID FROM Categories WHERE CategoriesName = ? AND CategoriesID != ?',
-        [categoriesName.trim(), categoryId]
-      );
+    // Get current officer info for duplicate checking
+    let officerID = req.user?.userId ?? req.user?.OfficerID ?? null;
+    let currentOfficerOrgID = null;
+    if (officerID !== null) {
+      const [foundOfficer] = await connection.query('SELECT OfficerID, OrgID FROM Officers WHERE OfficerID = ? LIMIT 1', [officerID]);
+      if (foundOfficer && foundOfficer.length > 0) {
+        currentOfficerOrgID = foundOfficer[0].OrgID;
+      }
+    }
 
-      if (nameConflict.length > 0) {
-        return res.status(400).json({ success: false, message: 'ชื่อหมวดหมู่นี้มีอยู่แล้ว' });
+    // Determine if this will be a sub-category after update
+    const willBeSubCategory = parentCategoriesID !== undefined ? parentCategoriesID : existingCategory[0].ParentCategoriesID;
+    const newName = categoriesName !== undefined ? categoriesName.trim() : null;
+
+    // For sub-categories: check duplicate name within same parent (excluding self)
+    const parentId = willBeSubCategory || (parentCategoriesID !== undefined ? parentCategoriesID : existingCategory[0].ParentCategoriesID);
+    if (parentId && newName) {
+      const [duplicateCheck] = await connection.query(`
+        SELECT c.CategoriesID, c.OfficerID, o.OrgID 
+        FROM Categories c 
+        LEFT JOIN Officers o ON c.OfficerID = o.OfficerID
+        WHERE c.CategoriesName = ? 
+          AND c.ParentCategoriesID = ?
+          AND c.CategoriesID != ?
+      `, [newName, parentId, categoryId]);
+
+      if (duplicateCheck.length > 0) {
+        // Check if any duplicate shares same officer OR same organization
+        for (const dup of duplicateCheck) {
+          // Same officer (including NULL)
+          if (dup.OfficerID === officerID) {
+            return res.status(400).json({ success: false, message: 'ข้อมูลซ้ำ - ชื่อหมวดหมู่ย่อยนี้มีอยู่แล้วสำหรับเจ้าหน้าที่คนนี้' });
+          }
+          // Same organization
+          if (currentOfficerOrgID && dup.OrgID === currentOfficerOrgID) {
+            return res.status(400).json({ success: false, message: 'ข้อมูลซ้ำ - ชื่อหมวดหมู่ย่อยนี้มีอยู่แล้วในหน่วยงานเดียวกัน' });
+          }
+        }
       }
     }
 

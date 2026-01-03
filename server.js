@@ -633,25 +633,8 @@ app.use('/ai-image', aiImageRoutes); // Public GET for chatbot, protected POST/D
 // Serve uploaded AI images with explicit CORS
 app.use('/uploads/ai-images', cors(), express.static(path.join(__dirname, 'uploads', 'ai-images')));
 
-// Public endpoint: categories (no auth required)
-app.get('/questionsanswers/categories', async (req, res) => {
-  if (!app.locals.pool) {
-    return res.status(500).json({ success: false, message: 'Database pool not available' });
-  }
-  try {
-    const [categories] = await app.locals.pool.query(
-      'SELECT CategoriesID, CategoriesName FROM Categories ORDER BY CategoriesName'
-    );
-    res.status(200).json({
-      success: true,
-      data: categories
-    });
-  } catch (err) {
-    console.error('Get categories error:', err);
-    res.status(500).json({ success: false, message: err.message });
-  }
-});
-// Protected endpoints: create, update, delete (auth required)
+// Protected endpoints: create, update, delete, categories (auth required)
+// Categories endpoint moved to questionsAnswersCrud.js with org filtering
 app.use('/questionsanswers', authenticateToken, questionsAnswersCrudRoutes);
 
 // Explicit public fallback with logging (calls service handler directly)
