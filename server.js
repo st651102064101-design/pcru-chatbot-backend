@@ -158,6 +158,7 @@ const { clearNegativeKeywordsCache } = require('./services/negativeKeywords/load
 const { syncStopwords } = require('./scripts/sync_stopwords_from_standard');
 // Ranking route
 const rankingRoute = require('./routes/ranking');
+const geocodeService = require('./services/geo/geocode');
 
 const upload = multer({ dest: 'uploads/' }); // Multer config
 
@@ -709,6 +710,9 @@ app.use('/ranking', rankingRoute);
 // --- System Information Route (public) ---
 const systemRoute = require('./routes/system');
 app.use('/system', systemRoute(pool));
+
+// --- Geo helpers (auth required) ---
+app.get('/geo/geocode', authenticateToken, geocodeService());
 
 // --- Download Routes ---
 app.get('/adminusers/last-upload', authenticateToken, downloadLastUploadService());
