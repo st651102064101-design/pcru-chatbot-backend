@@ -4,9 +4,11 @@
 const getStopwordsService = (pool) => async (req, res) => {
   try {
     const [rows] = await pool.query(
-      `SELECT StopwordID, StopwordText, CreatedAt, UpdatedAt
+      `SELECT 
+        ROW_NUMBER() OVER (ORDER BY StopwordID DESC) as RowNum,
+        StopwordID, StopwordText, CreatedAt, UpdatedAt
        FROM Stopwords
-       ORDER BY StopwordText ASC`
+       ORDER BY StopwordID DESC`
     );
     res.status(200).json({ success: true, data: rows });
   } catch (error) {

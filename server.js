@@ -559,8 +559,30 @@ app.get('/debug/feedbacks', async (req, res) => {
 });
 
 // --- Stopwords Management ---
-// Public list endpoint for viewing in UI without auth
+// Public list endpoint for viewing in UI without auth (must be before authenticateToken middleware)
 app.get('/stopwords/public', getStopwordsService(pool));
+
+// Public seed preview endpoint (for testing without auth)
+// ใช้ STANDARD_THAI_STOPWORDS จาก sync script (pythainlp-based) แทน hard-coded
+app.get('/stopwords/seed/preview-public', async (req, res) => {
+  try {
+    const [existingRows] = await pool.query('SELECT StopwordText FROM Stopwords');
+    const existingWords = new Set(existingRows.map(r => (r.StopwordText || '').trim().toLowerCase()));
+    // ใช้ STANDARD_THAI_STOPWORDS จาก sync_stopwords_from_standard.js
+    const { STANDARD_THAI_STOPWORDS } = require('./scripts/sync_stopwords_from_standard');
+    const wordsToAdd = STANDARD_THAI_STOPWORDS.filter(word => !existingWords.has(word.trim().toLowerCase()));
+    const alreadyExists = STANDARD_THAI_STOPWORDS.filter(word => existingWords.has(word.trim().toLowerCase()));
+    res.json({ ok: true, data: { toAdd: wordsToAdd, alreadyExists, totalStandard: STANDARD_THAI_STOPWORDS.length } });
+  } catch (error) {
+    console.error('Error getting seed preview:', error);
+    res.status(500).json({ ok: false, message: error && error.message });
+  }
+});
+
+// Mount full-featured stopwords CRUD router (includes seed/preview)
+const stopwordsCrudRouter = require('./routes/stopwordsCrud');
+app.use('/stopwords', authenticateToken, stopwordsCrudRouter);
+
 // Protected list (legacy/for authenticated use)
 app.get('/stopwords', authenticateToken, getStopwordsService(pool));
 app.post('/stopwords', authenticateToken, async (req, res) => {
