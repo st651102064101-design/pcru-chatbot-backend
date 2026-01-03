@@ -252,6 +252,92 @@ router.delete('/:id', async (req, res) => {
   }
 });
 
+// Standard negative keywords list (shared between preview and seed)
+const STANDARD_NEGATIVE_KEYWORDS = [
+  { word: 'ไม่', modifier: -1.0 },
+  { word: 'ไม่ได้', modifier: -1.0 },
+  { word: 'มิได้', modifier: -1.0 },
+  { word: 'หาไม่', modifier: -1.0 },
+  { word: 'หามิได้', modifier: -1.0 },
+  { word: 'เปล่า', modifier: -1.0 },
+  { word: 'อย่า', modifier: -1.0 },
+  { word: 'ไม่ใช่', modifier: -1.0 },
+  { word: 'มิใช่', modifier: -1.0 },
+  { word: 'ไม่มี', modifier: -1.0 },
+  { word: 'บ่', modifier: -1.0 },
+  { word: 'ไม่เอา', modifier: -1.0 },
+  { word: 'ไม่ต้อง', modifier: -1.0 },
+  { word: 'ไม่อยาก', modifier: -1.0 },
+  { word: 'ไม่ต้องการ', modifier: -1.0 },
+  { word: 'ไม่สนใจ', modifier: -1.0 },
+  { word: 'ไม่ชอบ', modifier: -1.0 },
+  { word: 'ไม่รับ', modifier: -1.0 },
+  { word: 'ยกเว้น', modifier: -1.0 },
+  { word: 'ปราศจาก', modifier: -1.0 },
+  { word: 'ไร้', modifier: -1.0 },
+  { word: 'ห้าม', modifier: -1.0 },
+  { word: 'งด', modifier: -1.0 },
+  { word: 'เลิก', modifier: -1.0 },
+  { word: 'หยุด', modifier: -1.0 },
+  { word: 'ปฏิเสธ', modifier: -1.0 },
+  { word: 'ขาด', modifier: -0.5 },
+  { word: 'แต่', modifier: -0.5 },
+  { word: 'ทว่า', modifier: -0.5 },
+  { word: 'แม้', modifier: -0.5 },
+  { word: 'ถึงแม้', modifier: -0.5 },
+  { word: 'นอกจาก', modifier: -1.0 },
+  { word: 'เว้นแต่', modifier: -1.0 },
+];
+
+/**
+ * GET /seed/preview
+ * ดูตัวอย่างคำที่จะถูกเพิ่มเมื่อกด seed (แสดงเฉพาะคำที่ยังไม่มีในระบบ)
+ */
+router.get('/seed/preview', async (req, res) => {
+  let conn;
+  try {
+    conn = await req.pool.getConnection();
+
+    // Get existing words
+    const [existingRows] = await conn.query('SELECT Word FROM NegativeKeywords');
+    const existingWords = new Set(existingRows.map(r => r.Word.toLowerCase()));
+
+    // Get ignored words
+    const [ignoredRows] = await conn.query('SELECT Word FROM NegativeKeywords_Ignored');
+    const ignoredWords = new Set(ignoredRows.map(r => r.Word.toLowerCase()));
+
+    // Filter out existing and ignored words
+    const wordsToAdd = STANDARD_NEGATIVE_KEYWORDS.filter(item => 
+      !existingWords.has(item.word.toLowerCase()) && 
+      !ignoredWords.has(item.word.toLowerCase())
+    );
+
+    const alreadyExists = STANDARD_NEGATIVE_KEYWORDS.filter(item =>
+      existingWords.has(item.word.toLowerCase())
+    );
+
+    const ignored = STANDARD_NEGATIVE_KEYWORDS.filter(item =>
+      ignoredWords.has(item.word.toLowerCase())
+    );
+
+    res.json({
+      ok: true,
+      data: {
+        toAdd: wordsToAdd,
+        alreadyExists: alreadyExists,
+        ignored: ignored,
+        totalStandard: STANDARD_NEGATIVE_KEYWORDS.length
+      }
+    });
+
+  } catch (error) {
+    console.error('Error getting seed preview:', error);
+    res.status(500).json({ ok: false, message: error && error.message });
+  } finally {
+    if (conn) conn.release();
+  }
+});
+
 /**
  * POST /seed
  * เติมคำมาตรฐานเข้า DB หากยังไม่มี และไม่อยู่ในตาราง Ignored
@@ -261,37 +347,47 @@ router.post('/seed', async (req, res) => {
   try {
     conn = await req.pool.getConnection();
 
-    const sql = `
-      INSERT INTO NegativeKeywords (Word, WeightModifier, IsActive)
-      SELECT * FROM (
-        SELECT 'ไม่' AS Word, -1.0 AS WeightModifier, 1 AS IsActive
-        UNION ALL SELECT 'ไม่ได้', -1.0, 1
-        UNION ALL SELECT 'มิได้', -1.0, 1
-        UNION ALL SELECT 'หาไม่', -1.0, 1
-        UNION ALL SELECT 'หามิได้', -1.0, 1
-        UNION ALL SELECT 'เปล่า', -1.0, 1
-        UNION ALL SELECT 'อย่า', -1.0, 1
-        UNION ALL SELECT 'ไม่ใช่', -1.0, 1
-        UNION ALL SELECT 'มิใช่', -1.0, 1
-        UNION ALL SELECT 'ไม่มี', -1.0, 1
-        UNION ALL SELECT 'บ่', -1.0, 1
-        UNION ALL SELECT 'ไม่เอา', -1.0, 1
-        UNION ALL SELECT 'ไม่ต้อง', -1.0, 1
-        UNION ALL SELECT 'ไม่อยาก', -1.0, 1
-        UNION ALL SELECT 'ไม่ต้องการ', -1.0, 1
-        UNION ALL SELECT 'ไม่สนใจ', -1.0, 1
-        UNION ALL SELECT 'ไม่ชอบ', -1.0, 1
-        UNION ALL SELECT 'ไม่รับ', -1.0, 1
-        UNION ALL SELECT 'ยกเว้น', -1.0, 1
-        UNION ALL SELECT 'ปราศจาก', -1.0, 1
-        UNION ALL SELECT 'ไร้', -1.0, 1
-      ) AS NewData
-      WHERE 
-        NOT EXISTS (SELECT 1 FROM NegativeKeywords WHERE Word = NewData.Word)
-        AND NOT EXISTS (SELECT 1 FROM NegativeKeywords_Ignored WHERE Word = NewData.Word);
-    `;
+    // Get existing + ignored words for fast checks (case-insensitive)
+    const [existingRows] = await conn.query('SELECT Word, IsActive FROM NegativeKeywords');
+    const existingMap = new Map(
+      (Array.isArray(existingRows) ? existingRows : []).map(r => [String(r.Word || '').toLowerCase(), Number(r.IsActive) || 0])
+    );
 
-    const [result] = await conn.query(sql);
+    const [ignoredRows] = await conn.query('SELECT Word FROM NegativeKeywords_Ignored');
+    const ignoredSet = new Set(
+      (Array.isArray(ignoredRows) ? ignoredRows : []).map(r => String(r.Word || '').toLowerCase())
+    );
+
+    await conn.beginTransaction();
+
+    let addedCount = 0;
+    for (const item of STANDARD_NEGATIVE_KEYWORDS) {
+      const word = String(item.word || '').trim();
+      if (!word) continue;
+      const key = word.toLowerCase();
+
+      if (ignoredSet.has(key)) continue;
+      if (existingMap.has(key)) {
+        // If exists but inactive, reactivate it (do not override modifier)
+        if ((existingMap.get(key) || 0) === 0) {
+          await conn.query(
+            'UPDATE NegativeKeywords SET IsActive = 1 WHERE LOWER(Word) = LOWER(?)',
+            [word]
+          );
+          existingMap.set(key, 1);
+        }
+        continue;
+      }
+
+      await conn.query(
+        'INSERT INTO NegativeKeywords (Word, WeightModifier, IsActive) VALUES (?, ?, 1)',
+        [word, Number(item.modifier)]
+      );
+      existingMap.set(key, 1);
+      addedCount++;
+    }
+
+    await conn.commit();
 
     // Reload in-memory cache
     try {
@@ -302,13 +398,255 @@ router.post('/seed', async (req, res) => {
 
     res.json({ 
       ok: true, 
-      message: `ตรวจสอบและเติมคำมาตรฐานสำเร็จ (เพิ่มใหม่ ${result.affectedRows} คำ)`,
-      addedCount: result.affectedRows 
+      message: `ตรวจสอบและเติมคำมาตรฐานสำเร็จ (เพิ่มใหม่ ${addedCount} คำ)`,
+      addedCount
     });
 
   } catch (error) {
+    if (conn) {
+      try { await conn.rollback(); } catch (e) {}
+    }
     console.error('Error seeding:', error && (error.stack || error));
     res.status(500).json({ ok: false, message: error && error.message ? error.message : String(error) });
+  } finally {
+    if (conn) conn.release();
+  }
+});
+
+/**
+ * GET /deleted
+ * ดึงรายการคำที่ถูกลบไปแล้ว (Recently Deleted - Apple Style)
+ */
+router.get('/deleted', async (req, res) => {
+  let conn;
+  try {
+    conn = await req.pool.getConnection();
+    
+    const [rows] = await conn.query(`
+      SELECT 
+        Id,
+        Word,
+        DeletedAt,
+        DATEDIFF(DATE_ADD(DeletedAt, INTERVAL 30 DAY), NOW()) as daysRemaining
+      FROM NegativeKeywords_Ignored 
+      ORDER BY DeletedAt DESC
+    `);
+
+    res.json({
+      ok: true,
+      data: rows,
+      total: rows.length
+    });
+
+  } catch (error) {
+    console.error('Error getting deleted keywords:', error);
+    res.status(500).json({ ok: false, message: error && error.message });
+  } finally {
+    if (conn) conn.release();
+  }
+});
+
+/**
+ * POST /restore/:id
+ * กู้คืนคำที่ถูกลบ (Restore from Recently Deleted)
+ */
+router.post('/restore/:id', async (req, res) => {
+  let conn;
+  try {
+    const { id } = req.params;
+    conn = await req.pool.getConnection();
+    
+    // Get the word from ignored table
+    const [rows] = await conn.query(
+      'SELECT Word FROM NegativeKeywords_Ignored WHERE Id = ?',
+      [id]
+    );
+    
+    if (rows.length === 0) {
+      return res.status(404).json({ ok: false, message: 'ไม่พบคำที่ต้องการกู้คืน' });
+    }
+    
+    const word = rows[0].Word;
+    
+    await conn.beginTransaction();
+    
+    // Check if word already exists in NegativeKeywords
+    const [existing] = await conn.query(
+      'SELECT NegativeKeywordID FROM NegativeKeywords WHERE LOWER(Word) = LOWER(?)',
+      [word]
+    );
+    
+    if (existing.length > 0) {
+      // Re-activate the existing word
+      await conn.query(
+        'UPDATE NegativeKeywords SET IsActive = 1 WHERE LOWER(Word) = LOWER(?)',
+        [word]
+      );
+    } else {
+      // Insert as new word
+      await conn.query(
+        'INSERT INTO NegativeKeywords (Word, WeightModifier, IsActive) VALUES (?, -1.0, 1)',
+        [word]
+      );
+    }
+    
+    // Remove from ignored table
+    await conn.query('DELETE FROM NegativeKeywords_Ignored WHERE Id = ?', [id]);
+    
+    await conn.commit();
+    
+    // Reload cache
+    try {
+      await negativeLoader.loadNegativeKeywords(req.pool);
+    } catch (e) {
+      console.warn('Cache reload failed:', e && e.message);
+    }
+    
+    res.json({
+      ok: true,
+      message: `กู้คืนคำว่า "${word}" สำเร็จ`,
+      word: word
+    });
+
+  } catch (error) {
+    if (conn) await conn.rollback();
+    console.error('Error restoring keyword:', error);
+    res.status(500).json({ ok: false, message: error && error.message });
+  } finally {
+    if (conn) conn.release();
+  }
+});
+
+/**
+ * POST /restore-all
+ * กู้คืนคำทั้งหมดที่ถูกลบ
+ */
+router.post('/restore-all', async (req, res) => {
+  let conn;
+  try {
+    conn = await req.pool.getConnection();
+    
+    // Get all ignored words
+    const [rows] = await conn.query('SELECT Id, Word FROM NegativeKeywords_Ignored');
+    
+    if (rows.length === 0) {
+      return res.json({ ok: true, message: 'ไม่มีคำที่ต้องกู้คืน', restoredCount: 0 });
+    }
+    
+    await conn.beginTransaction();
+    
+    let restoredCount = 0;
+    for (const row of rows) {
+      const [existing] = await conn.query(
+        'SELECT NegativeKeywordID FROM NegativeKeywords WHERE LOWER(Word) = LOWER(?)',
+        [row.Word]
+      );
+      
+      if (existing.length > 0) {
+        await conn.query(
+          'UPDATE NegativeKeywords SET IsActive = 1 WHERE LOWER(Word) = LOWER(?)',
+          [row.Word]
+        );
+      } else {
+        await conn.query(
+          'INSERT INTO NegativeKeywords (Word, WeightModifier, IsActive) VALUES (?, -1.0, 1)',
+          [row.Word]
+        );
+      }
+      restoredCount++;
+    }
+    
+    // Clear ignored table
+    await conn.query('DELETE FROM NegativeKeywords_Ignored');
+    
+    await conn.commit();
+    
+    // Reload cache
+    try {
+      await negativeLoader.loadNegativeKeywords(req.pool);
+    } catch (e) {
+      console.warn('Cache reload failed:', e && e.message);
+    }
+    
+    res.json({
+      ok: true,
+      message: `กู้คืนทั้งหมด ${restoredCount} คำสำเร็จ`,
+      restoredCount
+    });
+
+  } catch (error) {
+    if (conn) await conn.rollback();
+    console.error('Error restoring all keywords:', error);
+    res.status(500).json({ ok: false, message: error && error.message });
+  } finally {
+    if (conn) conn.release();
+  }
+});
+
+/**
+ * DELETE /deleted/:id
+ * ลบถาวร (Permanently delete from Recently Deleted)
+ */
+router.delete('/deleted/:id', async (req, res) => {
+  let conn;
+  try {
+    const { id } = req.params;
+    conn = await req.pool.getConnection();
+    
+    const [rows] = await conn.query(
+      'SELECT Word FROM NegativeKeywords_Ignored WHERE Id = ?',
+      [id]
+    );
+    
+    if (rows.length === 0) {
+      return res.status(404).json({ ok: false, message: 'ไม่พบคำที่ต้องการลบ' });
+    }
+    
+    const word = rows[0].Word;
+    
+    await conn.query('DELETE FROM NegativeKeywords_Ignored WHERE Id = ?', [id]);
+    
+    res.json({
+      ok: true,
+      message: `ลบคำว่า "${word}" ถาวรแล้ว`,
+      word: word
+    });
+
+  } catch (error) {
+    console.error('Error permanently deleting keyword:', error);
+    res.status(500).json({ ok: false, message: error && error.message });
+  } finally {
+    if (conn) conn.release();
+  }
+});
+
+/**
+ * DELETE /deleted-all
+ * ลบถาวรทั้งหมด (Empty Recently Deleted)
+ */
+router.delete('/deleted-all', async (req, res) => {
+  let conn;
+  try {
+    conn = await req.pool.getConnection();
+    
+    const [countResult] = await conn.query('SELECT COUNT(*) as total FROM NegativeKeywords_Ignored');
+    const total = countResult[0].total;
+    
+    if (total === 0) {
+      return res.json({ ok: true, message: 'ไม่มีคำที่ต้องลบ', deletedCount: 0 });
+    }
+    
+    await conn.query('DELETE FROM NegativeKeywords_Ignored');
+    
+    res.json({
+      ok: true,
+      message: `ลบถาวรทั้งหมด ${total} คำแล้ว`,
+      deletedCount: total
+    });
+
+  } catch (error) {
+    console.error('Error emptying deleted keywords:', error);
+    res.status(500).json({ ok: false, message: error && error.message });
   } finally {
     if (conn) conn.release();
   }
