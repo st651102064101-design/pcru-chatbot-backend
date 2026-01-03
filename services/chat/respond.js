@@ -719,7 +719,12 @@ module.exports = (pool) => async (req, res) => {
             found: false,
             message: `✨ รับทราบค่ะ ${BOT_PRONOUN}จะไม่แสดงข้อมูลเกี่ยวกับ ${rejections.map(r => `"<span style="color:#e74c3c;text-decoration:line-through">${r}</span>"`).join(' และ ')} ให้กวนใจแล้ว แต่ไม่พบข้อมูลเกี่ยวกับ ${searches.map(s => `"<span style="color:#27ae60">${s}</span>"`).join(' และ ')} ที่ไม่เกี่ยวกับเรื่องที่ปฏิเสธค่ะ`,
             blockedKeywords: Array.from(loadBlockedKeywords(req)),
-            blockedKeywordsDisplay: rejections
+            blockedKeywordsDisplay: rejections,
+            negationInfo: {
+              hasNegation: true,
+              negatedKeywords: rejections.map(r => ({ keyword: r, negativeWord: 'ไม่เอา', modifier: -1.0 })),
+              negativeWordsFound: rejections.map((r, i) => ({ word: 'ไม่เอา', index: i, modifier: -1.0, targetKeyword: r }))
+            }
           });
         }
         
@@ -736,6 +741,11 @@ module.exports = (pool) => async (req, res) => {
           query: searchMessage,
           blockedKeywords: Array.from(loadBlockedKeywords(req)),
           blockedKeywordsDisplay: rejections,
+          negationInfo: {
+            hasNegation: rejections.length > 0,
+            negatedKeywords: rejections.map(r => ({ keyword: r, negativeWord: 'ไม่เอา', modifier: -1.0 })),
+            negativeWordsFound: rejections.map((r, i) => ({ word: 'ไม่เอา', index: i, modifier: -1.0, targetKeyword: r }))
+          },
           alternatives: topResults.map(r => ({
             id: r.item.QuestionsAnswersID,
             title: r.item.QuestionTitle,
@@ -757,7 +767,12 @@ module.exports = (pool) => async (req, res) => {
           message: `✨ รับทราบค่ะ ${BOT_PRONOUN}จะไม่แสดงข้อมูลเกี่ยวกับ ${rejectListHtml} ให้กวนใจแล้วค่ะ`,
           blockedDomains: Array.from(loadBlockedDomains(req)), 
           blockedKeywords: Array.from(loadBlockedKeywords(req)), 
-          blockedKeywordsDisplay: rejections 
+          blockedKeywordsDisplay: rejections,
+          negationInfo: {
+            hasNegation: true,
+            negatedKeywords: rejections.map(r => ({ keyword: r, negativeWord: 'ไม่เอา', modifier: -1.0 })),
+            negativeWordsFound: rejections.map((r, i) => ({ word: 'ไม่เอา', index: i, modifier: -1.0, targetKeyword: r }))
+          }
         });
       }
     }
