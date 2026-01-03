@@ -317,5 +317,99 @@ router.post('/refresh', async (req, res) => {
   }
 });
 
+/**
+ * POST /stopwords/seed
+ * เติมคำ stopwords มาตรฐานจาก pythainlp อัตโนมัติ
+ * คำที่มีอยู่แล้วจะถูกข้าม
+ */
+router.post('/seed', async (req, res) => {
+  const pool = createPool();
+
+  // รายการ stopwords มาตรฐานจาก pythainlp (Thai standard stopwords)
+  const STANDARD_STOPWORDS = [
+    // Pronouns
+    'ผม', 'ฉัน', 'เรา', 'เขา', 'มัน', 'คุณ', 'ท่าน', 'ใคร', 'อะไร', 'ที่ไหน',
+    // Particles & Polite endings
+    'ครับ', 'ค่ะ', 'คะ', 'นะ', 'นะครับ', 'นะคะ', 'จ้า', 'จ๊ะ', 'จ๋า', 'ฮะ', 'เหรอ', 'หรือ',
+    // Common verbs/auxiliaries
+    'เป็น', 'คือ', 'มี', 'อยู่', 'ได้', 'ไป', 'มา', 'ทำ', 'ให้', 'ใช้', 'ต้อง', 'ควร', 'จะ', 'จะได้',
+    'ย่อม', 'เคย', 'กำลัง', 'ขอ', 'ช่วย', 'อยาก', 'ต้องการ', 'พบ', 'หา', 'ดู', 'เห็น',
+    // Prepositions/Conjunctions
+    'ที่', 'ซึ่ง', 'อัน', 'แห่ง', 'ของ', 'ใน', 'บน', 'ล่าง', 'หน้า', 'หลัง', 'ข้าง', 'นอก',
+    'ระหว่าง', 'ก่อน', 'ตาม', 'จาก', 'ถึง', 'สู่', 'ไว้', 'กับ', 'และ', 'หรือ', 'แต่', 'เพราะ',
+    'เนื่องจาก', 'โดย', 'ด้วย', 'พร้อม', 'รวม', 'ยกเว้น', 'นอกจาก', 'เกี่ยวกับ', 'เกี่ยว', 'เรื่อง',
+    // Conditionals
+    'ถ้า', 'หาก', 'เมื่อ', 'แม้', 'แม้ว่า', 'กรณี',
+    // Demonstratives
+    'นี้', 'นั้น', 'นี่', 'นั่น', 'โน้น', 'เหล่านี้', 'เหล่านั้น', 'อย่างนี้', 'อย่างนั้น',
+    // Quantifiers
+    'ทุก', 'แต่ละ', 'บาง', 'หลาย', 'น้อย', 'มาก', 'เล็ก', 'ใหญ่', 'สูง', 'ต่ำ', 'ทั้งหมด', 'ทั้งนี้', 'ทั้ง',
+    'หนึ่ง', 'สอง', 'สาม', 'สี่', 'ห้า', 'หก', 'เจ็ด', 'แปด', 'เก้า', 'สิบ',
+    // Time expressions
+    'วัน', 'เดือน', 'ปี', 'ครั้ง', 'ช่วง', 'ตอน', 'เวลา', 'ขณะ', 'ตั้งแต่', 'จนถึง', 'ก่อน', 'หลัง',
+    // Modifiers
+    'ดี', 'ไม่ดี', 'มาก', 'น้อย', 'เพียง', 'แค่', 'เท่า', 'เฉพาะ', 'อื่น', 'เดียว', 'เดียวกัน', 'กัน',
+    // Direction/Movement
+    'ขึ้น', 'ลง', 'ออก', 'เข้า', 'ผ่าน',
+    // Abstract/Formal
+    'การ', 'ความ', 'ใด', 'นัก', 'แบบ', 'ประเภท', 'ชนิด', 'ส่วน', 'ภาย', 'ราย', 'ตัว', 'อัน',
+    // Question words
+    'ไหน', 'เท่าไร', 'อย่างไร', 'ยังไง', 'ทำไม', 'เมื่อไหร่',
+    // Misc common words
+    'ก็', 'ก็ได้', 'เลย', 'แล้ว', 'แล้วก็', 'ยัง', 'อีก', 'แค่', 'เพียง', 'เท่านั้น', 'จริง', 'จริงๆ',
+    'ประมาณ', 'ราว', 'ราวๆ', 'โดยประมาณ', 'เกือบ', 'เพิ่ม', 'ลด', 'เปลี่ยน', 'คง', 'ยัง', 'ถูก',
+    // Extra common particles
+    'นะจ๊ะ', 'นะจ้า', 'ได้ไหม', 'หรือเปล่า', 'ใช่ไหม', 'มั้ย', 'ได้มั้ย', 'บ้าง', 'หน่อย', 'สิ', 'ซิ', 'เถอะ',
+    'เอา', 'อยาก', 'สนใจ', 'ถาม', 'ตอบ', 'บอก', 'พูด', 'คิด', 'รู้', 'รู้จัก', 'รู้สึก', 'เข้าใจ'
+  ];
+
+  try {
+    let addedCount = 0;
+    let skippedCount = 0;
+
+    for (const word of STANDARD_STOPWORDS) {
+      const cleanText = word.trim().toLowerCase();
+      if (!cleanText) continue;
+
+      try {
+        // Use INSERT IGNORE to skip existing words
+        const [result] = await pool.query(
+          'INSERT IGNORE INTO Stopwords (StopwordText) VALUES (?)',
+          [cleanText]
+        );
+
+        if (result.affectedRows > 0) {
+          addedCount++;
+        } else {
+          skippedCount++;
+        }
+      } catch (err) {
+        if (err.code !== 'ER_DUP_ENTRY') {
+          console.error(`Error adding stopword "${cleanText}":`, err.message);
+        }
+        skippedCount++;
+      }
+    }
+
+    // Clear cache after adding
+    clearStopwordsCache();
+
+    res.json({
+      ok: true,
+      message: addedCount > 0 
+        ? `เติมข้อมูลสำเร็จ! เพิ่ม stopwords ใหม่ ${addedCount} คำ` 
+        : 'ข้อมูลเป็นปัจจุบันอยู่แล้ว ไม่มีคำใหม่ที่ต้องเพิ่ม',
+      addedCount,
+      skippedCount,
+      totalStandard: STANDARD_STOPWORDS.length
+    });
+  } catch (error) {
+    console.error('Error seeding stopwords:', error);
+    res.status(500).json({ ok: false, message: error.message });
+  } finally {
+    await pool.end();
+  }
+});
+
 module.exports = router;
 
