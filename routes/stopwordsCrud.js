@@ -30,7 +30,7 @@ router.get('/', async (req, res) => {
   try {
     const [stopwords] = await req.pool.query(
       `SELECT 
-        ROW_NUMBER() OVER (ORDER BY StopwordID DESC) as RowNum,
+        ROW_NUMBER() OVER (ORDER BY StopwordID ASC) as RowNum,
         StopwordID, StopwordText, CreatedAt, UpdatedAt 
       FROM Stopwords 
       ORDER BY StopwordID DESC`

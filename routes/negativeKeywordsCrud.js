@@ -43,7 +43,7 @@ module.exports = function(pool) {
       const [rows] = await pool.query(
         `SELECT * FROM NegativeKeywords 
          WHERE ${whereClause}
-         ORDER BY Word ASC
+         ORDER BY NegativeKeywordID DESC
          LIMIT ? OFFSET ?`,
         [...params, parseInt(limit), offset]
       );
