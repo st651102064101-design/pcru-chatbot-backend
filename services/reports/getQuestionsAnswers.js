@@ -30,7 +30,7 @@ const getQuestionsAnswersService = (pool) => async (req, res) => {
         if (isAdmin) {
             // Admin sees all questions
                 query = `SELECT qa.QuestionsAnswersID, qa.QuestionTitle, qa.ReviewDate, qa.QuestionText, qa.OfficerID,
-                    c.CategoriesName AS CategoriesID
+                    qa.CategoriesID, c.CategoriesName
                  FROM QuestionsAnswers qa
                  LEFT JOIN Categories c ON qa.CategoriesID = c.CategoriesID
                  ORDER BY qa.QuestionsAnswersID DESC`;
@@ -38,7 +38,7 @@ const getQuestionsAnswersService = (pool) => async (req, res) => {
         } else {
             // Officer sees only their questions
                 query = `SELECT qa.QuestionsAnswersID, qa.QuestionTitle, qa.ReviewDate, qa.QuestionText, qa.OfficerID,
-                    c.CategoriesName AS CategoriesID
+                    qa.CategoriesID, c.CategoriesName
                  FROM QuestionsAnswers qa
                  LEFT JOIN Categories c ON qa.CategoriesID = c.CategoriesID
                  WHERE qa.OfficerID = ?
