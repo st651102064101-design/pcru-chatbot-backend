@@ -747,6 +747,43 @@ app.get('/questionsanswers/popular', async (req, res) => {
   }
 });
 
+// Public: Get navigation questions (ONLY questions with actual map URLs or coordinates)
+app.get('/questionsanswers/navigation', async (req, res) => {
+  try {
+    const limit = parseInt(req.query.limit) || 10;
+    // Find questions that have ACTUAL location data:
+    // - Google Maps URL in QuestionText
+    // - OR latitude/longitude coordinates pattern in QuestionText
+    const [rows] = await pool.query(`
+      SELECT 
+        QuestionsAnswersID,
+        QuestionTitle,
+        QuestionText
+      FROM QuestionsAnswers 
+      WHERE 
+        QuestionText LIKE '%maps.google%'
+        OR QuestionText LIKE '%goo.gl/maps%'
+        OR QuestionText LIKE '%google.com/maps%'
+        OR QuestionText LIKE '%maps.app.goo.gl%'
+        OR QuestionText REGEXP '[0-9]+\\.[0-9]+,[[:space:]]*[0-9]+\\.[0-9]+'
+      ORDER BY QuestionsAnswersID DESC
+      LIMIT ?
+    `, [limit]);
+    
+    res.status(200).json({ 
+      success: true, 
+      data: rows.map(r => ({
+        id: r.QuestionsAnswersID,
+        title: r.QuestionTitle,
+        hasMap: true
+      }))
+    });
+  } catch (err) {
+    console.error('Get navigation questions error:', err);
+    res.status(500).json({ success: false, message: err.message });
+  }
+});
+
 // --- AI Image Management (Admin only) ---
 const aiImageRoutes = require('./routes/aiImageCrud');
 app.use('/ai-image', aiImageRoutes); // Public GET for chatbot, protected POST/DELETE via internal logic
