@@ -747,13 +747,13 @@ app.get('/questionsanswers/popular', async (req, res) => {
   }
 });
 
-// Public: Get navigation questions (ONLY questions with actual map URLs or coordinates)
+// Public: Get navigation questions (questions with location/coordinates - title must indicate location)
 app.get('/questionsanswers/navigation', async (req, res) => {
   try {
     const limit = parseInt(req.query.limit) || 10;
-    // Find questions that have ACTUAL location data:
-    // - Google Maps URL in QuestionText
-    // - OR latitude/longitude coordinates pattern in QuestionText
+    // Find questions that:
+    // 1. QuestionTitle contains location keywords (พิกัด, นำทาง, ที่ตั้ง, แผนที่)
+    // 2. AND QuestionText contains Google Maps URL or coordinates
     const [rows] = await pool.query(`
       SELECT 
         QuestionsAnswersID,
@@ -761,11 +761,14 @@ app.get('/questionsanswers/navigation', async (req, res) => {
         QuestionText
       FROM QuestionsAnswers 
       WHERE 
-        QuestionText LIKE '%maps.google%'
-        OR QuestionText LIKE '%goo.gl/maps%'
-        OR QuestionText LIKE '%google.com/maps%'
-        OR QuestionText LIKE '%maps.app.goo.gl%'
-        OR QuestionText REGEXP '[0-9]+\\.[0-9]+,[[:space:]]*[0-9]+\\.[0-9]+'
+        (QuestionTitle LIKE '%พิกัด%' OR QuestionTitle LIKE '%นำทาง%' OR QuestionTitle LIKE '%ที่ตั้ง%' OR QuestionTitle LIKE '%แผนที่%')
+        AND (
+          QuestionText LIKE '%maps.app.goo.gl%'
+          OR QuestionText LIKE '%maps.google%'
+          OR QuestionText LIKE '%goo.gl/maps%'
+          OR QuestionText LIKE '%google.com/maps%'
+          OR QuestionText REGEXP '[0-9]+\\.[0-9]+,[[:space:]]*[0-9]+\\.[0-9]+'
+        )
       ORDER BY QuestionsAnswersID DESC
       LIMIT ?
     `, [limit]);
