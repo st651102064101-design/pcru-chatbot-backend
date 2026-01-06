@@ -628,10 +628,10 @@ app.delete('/stopwords/:id', authenticateToken, async (req, res) => {
 app.get('/negativekeywords/public', async (req, res) => {
   try {
     const [rows] = await pool.query(`
-      SELECT KeywordText
+      SELECT Word
       FROM NegativeKeywords
       WHERE IsActive = 1
-      ORDER BY KeywordText
+      ORDER BY Word
       LIMIT 50
     `);
     res.status(200).json({ success: true, data: rows });
