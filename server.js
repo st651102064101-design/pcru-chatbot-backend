@@ -932,3 +932,6 @@ function shutdown() {
 
 process.on('SIGINT', shutdown);
 process.on('SIGTERM', shutdown);
+
+// เพิ่มบรรทัดนี้ไว้ท้ายสุดของไฟล์
+module.exports = app;
