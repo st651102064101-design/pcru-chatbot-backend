@@ -7,7 +7,7 @@
 [dotenv@17.2.3] injecting env (0) from .env -- tip: ⚙️  enable debug logging with { debug: true }
 ✅ Nodemailer Transporter Initialized.
 📦 Serving frontend static files from /Users/kriangkrai/PCRU-CHATBOT-FRONTEND-1/dist
-Server running at http://project.3bbddns.com:36145
+Server running at https://pcru-chatbot-backend-elm8jysae-kriangkrai2018-1681s-projects.vercel.app/
 Also accessible via: http://192.168.1.118:36145
 WebSocket server running at ws://project.3bbddns.com:36145
 🔄 Starting stopwords auto-sync...
