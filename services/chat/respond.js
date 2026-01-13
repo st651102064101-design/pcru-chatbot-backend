@@ -835,25 +835,31 @@ module.exports = (pool) => async (req, res) => {
     // 7. Final Response (Success or Fallback)
     if (finalResults.length === 0) {
         // 🔥 ใช้ Gemini AI ตอบแทนเมื่อไม่มีคำตอบจากระบบเดิม
-        console.log('📢 ไม่พบคำตอบ ลองใช้ Gemini AI...');
+        console.log('📢 ไม่พบคำตอบ ลองใช้ Gemini AI ด้วย Conversation...');
         
-        const aiResponse = await geminiIntegration.getAIResponse(message, {
-            category: 'general',
-        });
+        // สร้าง sessionId จาก user session หรือ IP
+        const sessionId = req.sessionID || req.ip || 'anonymous-' + Date.now();
+        
+        const aiResponse = await geminiIntegration.continueConversation(
+            sessionId,
+            message,
+            { category: 'general' }
+        );
 
         if (aiResponse.success) {
-            console.log('✅ AI ตอบสำเร็จ');
+            console.log('✅ AI ตอบสำเร็จ (Conversation Mode)');
             return res.status(200).json({
                 success: true,
                 found: true,
                 aiGenerated: true,
-                source: 'ai',
-                message: aiResponse.answer,
+                source: 'ai-conversation',
+                sessionId: sessionId,
+                message: aiResponse.message,
                 alternatives: [{
                     id: 'ai-generated',
                     title: 'ตอบจาก AI Assistant',
-                    preview: aiResponse.answer.slice(0, 200),
-                    text: aiResponse.answer,
+                    preview: aiResponse.message.slice(0, 200),
+                    text: aiResponse.message,
                     score: '1.00',
                     aiGenerated: true,
                 }],
@@ -900,20 +906,28 @@ module.exports = (pool) => async (req, res) => {
         keywordMatch: r.components && r.components.overlapCount > 0
     }));
 
-    // ปรับปรุงคำตอบแรกเพื่อให้ดูธรรมชาติมากขึ้น
+    // ปรับปรุงคำตอบแรกเพื่อให้ดูธรรมชาติมากขึ้น (ด้วย Conversation)
     if (topRanked.length > 0 && topRanked[0].item.QuestionText) {
         try {
             const firstAnswer = topRanked[0].item;
-            const enhanced = await geminiIntegration.enhanceAnswer(
+            
+            // สร้าง sessionId
+            const sessionId = req.sessionID || req.ip || 'anonymous-' + Date.now();
+            
+            // ใช้ continueConversation แทน enhanceAnswer เพื่อเก็บ history
+            const enhanced = await geminiIntegration.continueConversation(
+                sessionId,
                 message,
-                firstAnswer.QuestionText,
                 { category: firstAnswer.CategoriesID || 'general' }
             );
 
             if (enhanced.success) {
-                console.log('✨ ปรับปรุงคำตอบด้วย AI สำเร็จ');
-                enhancedAlternatives[0].text = enhanced.answer;
+                console.log('✨ ปรับปรุงคำตอบด้วย AI Conversation สำเร็จ');
+                enhancedAlternatives[0].text = enhanced.message;
                 enhancedAlternatives[0].enhanced = true;
+                enhancedAlternatives[0].sessionId = sessionId;
+                // เพิ่ม flag ว่าเป็น conversation
+                enhancedAlternatives[0].conversationMode = true;
             }
         } catch (aiError) {
             console.warn('⚠️ ไม่สามารถปรับปรุงคำตอบด้วย AI:', aiError.message);
@@ -950,6 +964,12 @@ module.exports = (pool) => async (req, res) => {
     const topResult = topRanked[0];
     const keywordMatch = topResult && topResult.components && topResult.components.overlapCount > 0;
 
+    // ถ้าปรับปรุงด้วย AI แล้วแสดง message มาจาก AI
+    let finalMessage = msgText;
+    if (enhancedAlternatives[0]?.enhanced) {
+        finalMessage = enhancedAlternatives[0].text;
+    }
+
     return res.status(200).json({
       success: true,
       found: topRanked.length > 0,
@@ -960,7 +980,7 @@ module.exports = (pool) => async (req, res) => {
       offset: offset,
       multipleResults: topRanked.length > 1,
       query: message,
-      message: msgText,
+      message: finalMessage,
       contacts: specificContacts,
       alternatives: enhancedAlternatives
     });
