@@ -12,7 +12,7 @@ const genAI = new GoogleGenerativeAI(process.env.GOOGLE_GEMINI_API_KEY);
 const MOCK_MODE = process.env.GEMINI_MOCK_MODE === 'true';
 
 // Default model configuration
-const DEFAULT_MODEL = 'gemini-2.0-flash';
+const DEFAULT_MODEL = 'gemini-3.0-flash';
 const DEFAULT_GENERATION_CONFIG = {
   temperature: 0.7,
   topP: 0.95,

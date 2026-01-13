@@ -30,7 +30,7 @@ async function getAIResponse(question, context = {}) {
         success: true,
         answer: result.message,
         source: 'ai', // บ่งบอกว่าคำตอบมาจาก AI
-        model: 'gemini-2.0-flash',
+        model: 'gemini-3.0-flash',
       };
     }
 
