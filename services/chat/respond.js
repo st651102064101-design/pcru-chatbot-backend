@@ -906,7 +906,11 @@ module.exports = (pool) => async (req, res) => {
         keywordMatch: r.components && r.components.overlapCount > 0
     }));
 
-    // ปรับปรุงคำตอบแรกเพื่อให้ดูธรรมชาติมากขึ้น (ด้วย Conversation)
+    // 🔴 DISABLED: ปรับปรุงคำตอบแรกเพื่อให้ดูธรรมชาติมากขึ้น (ด้วย Conversation)
+    // ⚠️ DO NOT USE AI ENHANCEMENT IN KEYWORD SEARCH MODE
+    // In keyword search mode, only return database answers without AI processing
+    // AI enhancement should only happen in Gemini AI mode (/api/gemini/conversation)
+    /*
     if (topRanked.length > 0 && topRanked[0].item.QuestionText) {
         try {
             const firstAnswer = topRanked[0].item;
@@ -934,6 +938,7 @@ module.exports = (pool) => async (req, res) => {
             // ใช้คำตอบเดิมต่อ ไม่ error
         }
     }
+    */
     
     // 🆕 8. Contact Fetching Logic (Hide if 1 answer, Show if >1)
     let specificContacts = [];
