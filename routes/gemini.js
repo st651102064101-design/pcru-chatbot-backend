@@ -177,4 +177,63 @@ router.delete('/conversation/:sessionId', async (req, res) => {
   }
 });
 
+/**
+ * POST /api/gemini/autocomplete
+ * ใช้ Gemini AI เติมคำแนะนำอัตโนมัติ
+ */
+router.post('/autocomplete', async (req, res) => {
+  try {
+    const { text, limit = 1 } = req.body;
+
+    if (!text || typeof text !== 'string' || text.trim().length < 2) {
+      return res.json({
+        success: true,
+        suggestion: '',
+      });
+    }
+
+    const userText = text.trim();
+    const prompt = `เติมคำให้ครบ (สั้นๆ 3-8 คำต่อจากนี้):
+"${userText}"
+
+ตอบเฉพาะส่วนที่เติม ไม่ต้องซ้ำคำเดิม ไม่ต้องมีเครื่องหมายคำพูด`;
+
+    const result = await geminiService.chat(prompt, { maxTokens: 20 });
+
+    if (result.success && result.message) {
+      // Clean up the response
+      let addition = result.message.trim()
+        .split('\n')[0] // Take only the first line
+        .replace(/^["'"]|["'"]$/g, '')
+        .replace(/^เติม:?\s*/i, '')
+        .replace(/^ส่วนที่เติม:?\s*/i, '')
+        .trim();
+      
+      // Combine user text with addition
+      let suggestion = userText + (addition.startsWith(userText) ? addition.slice(userText.length) : ' ' + addition);
+      
+      // Limit total length
+      if (suggestion.length > 60) {
+        suggestion = suggestion.slice(0, 60);
+      }
+
+      return res.json({
+        success: true,
+        suggestion,
+      });
+    } else {
+      return res.json({
+        success: true,
+        suggestion: '',
+      });
+    }
+  } catch (error) {
+    console.error('❌ Gemini Autocomplete Error:', error);
+    return res.json({
+      success: true,
+      suggestion: '',
+    });
+  }
+});
+
 module.exports = router;
