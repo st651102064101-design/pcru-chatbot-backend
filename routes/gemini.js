@@ -9,6 +9,119 @@ const geminiService = require('../services/gemini');
 const geminiIntegration = require('../services/chat/geminiIntegration');
 
 /**
+ * Middleware to get pool from app.locals
+ */
+router.use((req, res, next) => {
+  if (!req.pool && req.app.locals && req.app.locals.pool) {
+    req.pool = req.app.locals.pool;
+  }
+  next();
+});
+
+/**
+ * Search database for matching answers
+ * ค้นหาจากฐานข้อมูล เพื่อใช้เป็น context สำหรับ Gemini
+ */
+async function getContextFromDatabase(message, pool) {
+  try {
+    const connection = await pool.getConnection();
+    try {
+      console.log(`🔍 Searching database for: "${message}"`);
+      
+      // Strategy 1: Search keywords directly (best for Thai content)
+      let [results] = await connection.query(`
+        SELECT qa.QuestionsAnswersID, qa.QuestionTitle, qa.QuestionText,
+               GROUP_CONCAT(DISTINCT k.KeywordText SEPARATOR ', ') AS keywords,
+               COUNT(DISTINCT k.KeywordID) as keywordCount
+        FROM QuestionsAnswers qa
+        INNER JOIN AnswersKeywords ak ON qa.QuestionsAnswersID = ak.QuestionsAnswersID
+        INNER JOIN Keywords k ON ak.KeywordID = k.KeywordID
+        WHERE LOWER(k.KeywordText) LIKE LOWER(CONCAT('%', ?, '%'))
+        GROUP BY qa.QuestionsAnswersID
+        ORDER BY keywordCount DESC
+        LIMIT 1
+      `, [message]);
+      
+      if (results && results.length > 0) {
+        console.log(`✅ Strategy 1 (keyword match) found: "${results[0].QuestionTitle}"`);
+        const topResult = results[0];
+        return {
+          found: true,
+          title: topResult.QuestionTitle || '',
+          answer: topResult.QuestionText || '',
+          keywords: topResult.keywords || ''
+        };
+      }
+
+      // Strategy 2: Try word-by-word search (try each word until we find a match)
+      console.log(`⏳ Strategy 1 failed, trying word-by-word...`);
+      const words = message.split(/\s+/).filter(w => w.length > 1);
+      if (words.length > 0) {
+        // Try each word in order of preference (usually the most important word comes first)
+        for (const word of words) {
+          if (word.toLowerCase() === 'มอ') continue; // Skip particles
+          const [wordResults] = await connection.query(`
+            SELECT qa.QuestionsAnswersID, qa.QuestionTitle, qa.QuestionText,
+                   GROUP_CONCAT(DISTINCT k.KeywordText SEPARATOR ', ') AS keywords,
+                   COUNT(DISTINCT k.KeywordID) as keywordCount
+            FROM QuestionsAnswers qa
+            INNER JOIN AnswersKeywords ak ON qa.QuestionsAnswersID = ak.QuestionsAnswersID
+            INNER JOIN Keywords k ON ak.KeywordID = k.KeywordID
+            WHERE LOWER(k.KeywordText) LIKE LOWER(CONCAT('%', ?, '%'))
+            GROUP BY qa.QuestionsAnswersID
+            ORDER BY keywordCount DESC
+            LIMIT 1
+          `, [word]);
+          
+          if (wordResults && wordResults.length > 0) {
+            console.log(`✅ Strategy 2 (word "${word}") found: "${wordResults[0].QuestionTitle}"`);
+            const topResult = wordResults[0];
+            return {
+              found: true,
+              title: topResult.QuestionTitle || '',
+              answer: topResult.QuestionText || '',
+              keywords: topResult.keywords || ''
+            };
+          }
+        }
+      }
+
+      // Strategy 3: LIKE on title/text
+      console.log(`⏳ Strategy 2 failed, trying title/text LIKE...`);
+      [results] = await connection.query(`
+        SELECT qa.QuestionsAnswersID, qa.QuestionTitle, qa.QuestionText,
+               GROUP_CONCAT(k.KeywordText SEPARATOR ', ') AS keywords
+        FROM QuestionsAnswers qa
+        LEFT JOIN AnswersKeywords ak ON qa.QuestionsAnswersID = ak.QuestionsAnswersID
+        LEFT JOIN Keywords k ON ak.KeywordID = k.KeywordID
+        WHERE LOWER(CONCAT(qa.QuestionTitle, ' ', qa.QuestionText)) LIKE LOWER(CONCAT('%', ?, '%'))
+        GROUP BY qa.QuestionsAnswersID
+        LIMIT 1
+      `, [message]);
+      
+      if (results && results.length > 0) {
+        console.log(`✅ Strategy 3 (title/text) found: "${results[0].QuestionTitle}"`);
+        const topResult = results[0];
+        return {
+          found: true,
+          title: topResult.QuestionTitle || '',
+          answer: topResult.QuestionText || '',
+          keywords: topResult.keywords || ''
+        };
+      }
+
+      console.log(`❌ All strategies failed for: "${message}"`);
+      return { found: false };
+    } finally {
+      connection.release();
+    }
+  } catch (error) {
+    console.warn('⚠️ Database search failed:', error.message);
+    return { found: false };
+  }
+}
+
+/**
  * POST /api/gemini/chat
  * ส่งข้อความถึง Gemini AI
  */
@@ -119,6 +232,7 @@ ${context ? `บริบท: ${context}` : ''}
 /**
  * POST /api/gemini/conversation
  * สนทนาต่อเนื่องด้วย AI (แบบ conversation history)
+ * 🔍 ค้นหาจากฐานข้อมูล เพื่อใช้เป็น context ตอบคำถาม
  */
 router.post('/conversation', async (req, res) => {
   try {
@@ -138,10 +252,21 @@ router.post('/conversation', async (req, res) => {
       });
     }
 
+    // 🔍 Search database for relevant answers
+    const dbContext = await getContextFromDatabase(message, req.pool);
+    
+    // Enhance context with database answer if found
+    let enhancedContext = context || {};
+    if (dbContext.found) {
+      enhancedContext.databaseAnswer = dbContext.answer;
+      enhancedContext.databaseTitle = dbContext.title;
+      enhancedContext.databaseScore = dbContext.score;
+    }
+
     const result = await geminiIntegration.continueConversation(
       sessionId,
       message,
-      context || {}
+      enhancedContext
     );
 
     if (result.success) {

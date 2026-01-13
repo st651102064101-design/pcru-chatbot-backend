@@ -198,6 +198,20 @@ async function continueConversation(sessionId, message, context = {}) {
     if (context.category) {
       prompt = `[หมวดหมู่: ${context.category}]\n${prompt}`;
     }
+    
+    // 🔍 If database answer found, add it as context
+    if (context.databaseAnswer) {
+      console.log(`📚 Using database context for: "${context.databaseTitle}"`);
+      prompt = `**🔍 ข้อมูลจากฐานข้อมูล PCRU (ผู้ใช้ถาม: "${message}"):**
+ชื่อคำถาม: ${context.databaseTitle}
+เนื้อหา: "${context.databaseAnswer}"
+
+---
+
+${prompt}
+
+⚠️ **สำคัญ:** ข้อมูลด้านบนเป็นข้อมูลจากฐานข้อมูล PCRU ที่เกี่ยวข้องกับคำถามของผู้ใช้ กรุณาตอบโดยใช้ข้อมูลนี้เป็นหลัก`;
+    }
 
     // ใช้ env variables สำหรับ timeout
     const maxTokens = parseInt(process.env.CONVERSATION_MAX_TOKENS) || 256;
