@@ -193,28 +193,30 @@ router.post('/autocomplete', async (req, res) => {
     }
 
     const userText = text.trim();
-    const prompt = `เติมคำให้ครบ (สั้นๆ 3-8 คำต่อจากนี้):
+    const prompt = `เติมคำถัดไป (เพียง 1-2 คำเท่านั้น):
 "${userText}"
 
-ตอบเฉพาะส่วนที่เติม ไม่ต้องซ้ำคำเดิม ไม่ต้องมีเครื่องหมายคำพูด`;
+ตอบเฉพาะคำที่เติมต่อ ไม่ต้องซ้ำคำเดิม ห้ามตอบเป็นประโยค`;
 
-    const result = await geminiService.chat(prompt, { maxTokens: 20 });
+    const result = await geminiService.chat(prompt, { maxTokens: 10 });
 
     if (result.success && result.message) {
       // Clean up the response
       let addition = result.message.trim()
         .split('\n')[0] // Take only the first line
+        .split(' ')[0] // Take only first word
         .replace(/^["'"]|["'"]$/g, '')
         .replace(/^เติม:?\s*/i, '')
         .replace(/^ส่วนที่เติม:?\s*/i, '')
+        .replace(/[.!?,;:]$/g, '') // Remove trailing punctuation
         .trim();
       
       // Combine user text with addition
-      let suggestion = userText + (addition.startsWith(userText) ? addition.slice(userText.length) : ' ' + addition);
+      let suggestion = userText + addition;
       
-      // Limit total length
-      if (suggestion.length > 60) {
-        suggestion = suggestion.slice(0, 60);
+      // Limit total length to ~30 characters
+      if (suggestion.length > 30) {
+        suggestion = suggestion.slice(0, 30);
       }
 
       return res.json({
