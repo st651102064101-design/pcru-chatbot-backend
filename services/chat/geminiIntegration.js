@@ -134,7 +134,11 @@ async function startChatSession(sessionId, firstMessage, context = {}) {
       prompt = `[หมวดหมู่: ${context.category}]\n${firstMessage}`;
     }
 
-    const result = await geminiService.chat(prompt);
+    // ใช้ env variables สำหรับ timeout
+    const maxTokens = parseInt(process.env.CONVERSATION_MAX_TOKENS) || 256;
+    const timeout = parseInt(process.env.CONVERSATION_BACKEND_TIMEOUT_MS) || 8000;
+
+    const result = await geminiService.chat(prompt, { maxTokens, timeout });
 
     if (result.success) {
       // เพิ่มคำตอบลง history
@@ -195,7 +199,11 @@ async function continueConversation(sessionId, message, context = {}) {
       prompt = `[หมวดหมู่: ${context.category}]\n${prompt}`;
     }
 
-    const result = await geminiService.chat(prompt);
+    // ใช้ env variables สำหรับ timeout
+    const maxTokens = parseInt(process.env.CONVERSATION_MAX_TOKENS) || 256;
+    const timeout = parseInt(process.env.CONVERSATION_BACKEND_TIMEOUT_MS) || 8000;
+
+    const result = await geminiService.chat(prompt, { maxTokens, timeout });
 
     if (result.success) {
       // เพิ่มคำตอบลง history
