@@ -270,7 +270,19 @@ router.post('/conversation', async (req, res) => {
     );
 
     if (result.success) {
-      return res.json(result);
+      // ดึง contacts เพื่อแสดงให้ผู้ใช้
+      let contacts = [];
+      try {
+        const { getDefaultContacts } = require('../utils/getDefaultContact_fixed');
+        contacts = await getDefaultContacts(req.pool);
+      } catch (e) {
+        console.warn('⚠️ Failed to load contacts:', e.message);
+      }
+      
+      return res.json({
+        ...result,
+        contacts: contacts || []
+      });
     } else {
       return res.status(500).json(result);
     }
