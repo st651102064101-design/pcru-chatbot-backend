@@ -240,9 +240,9 @@ router.post('/autocomplete', async (req, res) => {
       // Combine user text with addition
       let suggestion = userText + addition;
       
-      // Limit total length to ~30 characters
-      if (suggestion.length > 30) {
-        suggestion = suggestion.slice(0, 30);
+      // Limit total length to ~20 characters (fit in one line)
+      if (suggestion.length > 20) {
+        suggestion = suggestion.slice(0, 20);
       }
 
       return res.json({
