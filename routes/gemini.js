@@ -193,12 +193,12 @@ router.post('/autocomplete', async (req, res) => {
     }
 
     const userText = text.trim();
-    const prompt = `เติมคำถัดไป (เพียง 1-2 คำเท่านั้น):
+    const prompt = `เติมคำถัดไป (เพียง 1 คำเท่านั้น):
 "${userText}"
 
-ตอบเฉพาะคำที่เติมต่อ ไม่ต้องซ้ำคำเดิม ห้ามตอบเป็นประโยค`;
+ตอบเฉพาะคำที่เติม ห้ามตอบเป็นประโยค`;
 
-    const result = await geminiService.chat(prompt, { maxTokens: 10 });
+    const result = await geminiService.chat(prompt, { maxTokens: 5, timeout: 4000 });
 
     if (result.success && result.message) {
       // Clean up the response
