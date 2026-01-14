@@ -103,7 +103,9 @@ router.get('/google/callback', async (req, res) => {
         }
         
         // Redirect กลับไปหน้าจัดการบัญชีพร้อมข้อความสำเร็จ
-        return res.redirect(`http://project.3bbddns.com:36144/managegoogleaccount?linked=success`);
+        // Use FRONTEND_BASE_URL if configured, otherwise redirect to the same host that handled this request
+        const appBase = process.env.FRONTEND_BASE_URL || `${req.protocol}://${req.headers.host}`;
+        return res.redirect(`${appBase}/managegoogleaccount?linked=success`);
         
       } catch (err) {
         console.error('Error linking with state:', err);

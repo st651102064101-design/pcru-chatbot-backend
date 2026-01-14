@@ -361,6 +361,17 @@ if (fs.existsSync(FRONTEND_DIR)) {
   // Use a generic middleware instead of a path pattern to avoid path-to-regexp issues
   app.use((req, res, next) => {
     if (req.method !== 'GET') return next();
+
+    // If request is coming to the backend host/port, skip SPA fallback so API root
+    // and backend endpoints are not overridden by the frontend index.html.
+    // This prevents visiting e.g. http://project.3bbddns.com:36145 from serving the
+    // frontend app.
+    const hostHeader = req.headers.host || '';
+    if (hostHeader.includes(`:${PORT}`)) {
+      console.log(`[spa-fallback] Skipping SPA fallback because request host ${hostHeader} matches backend port ${PORT}`);
+      return next();
+    }
+
     const skipPrefixes = ['/api', '/uploads', '/js', '/ranking', '/system', '/categories', '/getcategories', '/chat', '/login', '/forgotpassword', '/setnewpassword', '/validateresettoken', '/questionsanswers', '/getQuestionsAnswers', '/stopwords', '/synonyms', '/negativekeywords', '/adminusers', '/admin', '/officers', '/organizations', '/ai-image', '/health', '/keywords', '/autocomplete', '/getChatLogHasAnswers', '/getChatLogNoAnswers', '/getChatLogNoAnswers', '/feedbacks', '/debug', '/debug/feedbacks', '/auth'];
     // Debug: log the requested path and whether it will be skipped
     for (const p of skipPrefixes) {
